@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]><html dir="ltr" lang="ru" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html dir="ltr" lang="ru" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html dir="ltr" lang="ru">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Свеча IAME 60cc для картов. Все для картинга на Openkart.ru</title>
+<base href="https://openkart.ru/" />
+<meta name="description" content="У нас вы можете купить свеча IAME 60cc для гоночных картов - в наличии и под заказ, с экспресс-доставкой по России. Все для картинга на Openkart.ru" />
+<meta name="yandex-verification" content="bf8adcc2e2331beb" />
+<script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script defer src="catalog/view/javascript/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!--<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700|Roboto:300,400,500,700&amp;subset=cyrillic,cyrillic-ext" rel="stylesheet">-->
+<link href="catalog/view/theme/ktemplate/stylesheet/stylesheet-v3.24.css" rel="stylesheet">
+			<!-- cdek -->
+				<!-- cdek -->
+	    <script defer src="catalog/view/javascript/common4.js" type="text/javascript"></script>
+<script defer src="catalog/view/javascript/custom4.3.js" type="text/javascript"></script>
+<script defer src="catalog/view/javascript/lazyload/lazysizes.min.js"></script>
+<link rel="apple-touch-icon" sizes="192x192" href="https://openkart.ru/image/catalog/favicons/favicon-192x192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://openkart.ru/image/catalog/favicons/favicon-192x192.png">
+<meta name="msapplication-config" content="https://openkart.ru/image/catalog/favicons/browserconfig.xml">
+<link href="https://openkart.ru/iame-60cc-spark-plug" rel="canonical" />
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(48771104, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true,
+        ecommerce:"dataLayer"
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/48771104" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2983350-12"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2983350-12');
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script type="text/javascript">
+	var selector = 'input.form-control.input-search';
+	var catTitle = 'Категории';
+	var prodTitle = 'Товары';
+	var viewAllTitle = 'Посмотреть все товары';
+	var noResTitle = 'Ничего не найдено';
+
+	console.log(selector);
+
+	$(document).ready(function() {
+
+		var timer = null;
+		$('input.form-control.input-search').keydown(function(){
+	       clearTimeout(timer); 
+	       timer = setTimeout(sphinxAutocomplete, 500)
+		});
+
+	});
+
+	$(document).mouseup(function (e) {
+		
+		if (!$('.sphinxsearch').is(e.target) && $('.sphinxsearch').has(e.target).length === 0) {
+			$('.sphinxsearch').hide();
+			$('input.form-control.input-search').removeClass('no-bottom-borders');
+			return false;
+		}
+		
+	});
+
+	function sphinxAutocomplete() {
+
+		if($(selector).val() == '') {
+			$('.sphinxsearch').hide();
+			$('input.form-control.input-search').removeClass('no-bottom-borders');
+			return false;
+		}
+
+		$.ajax({
+			url: 'https://openkart.ru/index.php?route=extension/module/sphinxautocomplete&search=' + $(selector).val(),
+			dataType: 'json',
+			success: function(json) {
+
+				var html = '';
+				
+				//Categories
+				if (json.categories.length) {
+					html += '<div class="categories"><span>'+catTitle+'</span>';
+					var categories = json.categories;
+					for (i = 0; i < categories.length; i++) {
+						html += '<a class="sphinxsearcha" href="' + categories[i]['href'] + '">';
+							if(categories[i]['image'] != '') {
+								html += '<img src="' + categories[i]['image'] + '" />';
+							}
+							html += categories[i]['name'];
+							html += '<br />';
+						html += '</a>';
+					}
+					html += '</div>';
+				}
+				
+				//Products
+				if (json.products.length) {
+					if (json.categories.length) { html += '<div class="products"><span>'+prodTitle+'</span>'; }
+					var products = json.products;
+					for (i = 0; i < products.length; i++) {
+						html += '<a class="sphinxsearcha" href="' + products[i]['href'] + '">';
+							html += '<img src="' + products[i]['image'] + '" />';
+							html += products[i]['name'];
+							html += '<br />';
+						html += '</a>';
+					}
+					if (json.categories.length) {  html += '</div>'; }
+					html += '<div class="sphinx-viewall"><a id="view-all" href="https://openkart.ru/search?wildcard=true&amp;search=' + encodeURIComponent($(selector).val()) + '">'+viewAllTitle+'</a></div>';
+				} else {
+					html = '<div class="sphinx-viewall">'+noResTitle+'</div>';
+				}
+
+                $('.sphinxsearch').remove();
+				$(selector).after('<div class="sphinxsearch">'+ html +'</div>');
+				$('.sphinxsearch').show();
+				$('input.form-control.input-search').addClass('no-bottom-borders');
+
+				$('.sphinxsearcha').hover(
+					function(){$(this).addClass('sphinxsearch-a-active');},
+ 					function(){$(this).removeClass('sphinxsearch-a-active');}
+				);
+
+			}
+		});
+			
+	}
+</script>
+
+</head>
+<body> 
+<header>
+  <div class="container">
+    <div class="row header-contacts">
+      <div class="col-sm-12">
+			<i class="fa fa-map-marker"></i>г. Санкт-Петербург, ул. Плуталова, д. 8
+			<i class="fa fa-mobile"></i><a href="tel:+79219672225">+7-921-9672225</a>
+			<i class="fa fa-envelope-o"></i><a href="/cdn-cgi/l/email-protection#4c25222a230c233c2922272d3e38623e39"><span class="__cf_email__" data-cfemail="422b2c242d022d32272c292330366c3037">[email&#160;protected]</span></a>
+			<i class="fa fa-calendar-o"></i>Время работы: ПН-ПТ 9:00-18:00
+	 	</div>
+	 </div>
+    <div class="row header-contacts-mobile">
+      <div class="col-sm-12">
+			<span class="dropdown"><a href="#" class="dropdown-toggle icon-map-marker" data-toggle="dropdown" aria-expanded="false">
+				<i class="fa fa-map-marker"></i></a>
+				<span class="dropdown-menu dropdown-menu-left dropdown-paddings">г. Санкт-Петербург,<br />ул. Плуталова, д. 8</span>
+			</span>
+			<a href="tel:+79219672225" class="icon-mobile"><i class="fa fa-mobile"></i></a>
+			<a href="/cdn-cgi/l/email-protection#d8b1b6beb798b7a8bdb6b3b9aaacf6aaad" class="icon-envelope"><i class="fa fa-envelope-o"></i></a>
+			<span class="dropdown"><a href="#" class="dropdown-toggle icon-calendar" data-toggle="dropdown" aria-expanded="false">
+				<i class="fa fa-calendar-o"></i></a>
+				<span class="dropdown-menu dropdown-menu-right dropdown-paddings">Время работы:<br />ПН-ПТ 9:00-18:00</span>
+			</span>
+	 	</div>
+	 </div>
+    <div class="row header">
+      <div class="col-sm-3">
+        <div id="logo">
+				<a href="https://openkart.ru/"><img src="/catalog/view/theme/ktemplate/image/logo.png" title="Openkart - Все для картинга" alt="Openkart - Все для картинга" class="img-responsive" /></a>
+			</div>
+      </div>
+		<div class="col-sm-9"> 
+	 	  <div class="row">
+      	<div class="col-sm-5 col-lg-7">
+  			  <nav class="navbar header-menu"> 
+    			<div class="navbar-header">
+      			<button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
+    			</div>
+    			<div class="collapse navbar-collapse navbar-ex1-collapse">
+      			<ul class="nav navbar-nav header-links">
+        				<li><a href="https://openkart.ru/" class="link-home">Главная</a></li> 
+        				<li><a href="https://openkart.ru/latest">Новинки</a></li> 
+        				<li><a href="https://openkart.ru/specials">Акции</a></li> 
+        				<li><a href="https://openkart.ru/oplata">Оплата</a></li> 
+        				<li><a href="https://openkart.ru/contact-us">Контакты</a></li>  
+      			</ul>
+    			</div> 
+  			  </nav>
+			</div> 
+	 	<div class="col-sm-7 col-lg-5 header-right-row">
+       <div class="header-search"><div id="search"> 
+  <input type="text" name="search" value="" placeholder="Поиск..." class="form-control input-search" autocomplete="off" /> 
+  <button type="submit" value="Искать" class="button search-submit"><i class="fa fa-search"></i></button>
+</div>
+</div>
+       <div class="header-account">
+		  <ul class="list-inline"> 
+         <li class="dropdown"><a href="https://openkart.ru/my-account" title="Личный кабинет" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i></a> 
+          <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="https://openkart.ru/create-account">Регистрация</a></li>
+            <li><a href="https://openkart.ru/login">Авторизация</a></li>
+                       </ul>
+          </li>
+		   </ul>
+        </div>
+        <div class="header-cart">
+		   <div id="cart">
+  <a data-toggle="dropdown" data-loading-text="Загрузка..." class="dropdown-toggle my-cart" title="Корзина"><i class="fa fa-shopping-cart"></i> <div id="cart-total">0</div></a>
+  <ul class="dropdown-menu pull-right dropdown-menu-wrap">
+        <li>
+        <div class="marker"></div>
+        <p class="text-center">Ваша корзина пуста!</p>
+    </li>
+      </ul>
+</div>
+<a class="cart-total-href" href="/checkout2" style="display:none;"><i class="fa fa-shopping-cart" style="font-size:22px;height:20px;width:28px;margin-left:-4px;"></i><div class="cart-total-btn">0</div></a>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript"><!--
+function loadCart8() {
+	$.ajax({
+		url: 'index.php?route=extension/quickcheckout/cart2',
+		dataType: 'html',
+		cache: false,
+		beforeSend: function() {
+			$('.tooltip').remove();
+		},
+		success: function(html) {			
+			$('.cart8 .quickcheckout-content').html(html);
+		}
+	});
+}
+
+$(document).ready(function(){
+    loadCart8();
+});
+
+$(document).on('click', '.cart8 .button-update', function() {
+	var quantity = $(this).parents('.quantity').find('input.qc-product-qantity');
+	if (quantity.length){
+		if ($(this).data('type')=='increase') {
+			quantity.val(parseInt(quantity.val())+1);
+		} else if ($(this).data('type')=='decrease') {
+			quantity.val(parseInt(quantity.val())-1);
+		}
+	}
+	
+	$.ajax({
+		url: 'index.php?route=extension/quickcheckout/cart2/update',
+		type: 'post',
+		data: $('.cart8 :input'),
+		dataType: 'json',
+		cache: false,
+		beforeSend: function() {
+			$('.cart8 .button-update').prop('disabled', true);
+		},
+		success: function(json) {
+			if (json['redirect']) {
+			    if (window.location.pathname == '/checkout2') {
+				    location = json['redirect'];
+				} else {
+				    $('ul.dropdown-menu.pull-right.dropdown-menu-wrap').html('<li><div class="marker"></div><p class="text-center">Ваша корзина пуста!</p></li>');
+			        $('#cart-total').html(json['count_products']);
+				    $('.cart-total-btn').html(json['count_products']);
+				}
+			} else {
+				if (json['error']['stock']) {
+					$('#button-payment-method').attr("disabled", true);
+				} else if (json['error']['warning']) {
+						$('#warning-messages').html('<div class="alert alert-danger" style="display: none;"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '</div>');
+						$('.alert-danger').fadeIn('slow');
+						$('#button-payment-method').attr("disabled", true);
+				} else {
+					$('#warning-messages').html('');
+					$('#button-payment-method').removeAttr("disabled");
+				}
+                if (window.location.pathname == '/checkout2') {
+			        reloadShippingMethodById($('#shipping-address select[name=\'address_id\']').val());			    
+				}				
+			    loadCart8();
+				$('#cart-total').html(json['count_products']);
+				$('.cart-total-btn').html(json['count_products']);				
+			}
+		}
+	});
+
+	return false;
+});
+
+$(document).on('click', '.button-remove', function() {
+	var remove_id = $(this).attr('data-remove');
+
+	$.ajax({
+		url: 'index.php?route=extension/quickcheckout/cart2/update&remove=' + remove_id,
+		type: 'get',
+		dataType: 'json',
+		cache: false,
+		beforeSend: function() {
+			$('.cart8 .button-remove').prop('disabled', true);
+		},
+		success: function(json) {
+			if (json['redirect']) {
+			    if (window.location.pathname == '/checkout2') {
+				    location = json['redirect'];
+				} else {
+				    $('ul.dropdown-menu.pull-right.dropdown-menu-wrap').html('<li><div class="marker"></div><p class="text-center">Ваша корзина пуста!</p></li>');
+			        $('#cart-total').html(json['count_products']);
+				    $('.cart-total-btn').html(json['count_products']);
+				}
+			} else {
+			    if (window.location.pathname == '/checkout2') {
+				    reloadShippingMethodById($('#shipping-address select[name=\'address_id\']').val());
+				}
+				loadCart8();
+				$('#cart-total').html(json['count_products']);
+				$('.cart-total-btn').html(json['count_products']);
+			}
+		}
+	});
+
+	return false;
+});
+//--></script>
+
+        </div>
+	 	</div>
+	 	</div>
+	  </div>
+    </div>
+  </div>
+</header>
+<div class="container categories-menu2">
+	<div class="row categories2">
+		<div class="category-menu2">
+			<a href="/chassis_parts">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category1.png" alt="ШАССИ И ЗАПЧАСТИ">
+					<div class="category-text2">ШАССИ И <br class="category-text-break" />ЗАПЧАСТИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/engines_and_parts">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category2.png" alt="МОТОРЫ И ЗАПЧАСТИ">
+					<div class="category-text2">МОТОРЫ И <br class="category-text-break" />ЗАПЧАСТИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2"> 
+			<a href="/kart_tools">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category3.png" alt="ОБОРУДОВАНИЕ">
+					<div class="category-text2">ОБОРУДОВА- <br class="category-text-break" />НИЕ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/data_systems">
+				<div class="category-link5 category-link5-fix2">
+					<img src="/catalog/view/theme/ktemplate/image/category4.png" alt="ЭЛЕКТРОННЫЕ СИСТЕМЫ">
+					<div class="category-text2">ЭЛЕКТРОННЫЕ <br class="category-text-break" />СИСТЕМЫ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/tyres_and_wheels">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category5.png" alt="ШИНЫ И ДИСКИ">
+					<div class="category-text2">ШИНЫ И <br class="category-text-break" />ДИСКИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/protection_wear">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category6.png" alt="ЭКИПИРОВКА И ШЛЕМЫ">
+					<div class="category-text2">ЭКИПИРОВКА <br class="category-text-break" />И ШЛЕМЫ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/lubricants">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category7.png" alt="МАСЛО И СМАЗКИ">
+					<div class="category-text2">МАСЛО И <br class="category-text-break" />СМАЗКИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/sprockets_and_chains">
+				<div class="category-link5 category-link5-fix">				
+					<img src="/catalog/view/theme/ktemplate/image/category8.png" alt="ЦЕПИ И ЗВЕЗДЫ">
+					<div class="category-text2">ЦЕПИ И <br class="category-text-break" />ЗВЕЗДЫ</div>
+				</div>
+			</a>
+		</div> 
+	</div>
+</div>
+
+<div id="product-category" class="container">
+  <ul class="breadcrumb-category">
+        <li><a href="https://openkart.ru/">Главная</a></li>
+        <li><a href="https://openkart.ru/iame-60cc-spark-plug">Свеча IAME 60cc</a></li>
+      </ul>
+  <h1>Свеча IAME 60cc</h1>
+  <div class="row">
+                <div id="content" class="col-sm-12">
+      	  		      <div class="row category-description">         
+        <div class="col-sm-12"><div class="interactive-scheme"> 
+		<svg viewBox="0 0 795 452">
+			<a href="https://openkart.ru/engines_and_parts/iame_parilla_parts/iame_60cc_parts/iame-60cc-ignition/iame-60cc-spark-plug">
+				<path class="part" d="m 101.75105,76.723102 8.66562,-4.053271 c -1.22776,-4.136399 5.37043,-5.664147 9.22468,-8.10654 -1.53903,-0.851468 0.86349,-2.289986 4.47258,-4.612342 l 6.42932,0.139768 c 0.52348,2.838189 5.10202,0.96997 4.47257,0 l 13.13819,-5.870253 3.35443,1.118143 5.87025,-3.633966 c 3.2301,0.761008 3.28192,3.111151 3.63397,5.311182 l -4.75211,2.795358 c -1.42732,1.397679 -1.91392,2.795359 -2.23629,4.193038 l -14.8154,7.547469 c -0.90856,8.664804 -2.55842,8.433968 -4.19304,8.386076 -1.03952,0.196551 -1.64664,1.474114 -3.35443,0 l -8.38607,4.752109 c -2.21523,0.779467 -4.43922,1.570621 -4.47258,-0.559072 l -9.22468,4.193038 c -1.40819,1.588772 -4.18913,0.254815 -6.9884,-1.118143 -3.936,-5.039144 -2.35257,-7.260103 -0.83861,-10.482594 z" fill="red">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/iame_parilla_parts/iame_60cc_parts/iame-60cc-ignition/kolpachok-svechi-iame-60cc">
+				<path class="part" d="m 178.90295,55.757911 16.49262,-9.084916 c 2.75694,-1.414025 4.31056,-0.421391 5.59072,1.118144 3.4519,2.846241 7.08954,5.878215 10.20306,8.386076 l 2.79535,4.332806 0.55908,3.35443 c 1.10034,1.063979 2.48793,1.122563 4.3328,-0.419304 l 9.22469,-5.590717 c -0.51677,-3.350605 -1.12649,-3.246369 -2.65559,-3.494198 l -3.91351,-5.031646 c -1.21132,-3.259058 -2.42264,-6.326899 -3.63396,-9.923523 L 201.12606,17.601265 c -1.63063,-1.062852 -3.26125,0.155266 -4.89188,0.419304 l -10.06329,6.010021 0.27953,4.891878 -19.42774,10.063291 c -3.08832,4.846939 -0.54878,8.528272 1.39768,12.718882 3.4942,3.46391 6.98839,5.059164 10.48259,4.05327 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/iame_parilla_parts/iame_60cc_parts/iame-60cc-ignition/katushka-zazhiganiya-iame-60cc">
+				<path class="part" d="m 330.69093,104.39715 16.49261,5.73049 c 0.46082,1.80094 1.13172,3.61748 3.91351,5.59071 l 24.45938,7.68724 0.97838,-0.4193 4.47257,-0.97838 c -0.38255,-0.64299 -0.0538,-0.82548 0.69884,-2.51582 l 0,-41.231542 -15.09493,-4.75211 c 0.47553,-4.389029 1.18169,-9.008698 -1.95675,-9.783755 2.57935,-5.876606 4.23709,-11.661051 10.34282,-17.890295 -1.82061,-4.343078 -4.12275,-3.87091 -6.28955,-4.75211 -4.70335,6.11816 -9.41441,12.216269 -12.29958,23.061709 l -1.95675,0 -0.13977,4.612342 -1.39768,-0.279536 -0.97838,-10.762131 c -1.26832,-3.942826 -3.95554,-7.64917 -11.88027,-10.482595 l -11.74051,-3.35443 -6.28955,-2.935127 -4.47258,-5.171413 c -2.12454,-0.307555 -3.32737,0.306595 -4.75211,0.698839 -0.46487,1.256543 -1.28093,1.743983 -0.69884,5.45095 2.28196,2.092851 4.79262,5.100517 6.01002,2.935126 l 5.31119,0.139768 c 0.68797,1.559195 2.25635,1.357562 4.05327,0.69884 6.76163,3.182333 10.41122,3.87504 15.51424,5.730485 3.39362,1.950393 4.67718,4.744806 6.28955,7.4077 l 0.13977,9.923524 -5.03164,2.096519 -0.41931,-6.569093 c -4.40154,-0.593439 -5.86381,0.282758 -6.56909,1.537447 l 0.13977,6.708861 -4.47258,1.397679 c -1.45358,0.216177 -2.62487,0.940483 -2.23628,4.472574 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/iame_parilla_parts/iame_60cc_parts/iame-60cc-ignition/komplekt-zazhiganiya-rotor---stator-iame-60cc">
+				<path class="part" d="m 618.75264,57.714662 c -0.1974,-4.848308 -0.13242,-8.942123 0.4193,-12.299578 1.71564,-8.193668 4.34431,-16.022125 15.23471,-20.545886 8.85197,-3.366184 17.70393,-5.856609 26.5559,-2.236287 8.0167,5.114613 14.92118,5.267026 27.53429,30.888713 l 1.53744,0.559072 c 0.11345,4.108049 -0.0213,6.975308 -0.27953,9.224683 1.3642,4.469653 0.69753,6.435386 0.69884,9.224684 -3.53934,18.224498 -10.54823,17.118649 -16.49262,21.943565 l -0.13977,15.234702 c 0.79832,4.70151 5.22772,7.09233 10.06329,9.22469 1.84756,1.72087 3.66239,3.24541 5.87026,7.12816 l -0.13977,14.3961 c 3.35929,-1.79336 7.40418,-2.44403 11.88027,-2.37606 6.35851,1.2531 11.10446,4.25314 12.99842,10.34283 l 0.69884,3.63397 3.9135,1.25791 -0.13976,16.91192 c -3.02502,1.87538 -5.23984,0.91502 -7.54747,0.27953 l 0.13977,-8.94514 -2.09652,-1.25792 0.13976,-6.98839 2.79536,-1.81699 c 0.53271,-4.26999 -2.80719,-6.77972 -6.28955,-9.22468 -2.82167,-1.54457 -6.31022,-2.08883 -10.62237,-1.39768 l -5.73048,3.0749 c -0.0623,2.03484 -0.60116,5.02263 0,5.73048 l 2.37605,0.69884 0,17.19146 c -1.36672,1.20131 -3.02074,1.58603 -5.17141,0.55907 l -2.79536,-0.55907 0.4193,-8.80538 -1.67721,-0.55907 0.13977,-7.68724 1.25791,-0.55907 0.83861,-20.26635 c -0.26767,-6.69362 -5.20418,-7.16213 -8.52585,-9.78376 -5.32483,-1.37803 -6.60492,-5.99091 -8.38607,-10.20306 l 0.4193,-13.277951 c -1.77039,0.716268 -3.54079,0.862618 -5.31118,0.838608 l -4.89188,-6.988397 c 0.28812,-1.734839 0.0541,-3.365246 2.09652,-5.450949 l 7.12816,-3.35443 -7.26793,-2.935127 0.97838,-17.051688 12.15981,-4.891877 -8.24631,-14.535865 c -1.91588,-2.737163 -5.78527,-4.692926 -9.50422,-6.708861 l -5.87025,-2.795359 -7.26794,4.75211 5.87026,3.214662 0.55907,12.299578 c -1.224,-0.304902 -1.37813,1.529953 -1.11814,4.193038 l -17.471,6.429325 c 4.16784,4.320586 6.96687,9.423344 8.52585,15.234705 -0.62711,7.503094 -2.00201,9.39775 -3.35443,11.46097 l -19.56751,8.386076 c -6.62993,-0.187451 -13.24533,-0.152017 -20.96519,-17.051687 -0.3342,-4.938467 0.65027,-9.876934 5.87025,-14.815401 l 18.03006,-7.267933 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/iame_parilla_parts/iame_60cc_parts/iame-60cc-ignition/akkumulyator-iame-60cc">
+				<path class="part" d="m 92.805907,263.59283 38.046143,20.19706 88.94777,-46.4505 -0.59299,-58.11254 -35.57911,-18.97553 c -1.08123,-0.60481 -2.54519,-0.44413 -4.15089,0 l -85.785181,45.65986 -0.790647,58.3102 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/iame_parilla_parts/iame_60cc_parts/iame-60cc-ignition/rele-iame-60cc">
+				<path class="part" d="m 241.5426,328.85676 16.60359,8.69711 27.07965,-14.62696 -0.22164,-7.8825 4.17488,-1.60527 c 0.0929,-1.22485 0.26196,-2.37352 0,-3.95323 -0.31125,-0.94061 -2.20165,-0.30207 -3.95324,0.19766 l -0.19766,-3.55791 -0.79065,-0.39532 -0.19766,-5.13921 -2.17428,0.19767 -3.16258,1.97661 -9.48777,-4.94154 -15.61527,8.49945 -0.39532,5.33687 c -3.88735,5.73219 -11.12784,16.7336 -11.66205,17.19657 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/iame_parilla_parts/iame_60cc_parts/iame-60cc-ignition/provodka-iame-60cc-komplekt">
+				<path class="part" d="m 188.82648,156.25105 0.27953,-2.79535 6.01002,-2.79536 2.09652,-2.93513 6.5691,-4.05327 3.35443,1.81698 c 11.15386,-4.72032 20.4655,-2.64744 30.18987,-2.09652 26.57999,7.09836 30.5633,15.45209 37.87711,23.62079 l 2.93513,0.13976 c 14.04416,11.65909 29.75077,20.15953 47.52109,24.73893 7.88634,3.36766 15.39819,2.24131 22.92194,1.25791 2.94309,-2.03548 5.09272,-4.18431 10.4826,-5.87025 3.89082,-1.95593 6.99821,-4.95644 11.88027,-5.59072 2.88594,-2.72677 8.92172,-3.87863 13.83703,-5.59072 l 7.12816,0.13977 c 23.49593,-7.85569 51.17392,-10.69292 80.2268,-11.88028 l 0.13976,29.07173 168.6999,0.13977 c 7.19434,5.22467 13.85176,6.04287 24.73892,25.7173 1.50605,13.80562 -4.8267,19.77245 -11.7405,25.15823 l 1.11814,5.87025 c 2.38476,4.04355 -0.3553,4.67054 -2.23629,5.87026 1.15027,7.64547 2.03367,15.37989 0.97838,23.76054 2.75113,14.02755 6.01685,28.01921 24.45939,40.95201 2.71841,-0.94802 4.35579,-0.81501 5.59071,-0.27954 l 6.9884,2.79536 -0.27953,1.53745 8.80537,3.35443 0,3.63397 -7.12816,3.9135 -19.28797,-6.56909 0.13976,-5.59072 1.53745,0.13977 0,-1.11815 c -14.0285,-10.17258 -21.36494,-24.49884 -24.59916,-41.37131 -6.18046,13.03057 -10.74303,26.89319 -4.05327,46.54273 1.12434,1.89491 2.51512,3.35756 2.6556,6.84862 0.48971,1.54279 1.4722,3.22036 6.01002,5.87026 -0.82679,3.33854 -1.95705,6.52788 -10.34283,6.14979 0.7971,-5.91273 0.42745,-9.4584 -0.97838,-10.9019 -1.60985,-1.89984 -2.21017,-4.20348 -1.95675,-6.84863 -2.72252,-4.08542 -4.52929,-10.91812 -3.9135,-25.01846 1.45856,-7.54747 3.21311,-15.09494 6.14979,-22.64241 1.63063,-1.94826 3.26125,-7.19051 4.89188,-17.33122 l -0.13977,-11.74051 c -0.60566,-1.08923 -1.21132,-0.46033 -1.81698,0.27954 0.7322,10.84649 -2.14103,19.28936 -6.9884,26.41614 -9.15175,11.17137 -19.27087,16.29669 -29.91034,18.16983 -19.11162,-3.33412 -38.42964,-3.36597 -58.28323,5.17141 l -10.76213,5.03165 c -4.16665,3.85414 -7.09125,4.91366 -9.78375,5.45095 -10.81879,4.03969 -10.24272,6.22971 -11.18144,8.66561 l -2.09652,3.4942 c 0.74559,1.91071 0.38198,4.47769 1.53745,4.19304 l -0.83861,4.3328 -1.11814,2.93513 0.13977,2.23629 -2.51582,0.13976 -0.55908,-6.01002 c -1.14333,-2.12062 -0.47789,-3.46606 0.97838,-4.47257 0.30801,-1.18285 0.4662,-2.51551 1.11814,-3.35443 0.24542,-3.04482 0.22421,-5.96657 5.17142,-11.18144 2.63339,-1.18474 5.12756,-2.78714 8.10654,-2.93512 2.47795,-0.62311 5.08518,-1.50476 8.66561,-4.33281 -0.4038,-1.66717 -0.38228,-3.25184 2.23629,-4.3328 19.22831,-9.80599 29.95797,-9.83854 42.07014,-11.46097 l 17.05169,0.69884 c 16.13166,3.09114 22.62985,-2.57596 29.77057,-7.82701 11.54648,-10.53013 11.71233,-18.95175 12.71888,-27.39451 l -1.53744,-1.81699 c -24.81871,13.64854 -60.71799,23.28037 -115.30855,26.13661 -40.83294,0.0827 -81.68596,0.78789 -122.15717,-10.34283 9.43506,9.01655 22.52962,15.89839 27.95358,27.25475 3.40156,17.34106 -8.41274,24.73131 -18.7289,27.11498 -14.73604,0.35889 -27.00794,3.18192 -36.89873,8.38607 -0.34232,1.25955 -0.89473,2.05691 0.55907,7.26793 -2.06692,2.28288 -3.74862,4.56575 -4.33281,6.84863 -3.85735,4.4663 -5.39083,4.57533 -6.28955,3.4942 -1.11814,1.58454 -2.23629,1.327 -3.35443,0.69884 l -4.89188,2.65559 -7.26793,-3.21466 0.27953,-4.05327 5.17141,-2.79536 -0.13976,-1.67722 6.42932,-3.21466 5.59072,-0.69884 4.3328,-2.37605 0.27954,-4.75211 c -2.33739,0.41231 -4.31655,-0.96648 -6.28956,-2.37606 l -5.17141,0.13977 0.27954,1.81698 -5.73049,9.36446 -7.12816,2.09651 -5.31119,2.51583 -7.26793,-3.4942 0,-4.05327 4.89188,-2.79536 0.55907,-1.67721 6.56909,-3.4942 3.63397,0.4193 0.83861,-1.11814 1.81698,0 1.25791,-2.09652 3.91351,-0.27954 5.31118,-0.8386 c 1.94787,0.89408 4.19154,1.49235 5.45095,3.07489 6.82867,-3.40322 13.73681,-6.674 21.66403,-8.24631 7.49185,-1.16925 15.67743,-1.99163 23.90031,-2.79536 10.81364,-6.09383 11.7189,-13.98919 6.14979,-23.06171 -10.36045,-9.5294 -22.96469,-18.31087 -35.50105,-27.11497 -15.57323,-6.14033 -30.81204,-10.02325 -47.80064,-25.7173 -5.77106,-5.48902 -10.37477,-12.33996 -9.50422,-25.57754 -8.24686,7.421 -14.5839,16.61034 -12.85865,33.26477 0.92455,5.5871 4.17773,12.33851 7.26794,19.00844 1.10246,16.00043 -2.99885,18.12413 -6.14979,22.78217 -1.60493,4.95293 -3.02527,9.94277 -6.42933,14.53587 l -0.27953,3.35443 -11.32121,6.28956 -5.17141,-2.79536 0,-2.51583 3.77373,-1.95675 0.13977,-5.59071 -0.69884,-0.97838 -4.05327,1.81698 -3.63396,-1.11814 0,-4.47257 4.19303,-2.37606 0,-3.07489 9.22469,-4.89188 1.81698,1.25791 6.28956,0 -0.41931,-3.4942 c 4.97731,-5.66923 4.90406,-11.89963 3.21467,-18.3096 -8.31205,-13.34444 -6.6888,-18.56001 -7.26794,-25.57753 2.14762,-20.13169 13.29119,-30.72221 27.67406,-37.87711 -22.08129,-4.99708 -42.21031,-14.06139 -59.82068,-28.37289 l -2.09652,-3.35443 c -13.8039,-11.84886 -27.81178,-10.7318 -41.79061,-11.46097 l 0,3.4942 -13.83703,6.56909 -6.14979,-2.79536 -0.4193,-3.21466 6.28956,-2.65559 0.55907,-2.37605 7.26793,-3.91351 3.35443,1.11815 c 11.30142,-0.96532 23.35325,-0.49804 38.71572,6.28955 -8.9293,-9.43788 -22.08991,-15.97429 -44.0269,-16.49261 l -11.74051,1.53744 0,4.61235 -14.39609,7.68723 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/iame_parilla_parts/iame_60cc_parts/iame-60cc-ignition/knopka-zelenaya-iame-60cc">
+				<path class="part" d="m 271.01002,370.09599 c 3.82778,-1.51136 6.71221,-5.01422 13.69726,0.13977 l 0.55907,2.65559 c 0.67326,1.99432 0.0708,3.82917 -2.23629,5.45095 0.19818,4.04213 -0.46703,5.49412 -0.97837,7.4077 -0.88771,9.16424 0.40494,13.03329 2.09652,15.93354 l 1.39768,5.87026 4.05327,0 3.35443,-8.24631 c 5.46843,-12.11938 4.28273,-17.95431 3.21466,-23.90032 -0.30697,-7.04009 1.38509,-13.22345 6.28956,-18.03006 l 8.80538,-6.01002 9.08491,-6.28956 3.0749,0.41931 c -0.41659,-1.30314 1.787,-1.2962 3.49419,-1.53745 2.42893,-1.78296 3.84494,-1.54009 5.59072,-1.95675 l 0.55907,1.11814 3.0749,1.11814 -0.13977,3.63397 c -5.97763,1.45734 -7.30422,4.18314 -9.36445,6.70886 l -12.99842,0 c -8.51167,4.02142 -10.16027,7.66156 -12.15981,11.3212 -1.75749,3.81616 -1.53424,8.18251 -0.69884,12.71889 l 0.13977,9.92352 c -1.69845,5.0912 -3.36492,10.02255 -4.33281,11.46097 l -4.61234,10.20306 c -1.89043,0.27241 -3.63524,0.83606 -5.87025,0.4193 l -3.0749,-2.09652 -3.35443,-5.45095 -1.25791,-5.45095 0.27954,-6.56909 c -1.8335,1.81168 -1.30526,-2.28099 -1.81699,-3.77373 -0.62875,0.0462 -0.51666,-1.10978 -0.4193,-2.51582 l -1.11814,-2.23629 -2.51583,-0.83861 0.41931,-4.05327 c -2.01921,-0.85744 -3.40137,-1.99801 -2.09652,-4.33281 -0.212,-1.07872 -0.30021,-2.15207 -0.13977,-3.21466 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/iame_parilla_parts/iame_60cc_parts/iame-60cc-ignition/knopka-krasnaya-iame-60cc">
+				<path class="part" d="m 332.22838,397.21097 c 1.06033,2.84219 -0.47614,4.2005 -1.95676,5.59072 l 0,5.45095 -1.53744,0.97837 c 0.0995,2.136 -0.24044,3.6861 -1.25791,4.33281 l 0.55907,8.24631 -2.79536,5.45095 -3.35443,0.27953 -7.54747,-2.09652 c -2.96321,-1.90478 -6.13088,-3.72194 -6.56909,-6.70886 l 4.75211,-19.98681 c 1.10535,-0.50751 0.93783,-6.57874 0.97837,-11.74051 -2.45078,-1.64908 -0.97323,-7.22649 -1.39768,-10.9019 1.23362,-0.54362 1.25891,-2.09401 1.25791,-2.65559 5.20681,-9.19233 8.72127,-10.1788 12.71889,-12.85865 3.02756,-2.09504 6.25403,-4.58789 8.94514,-6.01002 l 2.79536,0 c 0.22331,-1.28167 2.0581,-1.46075 3.63397,-1.81698 l 4.47257,-2.09652 2.09652,1.25791 2.93513,1.11814 -0.27954,3.77374 c -5.93704,1.69861 -7.00658,4.47889 -9.92352,6.84863 l -11.88027,0.4193 c -10.63914,3.72435 -10.36271,9.26796 -12.57912,14.3961 7.7e-4,2.20548 -0.71621,4.17172 0.27954,6.70886 l 0.13977,11.18143 -4.75211,23.90032 3.63396,2.09652 5.73049,3.35443 c 2.56517,-3.22486 4.16348,-7.32869 2.65559,-14.25633 -0.60566,-0.88516 -1.21133,-2.59212 -1.81699,-4.19304 l -2.09651,-0.4193 c 0.2171,-0.99517 0.42692,-2.01947 0.27953,-4.47258 -3.11654,-0.73305 -2.41589,-2.53607 -2.23629,-4.19303 l 0.83861,-4.47258 c 5.24382,-0.93066 9.75596,-0.83697 13.13819,0.83861 z" fill="#87d7fb">
+			</path></a>
+			<path style="fill: white !important;" class="part" d="m 277.85865,403.6403 c 2.23629,-0.6401 4.47257,-0.52416 6.70886,-2.51583 l 6.84863,-2.09652 c 1.88192,1.77112 4.36827,2.03116 6.9884,1.95675 4.41584,0.51851 8.53257,-0.15943 12.57911,-1.11814 2.09652,-0.96801 4.19304,-1.88813 6.28956,-3.21466 l 4.47257,27.95359 c -0.13977,1.90547 -0.27953,3.63861 -0.4193,5.17141 -29.14346,-6.0256 -36.11351,-16.11632 -43.46783,-26.1366 z" fill="white">
+			</path>
+			<a href="https://openkart.ru/engines_and_parts/iame_parilla_parts/iame_60cc_parts/iame-60cc-ignition/zaryadnoe-ustrojstvo-akkumulyatora-dlya-iame-60cc">
+				<path class="part" d="m 546.49262,347.31382 c 5.89339,-4.91235 13.52726,-10.10318 28.65242,-16.49262 l 2.79536,0.27954 45.98365,24.59915 1.81698,1.53745 0,21.66403 c 3.24053,2.90357 3.74794,6.97929 4.61235,10.9019 5.09381,5.40298 10.32777,6.60123 15.79377,0.83861 7.92398,-12.28922 19.48726,-14.6531 31.44779,-15.93355 l 16.21308,0.13977 c 6.96865,3.10097 15.04886,3.42301 19.98681,11.60074 l 0.41931,6.70886 c -6.34668,9.18138 -12.32635,11.75657 -18.3096,14.3961 -12.21406,1.97271 -24.7352,2.71706 -37.31804,3.21466 -3.13933,1.7238 -0.95485,3.44761 0.13977,5.17141 0.65625,1.10913 1.60363,1.56325 0.8386,5.87026 l 1.39768,1.11814 -0.13976,5.17141 -13.69726,6.9884 -6.84863,-2.37605 0,-3.21467 5.59072,-2.79536 2.37605,-3.49419 5.73049,-3.0749 3.63396,0.97838 0.41931,-3.63397 c -3.36939,-1.89475 -2.72089,-4.43233 -1.95675,-6.9884 -6.56095,0.34241 -11.49707,3.93448 -17.05169,6.28956 l 0.97837,1.53745 0.83861,0.4193 0.13977,4.19304 -13.83703,7.12816 c -1.07889,0.65473 -4.28111,-1.34471 -6.70886,-2.37605 l -0.13976,-3.4942 5.87025,-2.37605 0.83861,-2.65559 6.42932,-3.91351 4.05327,0.97838 c 3.86276,-3.07043 12.3867,-6.94244 19.70728,-7.4077 l 5.03164,-1.11814 c -9.28813,-2.19745 -15.53146,-6.0557 -16.63238,-12.71889 -10.5979,4.21808 -17.21346,1.1352 -18.86867,-11.04166 -0.98235,2.23098 -0.95571,5.8073 -0.83861,9.50422 -8.29806,6.27791 -16.19632,12.98551 -28.37289,15.09493 -1.24043,0.39018 -2.44953,0.15992 -3.63396,-0.55907 l -41.93038,-22.36287 c -4.07202,3.63415 -5.24723,2.44029 -6.01003,0.55907 l -7.4077,3.35443 c -1.64118,-0.0754 -3.5105,0.0317 -1.53744,-2.93512 l 6.42932,-3.77374 -0.13977,-7.4077 -5.59071,2.09652 -1.11815,0.13977 c -0.72398,-0.7275 -0.4843,-1.69591 0.27954,-2.79536 l 6.84863,-3.77373 0.13977,-3.0749 2.51582,-1.95675 z" fill="#87d7fb">
+			</path></a>
+		</svg>
+		<img src="https://openkart.ru/image/catalog/scheme/schemes/scheme-0034.jpg" alt="Зажигание, проводка">
+</div>
+<link href="https://openkart.ru/image/catalog/scheme/schemes/libs/scheme-v3.css" rel="stylesheet" media="screen"></div>
+      </div>
+                       <div class="row category-form-control-wrap">
+		  <div class="col-md-4 col-sm-12"></div>
+		  <div class="col-md-8 col-sm-12">
+			<div class="row">
+        		<div class="col-md-9 col-sm-6 category-control-sorts">
+          		<div class="category-form-control2">
+            		<span class="category-form-control-texts">Сортировка:</span>
+            		<select class="category-sorts2" onchange="location = this.value;"> 
+              		               		               			<option value="https://openkart.ru/iame-60cc-spark-plug?sort=p.sort_order&amp;order=ASC" selected="selected">По умолчанию</option>
+              		               		               		               			<option value="https://openkart.ru/iame-60cc-spark-plug?sort=pd.name&amp;order=ASC">Название (А - Я)</option>           
+              		               		               		               			<option value="https://openkart.ru/iame-60cc-spark-plug?sort=pd.name&amp;order=DESC">Название (Я - А)</option>           
+              		               		               		               			<option value="https://openkart.ru/iame-60cc-spark-plug?sort=p.price&amp;order=ASC">Цена (низкая &gt; высокая)</option>           
+              		               		               		               			<option value="https://openkart.ru/iame-60cc-spark-plug?sort=p.price&amp;order=DESC">Цена (высокая &gt; низкая)</option>           
+              		               		               		               			<option value="https://openkart.ru/iame-60cc-spark-plug?sort=rating&amp;order=DESC">Рейтинг (начиная с высокого)</option>           
+              		               		               		               			<option value="https://openkart.ru/iame-60cc-spark-plug?sort=rating&amp;order=ASC">Рейтинг (начиная с низкого)</option>           
+              		               		               		               			<option value="https://openkart.ru/iame-60cc-spark-plug?sort=p.model&amp;order=ASC">Модель (А - Я)</option>           
+              		               		               		               			<option value="https://openkart.ru/iame-60cc-spark-plug?sort=p.model&amp;order=DESC">Модель (Я - А)</option>           
+              		               		            
+            		</select>
+						<select id="width_tmp_select">
+ 							<option id="width_tmp_option"></option>
+						</select>
+          		</div>
+        		</div>
+        		<div class="col-md-3 col-sm-6 category-control-pages">
+          		<div class="category-form-control">
+            		<span class="category-form-control-texts">На странице:</span> 
+            		<select class="category-sorts3" onchange="location = this.value;">          
+              		               		               			<option value="https://openkart.ru/iame-60cc-spark-plug?limit=16">16</option>   
+              		               		               		               			<option value="https://openkart.ru/iame-60cc-spark-plug?limit=32">32</option>   
+              		               		               		               			<option value="https://openkart.ru/iame-60cc-spark-plug?limit=48">48</option>   
+              		               		               		                   	<option value="https://openkart.ru/iame-60cc-spark-plug?limit=96" selected="selected">96</option>            
+              		               		   
+            		</select>
+          		</div>
+        		</div>
+			</div>
+		 </div>
+      </div>
+      <div class="row"> 
+	  
+  	<div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition" onclick="if (event.ctrlKey) { window.open('https://openkart.ru/iame-60cc-spark-plug/svecha-ngk-br10eg', '_blank'); return false; } else { location.href='https://openkart.ru/iame-60cc-spark-plug/svecha-ngk-br10eg'; return false; }">
+     <h4 class="h4-product-name"><a href="https://openkart.ru/iame-60cc-spark-plug/svecha-ngk-br10eg">Свеча NGK BR10EG</a></h4>
+		<div class="special-btn2">Хит</div>	   <div class="product-info">	
+			<ul class="list-unstyled">
+                        <li>Производитель: NGK</li>
+                        <li>Модель: BR10EG</li>
+				         </ul>
+		</div>
+      <div class="image"><a href="https://openkart.ru/iame-60cc-spark-plug/svecha-ngk-br10eg"><img 
+				class="lazyload" data-src="https://openkart.ru/image/cache/catalog/data/BR9EG-228x228.jpg"
+			 alt="Свеча NGK BR10EG" title="Свеча NGK BR10EG" class="img-responsive" /></a></div>
+      <div class="caption">      
+        <div class="price"> 
+						           930.00&nbsp;<span class="currency-rub">₽</span>
+           
+          
+			            <br /><span class="product-quantity">В наличии: 63</span>
+					  </div>
+		  <div class="cart-btn-wrap">
+          <div class="category-plus-minus">
+  				<button type="button" onclick="event.stopPropagation(); if ($(this).next().val() > 1) {$(this).next().val($(this).next().val()-1);} $(this).parents('form').submit();" class="minus" window.event.cancelBubble = "true">&ndash;</button>
+            <input type="text" onclick="event.stopPropagation();" name="quantity" value="1" size="2" id="input-quantity" class="quantity-items" window.event.cancelBubble = "true" />
+  				<button type="button" onclick="event.stopPropagation(); $(this).prev().val(~~$(this).prev().val()+1); $(this).parents('form').submit();" class="plus" window.event.cancelBubble = "true">+</button>        
+          </div>
+        	 <button type="button" class="cart-btn" onclick="event.stopPropagation(); cart.add('1177',$(this).parent().find('.quantity-items').val());" window.event.cancelBubble = "true">Купить</button>   
+		  </div>
+		</div>        
+    </div>
+  </div>
+    
+  	<div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition" onclick="if (event.ctrlKey) { window.open('https://openkart.ru/iame-60cc-spark-plug/svecha-ngk-br9eg', '_blank'); return false; } else { location.href='https://openkart.ru/iame-60cc-spark-plug/svecha-ngk-br9eg'; return false; }">
+     <h4 class="h4-product-name"><a href="https://openkart.ru/iame-60cc-spark-plug/svecha-ngk-br9eg">Свеча NGK BR9EG</a></h4>
+			   <div class="product-info">	
+			<ul class="list-unstyled">
+                        <li>Производитель: NGK</li>
+                        <li>Модель: BR9EG</li>
+				         </ul>
+		</div>
+      <div class="image"><a href="https://openkart.ru/iame-60cc-spark-plug/svecha-ngk-br9eg"><img 
+				class="lazyload" data-src="https://openkart.ru/image/cache/catalog/data/BR9EG-228x228.jpg"
+			 alt="Свеча NGK BR9EG" title="Свеча NGK BR9EG" class="img-responsive" /></a></div>
+      <div class="caption">      
+        <div class="price"> 
+						           930.00&nbsp;<span class="currency-rub">₽</span>
+           
+          
+			            <br /><span class="product-quantity">В наличии: 26</span>
+					  </div>
+		  <div class="cart-btn-wrap">
+          <div class="category-plus-minus">
+  				<button type="button" onclick="event.stopPropagation(); if ($(this).next().val() > 1) {$(this).next().val($(this).next().val()-1);} $(this).parents('form').submit();" class="minus" window.event.cancelBubble = "true">&ndash;</button>
+            <input type="text" onclick="event.stopPropagation();" name="quantity" value="1" size="2" id="input-quantity" class="quantity-items" window.event.cancelBubble = "true" />
+  				<button type="button" onclick="event.stopPropagation(); $(this).prev().val(~~$(this).prev().val()+1); $(this).parents('form').submit();" class="plus" window.event.cancelBubble = "true">+</button>        
+          </div>
+        	 <button type="button" class="cart-btn" onclick="event.stopPropagation(); cart.add('1176',$(this).parent().find('.quantity-items').val());" window.event.cancelBubble = "true">Купить</button>   
+		  </div>
+		</div>        
+    </div>
+  </div>
+   
+
+	
+		</div>
+      <div class="row">
+        <div class="col-md-6 text-left category-pagination"></div>
+        <div class="col-md-6 text-right category-results"><span class="category-form-control-texts">Показано</span> с 1 по 2 из 2 (всего 1 страниц)</div>
+      </div>
+                  </div>
+    </div>
+</div>
+<footer>
+  <div class="container">
+    <div class="row footer-links">
+            <div class="col-md-2 col-sm-4">
+        <h5>Информация</h5>
+        <ul class="list-footer-links">
+          <li><a href="https://openkart.ru/contact-us">Адреса и телефоны</a></li>
+                   <li><a href="https://openkart.ru/delivery">Доставка запчастей для картинга</a></li>
+                    <li><a href="https://openkart.ru/oplata">Способы оплаты</a></li>
+                  </ul>
+      </div>
+       
+		<div class="col-md-4 col-sm-8">	
+		  <div class="row">	
+      	<div class="col-md-7 col-sm-7 footer-service">
+        	 <h5>Служба поддержки</h5>
+        	 <ul class="list-footer-links">
+          	<li><a href="https://openkart.ru/kak-sdelat-zakaz">Как сделать заказ</a></li>
+          	<li><a href="https://openkart.ru/katalogi-i-tablitsy-razmerov">Каталоги и таблицы размеров</a></li>
+          	<li><a href="https://openkart.ru/nastroyka-karta-i-prochee">Настройка карта и прочее</a></li>
+        	 </ul>
+      	</div>
+      	<div class="col-md-5 col-sm-5 footer-extra"> 
+          <h5>Дополнительно</h5>
+        	 <ul class="list-footer-links">
+          	<li><a href="https://openkart.ru/brands">Производители</a></li>
+          	<li><a href="https://openkart.ru/specials">Акции</a></li>
+          	<li><a href="https://openkart.ru/latest">Новинки</a></li>
+          	<li><a href="https://openkart.ru/sitemap">Карта сайта</a></li>
+          </ul>
+      	</div>
+		  </div>
+		</div>
+      <div class="col-md-2 col-sm-4 footer-account"> 
+        <h5>Личный Кабинет</h5>
+        <ul class="list-footer-links">
+          <li><a href="https://openkart.ru/my-account">Личный Кабинет</a></li>
+          <li><a href="https://openkart.ru/order-history">История заказов</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 col-sm-8 footer-map">   
+        <h5 class="h5-fix">НАШ АДРЕС</h5>
+        <ul class="list-unstyled">
+          <li><i class="fa fa-map-marker"></i> г. Санкт-Петербург, ул. Плуталова, д. 8</li>
+          <li><i class="fa fa-mobile"></i> +7-921-9672225</li>
+          <li><i class="fa fa-envelope-o"></i> <a href="/cdn-cgi/l/email-protection#b3daddd5dcf3dcc3d6ddd8d2c1c79dc1c6" class="footer-email"><span class="__cf_email__" data-cfemail="0960676f664966796c6762687b7d277b7c">[email&#160;protected]</span></a></li>
+			 <li class="footer-icons">
+				<a href="https://www.facebook.com/openkart.ru/" class="fa fa-facebook" target="_blank"></a>
+				<a href="https://telegram.me/openkartnews" class="fa fa-telegram" target="_blank"></a>
+				<a href="https://www.instagram.com/openkart/" class="fa fa-instagram" target="_blank"></a>
+				<a href="https://vk.com/openkart" class="fa fa-vk" target="_blank"></a>
+			 </li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyrights">&copy; 2020 Openkart</div>
+  </div>
+</footer>
+<div class="in-stock-btn-form" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000000db; z-index: 9999999; text-align: center;">	
+	<div style="display: table-cell; vertical-align: middle;">	
+		<form method = "post">
+			<span style="font-size: 17px; color: #fff;">Уведомить о поступлении на e-mail:</span>
+			<input type="email" placeholder="username@example.ru" class="form-control" name="mail_in_stock" style="width: 80%; max-width: 400px; margin: 15px auto 25px;" />
+			<input type="hidden" class="form-control product-id-in-stock" name="product_id_in_stock" />
+			<button type="submit" name="send_in_stock" value = "OK" data-loading-text="Загрузка..." class="btn btn-success in-stock-btn-close">ОК</button>
+			<button type="button" class="btn btn-danger in-stock-btn-close" onclick="$('.in-stock-btn-form').hide();">Отмена</button> 
+		</form>
+	</div>
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript"><!--
+	$('.cart-btn').on('click', function(){
+	    setTimeout(function() {
+	        loadCart8(); //fix3
+		}, 1000);
+		$('.cart-total-href').css({ display: 'block' });
+		if ($(this).closest('.product-thumb').find('img').length == 1) {
+			var that = $(this).closest('.product-thumb').find('img');
+		} else {
+			var that = $(this).closest('#content').find('img');
+		}			
+		var cartTotalHref = $(".cart-total-href");
+		var w = that.width();		
+        that.clone()
+            .css({'width' : w,
+			'position' : 'absolute',
+			'z-index' : '9999',
+			top: that.offset().top,
+			left: that.offset().left })
+            .appendTo("body")
+            .animate({opacity: 0.05,
+                left: cartTotalHref.offset()['left'],
+                top: cartTotalHref.offset()['top'],						
+                width: 20}, 1000, function() {	
+					$(this).remove();
+				});
+	});
+//--></script>
+	<script type="text/javascript">
+  		WebFontConfig = {
+    		google: { families: [ 'Open+Sans:300,400,400i,700' , 'Roboto:300,400,500,700' ] }
+  		};
+  		(function() {
+    		var wf = document.createElement('script');
+    		wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+   		wf.type = 'text/javascript';
+    		wf.async = 'true';
+    		var s = document.getElementsByTagName('script')[0];
+    		s.parentNode.insertBefore(wf, s);
+  		})();
+	</script>
+</body></html>
+ 

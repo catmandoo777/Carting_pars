@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]><html dir="ltr" lang="ru" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html dir="ltr" lang="ru" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html dir="ltr" lang="ru">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Подшипник коленчатого вала Rotax для картов. Все для картинга на Openkart.ru</title>
+<base href="https://openkart.ru/" />
+<meta name="description" content="У нас вы можете купить подшипник коленчатого вала Rotax для гоночных картов - в наличии и под заказ, с экспресс-доставкой по России. Все для картинга на Openkart.ru" />
+<meta name="yandex-verification" content="bf8adcc2e2331beb" />
+<script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script defer src="catalog/view/javascript/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!--<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700|Roboto:300,400,500,700&amp;subset=cyrillic,cyrillic-ext" rel="stylesheet">-->
+<link href="catalog/view/theme/ktemplate/stylesheet/stylesheet-v3.24.css" rel="stylesheet">
+			<!-- cdek -->
+				<!-- cdek -->
+	    <script defer src="catalog/view/javascript/common4.js" type="text/javascript"></script>
+<script defer src="catalog/view/javascript/custom4.3.js" type="text/javascript"></script>
+<script defer src="catalog/view/javascript/lazyload/lazysizes.min.js"></script>
+<link rel="apple-touch-icon" sizes="192x192" href="https://openkart.ru/image/catalog/favicons/favicon-192x192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://openkart.ru/image/catalog/favicons/favicon-192x192.png">
+<meta name="msapplication-config" content="https://openkart.ru/image/catalog/favicons/browserconfig.xml">
+<link href="https://openkart.ru/rotax-crankshaft-bearing" rel="canonical" />
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(48771104, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true,
+        ecommerce:"dataLayer"
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/48771104" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2983350-12"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2983350-12');
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script type="text/javascript">
+	var selector = 'input.form-control.input-search';
+	var catTitle = 'Категории';
+	var prodTitle = 'Товары';
+	var viewAllTitle = 'Посмотреть все товары';
+	var noResTitle = 'Ничего не найдено';
+
+	console.log(selector);
+
+	$(document).ready(function() {
+
+		var timer = null;
+		$('input.form-control.input-search').keydown(function(){
+	       clearTimeout(timer); 
+	       timer = setTimeout(sphinxAutocomplete, 500)
+		});
+
+	});
+
+	$(document).mouseup(function (e) {
+		
+		if (!$('.sphinxsearch').is(e.target) && $('.sphinxsearch').has(e.target).length === 0) {
+			$('.sphinxsearch').hide();
+			$('input.form-control.input-search').removeClass('no-bottom-borders');
+			return false;
+		}
+		
+	});
+
+	function sphinxAutocomplete() {
+
+		if($(selector).val() == '') {
+			$('.sphinxsearch').hide();
+			$('input.form-control.input-search').removeClass('no-bottom-borders');
+			return false;
+		}
+
+		$.ajax({
+			url: 'https://openkart.ru/index.php?route=extension/module/sphinxautocomplete&search=' + $(selector).val(),
+			dataType: 'json',
+			success: function(json) {
+
+				var html = '';
+				
+				//Categories
+				if (json.categories.length) {
+					html += '<div class="categories"><span>'+catTitle+'</span>';
+					var categories = json.categories;
+					for (i = 0; i < categories.length; i++) {
+						html += '<a class="sphinxsearcha" href="' + categories[i]['href'] + '">';
+							if(categories[i]['image'] != '') {
+								html += '<img src="' + categories[i]['image'] + '" />';
+							}
+							html += categories[i]['name'];
+							html += '<br />';
+						html += '</a>';
+					}
+					html += '</div>';
+				}
+				
+				//Products
+				if (json.products.length) {
+					if (json.categories.length) { html += '<div class="products"><span>'+prodTitle+'</span>'; }
+					var products = json.products;
+					for (i = 0; i < products.length; i++) {
+						html += '<a class="sphinxsearcha" href="' + products[i]['href'] + '">';
+							html += '<img src="' + products[i]['image'] + '" />';
+							html += products[i]['name'];
+							html += '<br />';
+						html += '</a>';
+					}
+					if (json.categories.length) {  html += '</div>'; }
+					html += '<div class="sphinx-viewall"><a id="view-all" href="https://openkart.ru/search?wildcard=true&amp;search=' + encodeURIComponent($(selector).val()) + '">'+viewAllTitle+'</a></div>';
+				} else {
+					html = '<div class="sphinx-viewall">'+noResTitle+'</div>';
+				}
+
+                $('.sphinxsearch').remove();
+				$(selector).after('<div class="sphinxsearch">'+ html +'</div>');
+				$('.sphinxsearch').show();
+				$('input.form-control.input-search').addClass('no-bottom-borders');
+
+				$('.sphinxsearcha').hover(
+					function(){$(this).addClass('sphinxsearch-a-active');},
+ 					function(){$(this).removeClass('sphinxsearch-a-active');}
+				);
+
+			}
+		});
+			
+	}
+</script>
+
+</head>
+<body> 
+<header>
+  <div class="container">
+    <div class="row header-contacts">
+      <div class="col-sm-12">
+			<i class="fa fa-map-marker"></i>г. Санкт-Петербург, ул. Плуталова, д. 8
+			<i class="fa fa-mobile"></i><a href="tel:+79219672225">+7-921-9672225</a>
+			<i class="fa fa-envelope-o"></i><a href="/cdn-cgi/l/email-protection#1970777f765976697c7772786b6d376b6c"><span class="__cf_email__" data-cfemail="264f48404966495643484d475452085453">[email&#160;protected]</span></a>
+			<i class="fa fa-calendar-o"></i>Время работы: ПН-ПТ 9:00-18:00
+	 	</div>
+	 </div>
+    <div class="row header-contacts-mobile">
+      <div class="col-sm-12">
+			<span class="dropdown"><a href="#" class="dropdown-toggle icon-map-marker" data-toggle="dropdown" aria-expanded="false">
+				<i class="fa fa-map-marker"></i></a>
+				<span class="dropdown-menu dropdown-menu-left dropdown-paddings">г. Санкт-Петербург,<br />ул. Плуталова, д. 8</span>
+			</span>
+			<a href="tel:+79219672225" class="icon-mobile"><i class="fa fa-mobile"></i></a>
+			<a href="/cdn-cgi/l/email-protection#573e39313817382732393c362523792522" class="icon-envelope"><i class="fa fa-envelope-o"></i></a>
+			<span class="dropdown"><a href="#" class="dropdown-toggle icon-calendar" data-toggle="dropdown" aria-expanded="false">
+				<i class="fa fa-calendar-o"></i></a>
+				<span class="dropdown-menu dropdown-menu-right dropdown-paddings">Время работы:<br />ПН-ПТ 9:00-18:00</span>
+			</span>
+	 	</div>
+	 </div>
+    <div class="row header">
+      <div class="col-sm-3">
+        <div id="logo">
+				<a href="https://openkart.ru/"><img src="/catalog/view/theme/ktemplate/image/logo.png" title="Openkart - Все для картинга" alt="Openkart - Все для картинга" class="img-responsive" /></a>
+			</div>
+      </div>
+		<div class="col-sm-9"> 
+	 	  <div class="row">
+      	<div class="col-sm-5 col-lg-7">
+  			  <nav class="navbar header-menu"> 
+    			<div class="navbar-header">
+      			<button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
+    			</div>
+    			<div class="collapse navbar-collapse navbar-ex1-collapse">
+      			<ul class="nav navbar-nav header-links">
+        				<li><a href="https://openkart.ru/" class="link-home">Главная</a></li> 
+        				<li><a href="https://openkart.ru/latest">Новинки</a></li> 
+        				<li><a href="https://openkart.ru/specials">Акции</a></li> 
+        				<li><a href="https://openkart.ru/oplata">Оплата</a></li> 
+        				<li><a href="https://openkart.ru/contact-us">Контакты</a></li>  
+      			</ul>
+    			</div> 
+  			  </nav>
+			</div> 
+	 	<div class="col-sm-7 col-lg-5 header-right-row">
+       <div class="header-search"><div id="search"> 
+  <input type="text" name="search" value="" placeholder="Поиск..." class="form-control input-search" autocomplete="off" /> 
+  <button type="submit" value="Искать" class="button search-submit"><i class="fa fa-search"></i></button>
+</div>
+</div>
+       <div class="header-account">
+		  <ul class="list-inline"> 
+         <li class="dropdown"><a href="https://openkart.ru/my-account" title="Личный кабинет" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i></a> 
+          <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="https://openkart.ru/create-account">Регистрация</a></li>
+            <li><a href="https://openkart.ru/login">Авторизация</a></li>
+                       </ul>
+          </li>
+		   </ul>
+        </div>
+        <div class="header-cart">
+		   <div id="cart">
+  <a data-toggle="dropdown" data-loading-text="Загрузка..." class="dropdown-toggle my-cart" title="Корзина"><i class="fa fa-shopping-cart"></i> <div id="cart-total">0</div></a>
+  <ul class="dropdown-menu pull-right dropdown-menu-wrap">
+        <li>
+        <div class="marker"></div>
+        <p class="text-center">Ваша корзина пуста!</p>
+    </li>
+      </ul>
+</div>
+<a class="cart-total-href" href="/checkout2" style="display:none;"><i class="fa fa-shopping-cart" style="font-size:22px;height:20px;width:28px;margin-left:-4px;"></i><div class="cart-total-btn">0</div></a>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript"><!--
+function loadCart8() {
+	$.ajax({
+		url: 'index.php?route=extension/quickcheckout/cart2',
+		dataType: 'html',
+		cache: false,
+		beforeSend: function() {
+			$('.tooltip').remove();
+		},
+		success: function(html) {			
+			$('.cart8 .quickcheckout-content').html(html);
+		}
+	});
+}
+
+$(document).ready(function(){
+    loadCart8();
+});
+
+$(document).on('click', '.cart8 .button-update', function() {
+	var quantity = $(this).parents('.quantity').find('input.qc-product-qantity');
+	if (quantity.length){
+		if ($(this).data('type')=='increase') {
+			quantity.val(parseInt(quantity.val())+1);
+		} else if ($(this).data('type')=='decrease') {
+			quantity.val(parseInt(quantity.val())-1);
+		}
+	}
+	
+	$.ajax({
+		url: 'index.php?route=extension/quickcheckout/cart2/update',
+		type: 'post',
+		data: $('.cart8 :input'),
+		dataType: 'json',
+		cache: false,
+		beforeSend: function() {
+			$('.cart8 .button-update').prop('disabled', true);
+		},
+		success: function(json) {
+			if (json['redirect']) {
+			    if (window.location.pathname == '/checkout2') {
+				    location = json['redirect'];
+				} else {
+				    $('ul.dropdown-menu.pull-right.dropdown-menu-wrap').html('<li><div class="marker"></div><p class="text-center">Ваша корзина пуста!</p></li>');
+			        $('#cart-total').html(json['count_products']);
+				    $('.cart-total-btn').html(json['count_products']);
+				}
+			} else {
+				if (json['error']['stock']) {
+					$('#button-payment-method').attr("disabled", true);
+				} else if (json['error']['warning']) {
+						$('#warning-messages').html('<div class="alert alert-danger" style="display: none;"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '</div>');
+						$('.alert-danger').fadeIn('slow');
+						$('#button-payment-method').attr("disabled", true);
+				} else {
+					$('#warning-messages').html('');
+					$('#button-payment-method').removeAttr("disabled");
+				}
+                if (window.location.pathname == '/checkout2') {
+			        reloadShippingMethodById($('#shipping-address select[name=\'address_id\']').val());			    
+				}				
+			    loadCart8();
+				$('#cart-total').html(json['count_products']);
+				$('.cart-total-btn').html(json['count_products']);				
+			}
+		}
+	});
+
+	return false;
+});
+
+$(document).on('click', '.button-remove', function() {
+	var remove_id = $(this).attr('data-remove');
+
+	$.ajax({
+		url: 'index.php?route=extension/quickcheckout/cart2/update&remove=' + remove_id,
+		type: 'get',
+		dataType: 'json',
+		cache: false,
+		beforeSend: function() {
+			$('.cart8 .button-remove').prop('disabled', true);
+		},
+		success: function(json) {
+			if (json['redirect']) {
+			    if (window.location.pathname == '/checkout2') {
+				    location = json['redirect'];
+				} else {
+				    $('ul.dropdown-menu.pull-right.dropdown-menu-wrap').html('<li><div class="marker"></div><p class="text-center">Ваша корзина пуста!</p></li>');
+			        $('#cart-total').html(json['count_products']);
+				    $('.cart-total-btn').html(json['count_products']);
+				}
+			} else {
+			    if (window.location.pathname == '/checkout2') {
+				    reloadShippingMethodById($('#shipping-address select[name=\'address_id\']').val());
+				}
+				loadCart8();
+				$('#cart-total').html(json['count_products']);
+				$('.cart-total-btn').html(json['count_products']);
+			}
+		}
+	});
+
+	return false;
+});
+//--></script>
+
+        </div>
+	 	</div>
+	 	</div>
+	  </div>
+    </div>
+  </div>
+</header>
+<div class="container categories-menu2">
+	<div class="row categories2">
+		<div class="category-menu2">
+			<a href="/chassis_parts">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category1.png" alt="ШАССИ И ЗАПЧАСТИ">
+					<div class="category-text2">ШАССИ И <br class="category-text-break" />ЗАПЧАСТИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/engines_and_parts">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category2.png" alt="МОТОРЫ И ЗАПЧАСТИ">
+					<div class="category-text2">МОТОРЫ И <br class="category-text-break" />ЗАПЧАСТИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2"> 
+			<a href="/kart_tools">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category3.png" alt="ОБОРУДОВАНИЕ">
+					<div class="category-text2">ОБОРУДОВА- <br class="category-text-break" />НИЕ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/data_systems">
+				<div class="category-link5 category-link5-fix2">
+					<img src="/catalog/view/theme/ktemplate/image/category4.png" alt="ЭЛЕКТРОННЫЕ СИСТЕМЫ">
+					<div class="category-text2">ЭЛЕКТРОННЫЕ <br class="category-text-break" />СИСТЕМЫ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/tyres_and_wheels">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category5.png" alt="ШИНЫ И ДИСКИ">
+					<div class="category-text2">ШИНЫ И <br class="category-text-break" />ДИСКИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/protection_wear">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category6.png" alt="ЭКИПИРОВКА И ШЛЕМЫ">
+					<div class="category-text2">ЭКИПИРОВКА <br class="category-text-break" />И ШЛЕМЫ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/lubricants">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category7.png" alt="МАСЛО И СМАЗКИ">
+					<div class="category-text2">МАСЛО И <br class="category-text-break" />СМАЗКИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/sprockets_and_chains">
+				<div class="category-link5 category-link5-fix">				
+					<img src="/catalog/view/theme/ktemplate/image/category8.png" alt="ЦЕПИ И ЗВЕЗДЫ">
+					<div class="category-text2">ЦЕПИ И <br class="category-text-break" />ЗВЕЗДЫ</div>
+				</div>
+			</a>
+		</div> 
+	</div>
+</div>
+
+<div id="product-category" class="container">
+  <ul class="breadcrumb-category">
+        <li><a href="https://openkart.ru/">Главная</a></li>
+        <li><a href="https://openkart.ru/rotax-crankshaft-bearing">Подшипник коленчатого вала Rotax</a></li>
+      </ul>
+  <h1>Подшипник коленчатого вала Rotax</h1>
+  <div class="row">
+                <div id="content" class="col-sm-12">
+      	  		      <div class="row category-description">         
+        <div class="col-sm-12"><div class="interactive-scheme">
+		<svg viewBox="0 0 795 418">
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankshaft-piston-gears/kolenchatyj-val-rotax-evo-v-sbore">
+				<path class="part" d="m 536.42933,241.61287 c 1.28254,-8.56577 5.1548,-14.25408 13.13818,-15.37447 l 8.38608,6.42932 c 4.62038,-0.95466 7.8115,1.78331 11.7405,4.47258 l 4.75211,0.55907 22.08334,-15.37448 -3.91351,-2.79535 c 0.47926,-7.52631 0.35216,-15.26663 13.13819,-18.44937 l 11.46097,7.26793 c 0.66056,9.14605 -2.10951,11.8692 -4.19304,16.21309 l 34.10338,21.80379 c 3.74043,6.5891 9.24536,11.04689 2.23629,39.13502 l 6.98839,5.31118 0,1.39768 c 5.11506,3.18893 9.17572,6.11425 8.38608,7.827 6.66219,3.44526 14.61409,8.64164 13.13818,11.46098 l 4.47258,2.51582 c -0.2561,3.07163 -0.0152,6.35626 -5.31118,7.26793 l -4.47258,-1.95675 c -3.20059,1.42583 -9.57475,-3.49549 -15.65401,-7.827 -0.12978,2.21591 -5.1496,0.15303 -11.18143,-2.79536 l -9.22469,-3.63397 c -25.5428,25.13679 -29.64507,15.78229 -39.13502,15.09494 -11.6773,-5.71694 -12.07168,-9.01612 -13.69725,-12.57912 -8.88908,2.10421 -20.62885,-9.26284 -24.8787,-13.69725 -2.80268,-8.00604 -1.94554,-18.27422 1.95676,-32.98524 -4.8917,-3.33122 -9.44727,-6.83051 -12.85865,-10.90189 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankcase-estarterdrive-chainguard/rotax-crankshaft-bearing">
+				<path class="part" d="m 683.74473,356.78165 c -8.48415,-10.93762 3.44977,-55.30909 34.38291,-52.27321 l 13.13818,8.94515 c 6.07677,9.48478 3.45732,47.38608 -30.74894,52.2732 z" fill="red">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankcase-estarterdrive-chainguard/rotax-crankshaft-bearing">
+				<path class="part" d="m 488.34916,234.34494 c -3.26005,-8.57255 3.80376,-43.89667 34.38291,-47.5211 l 15.37447,8.94515 c 14.59841,24.88581 -17.82906,54.81532 -27.67405,53.11181 -10.07502,-3.14909 -17.962,-7.66571 -22.08333,-14.53586 z" fill="red">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankshaft-piston-gears/balansirovochnyj-val-rotax">
+				<path class="part" d="m 667.81118,248.04219 c 18.52615,11.72411 34.14332,20.53925 50.59599,30.18988 6.80058,0.27808 10.8843,-2.16071 13.9768,-5.59072 6.27085,-1.06309 9.54282,-4.76577 7.827,-12.85865 -4.8116,-3.22871 -8.9581,-7.6546 -17.33122,-4.47257 l -44.72574,-27.11498 c 1.58124,-7.98346 -0.83673,-13.16746 -6.70886,-15.93355 l -11.18144,-6.14979 c -11.30265,1.13417 -14.7508,12.62146 -13.41772,20.12659 l 19.56751,11.7405 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankshaft-piston-gears/podshipnik-balansirovochnogo-vala-6302-c3-rotax">
+				<path class="part" d="m 764.53059,258.94409 10.34283,6.70886 c 7.85646,10.57629 -0.66983,28.59895 -14.53587,35.78059 -9.38053,-1.09564 -14.51484,-4.6177 -18.7289,-8.66561 -2.575,-25.58602 18.68455,-34.31456 22.92194,-33.82384 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankshaft-piston-gears/podshipnik-balansirovochnogo-vala-6005-c3-rotax">
+				<path class="part" d="m 531.95675,168.09494 c -3.44328,-22.15139 12.7316,-36.13098 24.87869,-38.01688 4.79101,2.84964 10.02625,5.25505 13.41772,9.50422 4.57314,17.22145 -8.0782,29.10958 -18.7289,36.89873 -6.94007,0.96275 -13.37045,-2.66174 -19.56751,-8.38607 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankshaft-piston-gears/salnik-28kh38kh7-teflon">
+				<path class="part" d="m 466.54536,209.18671 c -0.32354,-10.86673 2.03414,-25.83648 20.12658,-30.46941 4.9092,2.54509 9.64655,5.26203 10.9019,11.46097 -3.54526,16.31949 -11.48946,22.74137 -20.96519,25.7173 -4.04153,-2.23629 -8.19321,-4.47257 -10.06329,-6.70886 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankshaft-piston-gears/shesternya-balansirovochnogo-vala-rotax-z50">
+				<path class="part" d="m 317.27321,123.64873 c 6.41405,4.6635 14.26197,5.98133 16.49261,20.40612 -10.33578,47.89253 -38.13551,52.33689 -45.56434,51.71414 1.65108,37.81941 -22.31073,51.79451 -34.66245,60.65928 -14.90878,-1.22285 -20.69608,-8.14661 -23.76055,-16.77215 -1.27148,-11.68593 14.47979,-55.37212 44.4462,-55.3481 2.91683,-51.6363 34.15846,-59.92535 43.04853,-60.65929 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankshaft-piston-gears/shesternya-vodyanogo-nasosa-rotax">
+				<path class="part" d="m 151.50844,282.42511 1.67721,2.79535 -2.79535,1.39768 -0.27954,3.63397 -3.35443,0.27954 -1.39768,4.75211 -2.51582,-0.55908 -1.95675,3.63397 -2.79536,-1.95675 -1.67722,1.95675 -9.22468,-6.14979 0,-8.38608 -1.11814,-1.11814 2.51582,-2.23629 0,-3.63396 3.63396,-1.11815 -0.27953,-3.63396 2.51582,0 1.11814,-5.03165 3.0749,2.23629 1.95675,-4.75211 3.07489,3.07489 0.55908,-1.39767 8.94514,3.9135 0.13977,3.07489 1.53745,1.53745 -2.79536,3.4942 2.51582,1.95675 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankshaft-piston-gears/shesternya-pompy-rotax-promezhutochnaya-28--13">
+				<path class="part" d="m 151.92774,246.92405 4.61234,-3.63397 -3.63396,-1.95675 5.31118,-3.4942 -2.79536,-2.79535 c -0.10594,-0.74543 2.97483,-1.49086 4.89188,-2.23629 l -1.53745,-4.75211 4.89188,-0.97838 -1.53745,-5.31118 4.47258,1.67722 0.4193,-6.28956 4.33281,1.81698 0.13976,-6.28955 3.77374,2.37605 1.11814,-5.31118 3.63397,1.53745 1.25791,-4.19304 2.37605,2.51582 3.4942,-1.67721 1.11815,2.23628 2.65559,-0.8386 1.25791,1.81698 2.65559,-0.13977 -0.55907,1.39768 3.21466,1.39768 -0.4193,1.95675 3.07489,1.39768 -2.09652,2.51582 2.37606,3.0749 -2.93513,2.93512 2.79536,2.09652 -3.9135,3.4942 2.65559,2.37606 -3.91351,2.79536 -0.27953,1.95675 2.51582,1.11814 -0.27953,1.67722 1.67721,2.23628 0,4.05327 c -2.81387,2.60398 -4.44372,8.08344 -9.64399,4.89188 l -2.79536,-0.55907 -0.55907,6.14979 c -1.14799,-0.94853 -1.99121,-2.20183 -4.19304,-2.09652 l -0.55907,6.14979 -3.35443,-2.09652 -1.39768,4.61234 -2.79536,-0.83861 -1.95675,2.51583 -2.65559,-0.97838 -2.37605,1.67721 -1.39768,-1.67721 -3.63397,0.27954 c -1.65601,-1.44427 -2.57961,-2.88854 -5.59072,-4.33281 l 0.69884,-2.51582 -3.35443,-1.53745 2.37606,-2.51582 -3.4942,-1.81699 3.4942,-3.49419 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankshaft-piston-gears/prokladka-transmissionnaya-rotax">
+				<path class="part" d="m 176.1076,81.159283 11.46097,-17.890296 c -0.52026,-8.875245 9.36052,-17.366025 25.99683,-24.040084 2.74098,0.134621 3.36177,3.096169 3.9135,6.149789 4.08861,0.139522 6.97163,0.901703 10.9019,4.752109 6.46922,-3.633921 6.11153,1.420965 4.47258,8.106541 1.79395,10.332358 2.5997,21.103915 -2.23629,34.382911 1.88023,9.690187 -2.22822,11.145937 -6.14979,12.858647 0.48644,-2.60665 -8.23292,10.18875 -17.8903,18.44937 -17.54597,13.25146 -14.60454,14.92309 -15.93354,19.00844 3.3471,7.31944 -1.82479,9.52749 -5.59072,12.57911 -9.34764,16.18525 -17.34153,24.16772 -30.46941,35.22152 l -5.87025,5.03165 c -2.09707,2.09523 -4.89843,2.54711 -9.22468,-0.55907 -6.5908,-4.56575 -11.19855,-9.13151 -14.8154,-13.69726 -2.23629,2.19551 -4.47257,1.85304 -6.70886,-5.59072 l -5.87026,-1.11814 c -29.348999,5.94002 -10.18545,-26.82713 -6.98839,-33.82384 -0.85063,-4.73074 -3.3941,-9.36742 8.66561,-14.8154 l 22.6424,-19.00844 35.50106,-21.524264 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankshaft-piston-gears/verkhnij-separator-shatuna-rotax">
+				<path class="part" d="m 564.38291,199.68249 15.37447,10.62236 c 8.81976,-2.72929 11.95717,-7.89388 10.34283,-15.09493 l -14.53586,-9.50422 c -10.14718,1.69584 -10.4488,7.93578 -11.18144,13.97679 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankshaft-piston-gears/rotax-piston">
+				<path class="part" d="m 577.5211,70.816455 c 18.22016,-27.729861 54.26135,-8.542308 54.50949,-0.279535 l 0,48.63924 c -1.53713,-0.32709 -2.28061,-2.47602 -3.07489,-5.03165 l -5.87026,3.91351 c -9.98894,2.52316 -15.63841,7.65 -22.08333,12.29957 l -0.27954,5.03165 c -20.75134,-2.88306 -17.50615,-8.32491 -21.80379,-12.57911 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankshaft-piston-gears/porshnevoe-koltso-rotax">
+				<path class="part" d="m 654.67299,60.473629 c 17.33553,-10.793531 39.80116,-9.437055 48.08017,4.472573 4.05342,16.671629 -11.66098,17.648446 -25.15822,20.96519 -18.63231,-2.73173 -31.61216,-7.937102 -22.92195,-25.437763 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankshaft-piston-gears/palets-porshnevoj-rotax">
+				<path class="part" d="m 642.09388,127.2827 c -0.1664,-8.62245 3.6404,-11.56807 8.66561,-12.02004 l 31.58756,20.12658 c 0.94617,5.14993 1.70989,10.2347 -7.54747,11.74051 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankshaft-piston-gears/komplekt-stoporov-porshnevogo-paltsa-rotax">
+				<path class="part" d="m 687.65823,154.39768 c -8.46163,-0.0422 -4.14007,-6.85201 -0.27954,-13.41772 7.77422,-3.11529 6.52512,2.79274 7.26793,6.70886 -2.85945,3.1196 -6.24813,7.12125 -6.98839,6.70886 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankshaft-piston-gears/komplekt-stoporov-porshnevogo-paltsa-rotax">
+				<path class="part" d="m 560.46941,76.407173 c 2.30775,-6.315115 5.35081,-10.975802 10.62236,-10.622363 2.26928,4.954965 1.05039,8.165839 -1.11814,10.901899 -4.6595,3.776427 -8.5415,5.535586 -9.50422,-0.279536 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankshaft-piston-gears/shatun-rotax-evo-v-sbore">
+				<path class="part" d="m 349.69937,301.43354 148.99261,90.84916 13.9768,-24.87869 c 2.90611,-7.90788 2.124,-16.22556 -1.67722,-24.87869 l -95.8808,-58.70254 c -10.81907,-2.43744 -4.32747,-35.78678 -5.87025,-54.78902 4.45505,-7.54989 13.33117,-14.48997 -2.79536,-24.8787 -14.364,-0.63085 -15.4889,7.56437 -16.77216,15.65401 l 6.70887,8.94515 0.27953,47.80063 -11.46097,-11.46097 c -14.76006,4.10304 -16.84624,12.81477 -24.31962,19.56751 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankshaft-piston-gears/maslo-kf-rotax-kart-gear-oil-100ml">
+				<path class="part" d="m 13.138186,215.89557 -1.118144,126.90928 c -0.728738,1.85503 -0.71386,3.36045 2.515823,3.35443 l 60.379747,0 c 3.112458,-0.71176 3.495662,-2.90658 3.074894,-5.03164 L 77.710971,244.68776 C 73.213787,233.24788 65.515657,230.6106 58.14346,227.077 l -17.890295,2.23629 0.279535,-0.83861 c -0.868265,1.21553 -2.618186,-0.21391 -4.193038,-1.11814 l 0,-10.06329 c 0.918223,-3.32096 -2.414231,-3.45392 -4.193038,-4.75211 l -16.772151,0 c -0.986885,0.63523 -1.976692,1.26462 -2.236287,3.35443 z" fill="#87d7fb">
+			</path></a>
+		</svg>
+		<img src="https://openkart.ru/image/catalog/scheme/schemes/scheme-0013.jpg" alt="Коленчатый вал, поршень, балансировочный вал">
+</div>
+<div class="interactive-scheme">
+		<svg viewBox="0 0 795 452">
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankcase-estarterdrive-chainguard/salnik-28kh38kh7-teflon">
+				<path class="part" d="m 51.787367,237.33939 -8.301792,-5.13921 c -3.234717,-14.60113 9.506184,-26.87596 17.394231,-28.46328 3.792973,0.89926 7.736892,1.57211 9.487761,5.53453 1.696778,19.8396 -7.820713,24.84591 -18.5802,28.06796 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankcase-estarterdrive-chainguard/salnik-25kh38kh7-teflon">
+				<path class="part" d="m 569.66104,350.40188 -7.90647,-5.92985 c 2.42127,-20.57597 13.27629,-26.11905 20.95214,-27.27731 4.43504,2.97179 6.62031,5.19366 7.90647,7.11582 -0.0809,13.01161 -4.11563,23.55201 -20.95214,26.09134 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankcase-estarterdrive-chainguard/rotax-crankshaft-bearing">
+				<path class="part" d="m 378.71982,246.43183 -12.25502,-6.32518 c -17.84737,-18.08849 6.72022,-49.35266 25.69602,-51.78737 l 16.99891,11.85971 c 2.62791,32.52365 -20.7741,47.2438 -30.43991,46.25284 z" fill="red">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankcase-estarterdrive-chainguard/rotax-crankshaft-bearing">
+				<path class="part" d="m 209.52141,346.05333 -11.46438,-6.7205 c -8.13677,-25.07014 10.61725,-45.85489 29.64926,-48.62478 l 13.44099,8.69711 c 12.1343,31.71814 -22.57448,54.3838 -31.62587,46.64817 z" fill="red">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankcase-estarterdrive-chainguard/podshipnik-balansirovochnogo-vala-6302-c3-rotax">
+				<path class="part" d="m 451.06401,200.17899 -10.67373,-6.32518 c -5.86794,0.83759 -1.57228,-30.35333 20.16149,-32.02119 l 8.69712,5.1392 c 9.53767,19.54022 -10.30948,33.03873 -18.18488,33.20717 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankcase-estarterdrive-chainguard/podshipnik-balansirovochnogo-vala-6005-c3-rotax">
+				<path class="part" d="m 69.972244,173.69232 -9.092439,-5.92985 c -3.983143,-2.78678 -4.894485,-31.30502 22.138112,-35.97443 l 10.673732,6.32517 c 7.151601,24.4695 -16.400897,38.59644 -23.719405,35.57911 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankcase-estarterdrive-chainguard/salnik-pompy-rotax-10kh26kh7">
+				<path class="part" d="m 166.43116,370.16805 -4.74388,-4.34855 c -1.02831,-2.39677 -0.99942,-16.53141 12.65034,-18.97553 l 5.92986,4.34856 c -0.32147,8.82805 -1.12253,17.37633 -13.83632,18.97552 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankcase-estarterdrive-chainguard/salnik-pompy-rotax-10kh26kh7">
+				<path class="part" d="m 184.22071,380.84179 -6.32517,-5.13921 c 0.52458,-7.11657 2.50513,-13.79636 13.44099,-17.78955 l 7.51115,4.34856 c -0.81133,8.56426 -1.48213,17.21049 -14.62697,18.5802 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankcase-estarterdrive-chainguard/os-pompy-rotax-v-sbore">
+				<path class="part" d="m 261.7041,440.1403 17.39423,-29.25393 -17.39423,-11.46438 0.39532,-20.55682 -9.09243,0 0.39532,16.20826 -8.3018,3.16259 -44.27622,-26.09135 -15.02229,22.92876 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankcase-estarterdrive-chainguard/prokladka-kartera-rotax">
+				<path class="part" d="m 499.29347,175.27361 -86.1805,52.97334 c -0.37215,6.62735 -5.0289,6.1137 -8.3018,7.90647 -7.50588,4.16693 -4.77937,10.17706 -6.32517,15.41761 -7.79094,8.88565 -8.76876,18.52832 -7.11582,28.46329 -2.49263,11.15315 1.67632,7.63483 7.51114,3.16258 3.82151,6.72045 9.53815,13.12706 12.25503,20.95214 1.49359,6.17577 -6.21852,16.03383 -9.48776,24.11473 l 1.97661,6.32518 12.25503,-7.51115 c 0.5568,-10.61433 5.20822,-13.03941 9.88308,-15.41761 1.43037,3.52075 1.98142,8.36048 9.48777,2.76726 l -3.16259,-3.55791 -2.37194,-8.69711 c -1.22502,-9.13365 -1.40535,-18.73161 6.7205,-32.0212 -0.32863,-4.86974 1.11931,-9.90099 12.25502,-15.81294 l 0,-3.16258 3.95324,-3.16259 6.32517,5.53453 1.58129,-9.48776 3.95324,-1.18597 c 5.98025,1.69362 11.61504,4.42365 18.5802,3.16258 1.21987,-8.55268 4.94671,-19.49955 9.09244,-22.92876 6.33084,-8.37641 13.97514,-13.6881 17.39423,-28.8586 8.16645,-3.22411 6.4458,-10.94235 3.16258,-19.37085 -5.4856,1.85509 -14.65413,10.02377 -13.44099,0.39532 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankcase-estarterdrive-chainguard/separator-startera-rotax">
+				<path class="part" d="m 591.91493,302.00868 c 0.55677,0.92242 3.458,2.40391 6.20939,3.32633 5.10634,-2.54606 5.12665,-5.81869 5.13921,-9.09243 l -5.53453,-3.55791 c -5.57577,2.82799 -6.10704,5.76242 -5.81407,9.32401 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankcase-estarterdrive-chainguard/bendiks-rotax">
+				<path class="part" d="m 611.62447,327.60654 17.05169,12.02004 3.63397,-0.83861 c 1.94084,2.36128 5.26204,1.96186 8.66561,1.39768 l 6.9884,0.83861 c 8.40094,4.1126 9.81872,2.23964 13.41772,2.23629 l 5.31118,0.55907 c 1.86082,-0.23707 2.08792,-2.92473 2.51582,-5.31118 l -3.35443,-2.23629 -0.55907,-6.14979 -8.66561,-6.14979 0.55907,-3.63396 -3.35443,-3.63397 -8.10654,-9.22468 -14.53587,-7.82701 c -8.81605,4.52226 -18.64387,6.929 -19.56751,27.95359 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankcase-estarterdrive-chainguard/zaschita-tsepi-rotax">
+				<path class="part" d="m 639.29852,365.90295 46.68249,-28.51265 16.21308,-0.55908 29.6308,11.74051 5.59072,5.03165 c 0.54706,3.44761 2.67564,6.33614 4.75211,10.34282 1.30972,11.04297 -4.63602,20.27208 -8.94515,29.91034 l -6.14978,12.57911 -0.83861,2.23629 c -3.54079,3.71823 -7.08158,6.05738 -10.62237,11.18144 l -3.63396,0.27953 -1.95675,4.19304 -1.67722,-0.27954 c -4.74987,2.4465 -9.35526,4.92912 -11.18143,8.10654 l -1.95675,-0.27953 -0.55908,-3.35443 -2.79535,-3.0749 c 11.21815,-9.48596 18.31452,-21.82547 19.84704,-38.01687 -7.03972,-6.57133 -30.8885,6.4679 -46.40295,9.78375 l -0.55907,-0.83861 -0.83861,-2.23628 c -2.56385,-4.07584 -7.57399,-6.92855 -11.46097,-10.34283 -2.67701,-12.80829 -8.35834,-15.15099 -13.13819,-17.8903 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-crankcase-estarterdrive-chainguard/komplekt-prokladok-i-salnikov-rotax-polnyj">
+				<path class="part" d="M 277.02004,22.353375 275.9019,185.32278 c 1.21132,3.07489 2.79536,4.65893 4.75211,4.75211 l 83.30168,-6.70886 c 2.72365,-1.58404 3.68737,-3.16807 4.19304,-4.75211 l 3.0749,-149.551684 c -0.53038,-2.064278 -1.34654,-3.985662 -3.35444,-5.311181 l -83.86075,-8.386076 c -3.07818,0.550868 -5.38317,2.755167 -6.9884,6.988396 z" fill="#87d7fb">
+			</path></a>
+		</svg>
+		<img src="https://openkart.ru/image/catalog/scheme/schemes/scheme-0012-v2.jpg" alt="Картер, помпа, бендикс, защита цепи">
+</div>
+<link href="https://openkart.ru/image/catalog/scheme/schemes/libs/scheme-v3.css" rel="stylesheet" media="screen"></div>
+      </div>
+                       <div class="row category-form-control-wrap">
+		  <div class="col-md-4 col-sm-12"></div>
+		  <div class="col-md-8 col-sm-12">
+			<div class="row">
+        		<div class="col-md-9 col-sm-6 category-control-sorts">
+          		<div class="category-form-control2">
+            		<span class="category-form-control-texts">Сортировка:</span>
+            		<select class="category-sorts2" onchange="location = this.value;"> 
+              		               		               			<option value="https://openkart.ru/rotax-crankshaft-bearing?sort=p.sort_order&amp;order=ASC" selected="selected">По умолчанию</option>
+              		               		               		               			<option value="https://openkart.ru/rotax-crankshaft-bearing?sort=pd.name&amp;order=ASC">Название (А - Я)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-crankshaft-bearing?sort=pd.name&amp;order=DESC">Название (Я - А)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-crankshaft-bearing?sort=p.price&amp;order=ASC">Цена (низкая &gt; высокая)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-crankshaft-bearing?sort=p.price&amp;order=DESC">Цена (высокая &gt; низкая)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-crankshaft-bearing?sort=rating&amp;order=DESC">Рейтинг (начиная с высокого)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-crankshaft-bearing?sort=rating&amp;order=ASC">Рейтинг (начиная с низкого)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-crankshaft-bearing?sort=p.model&amp;order=ASC">Модель (А - Я)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-crankshaft-bearing?sort=p.model&amp;order=DESC">Модель (Я - А)</option>           
+              		               		            
+            		</select>
+						<select id="width_tmp_select">
+ 							<option id="width_tmp_option"></option>
+						</select>
+          		</div>
+        		</div>
+        		<div class="col-md-3 col-sm-6 category-control-pages">
+          		<div class="category-form-control">
+            		<span class="category-form-control-texts">На странице:</span> 
+            		<select class="category-sorts3" onchange="location = this.value;">          
+              		               		               			<option value="https://openkart.ru/rotax-crankshaft-bearing?limit=16">16</option>   
+              		               		               		               			<option value="https://openkart.ru/rotax-crankshaft-bearing?limit=32">32</option>   
+              		               		               		               			<option value="https://openkart.ru/rotax-crankshaft-bearing?limit=48">48</option>   
+              		               		               		                   	<option value="https://openkart.ru/rotax-crankshaft-bearing?limit=96" selected="selected">96</option>            
+              		               		   
+            		</select>
+          		</div>
+        		</div>
+			</div>
+		 </div>
+      </div>
+      <div class="row"> 
+	  
+  	<div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition" onclick="if (event.ctrlKey) { window.open('https://openkart.ru/rotax-crankshaft-bearing/podshipnik-fag-6206tvh-c4m-rotax', '_blank'); return false; } else { location.href='https://openkart.ru/rotax-crankshaft-bearing/podshipnik-fag-6206tvh-c4m-rotax'; return false; }">
+     <h4 class="h4-product-name"><a href="https://openkart.ru/rotax-crankshaft-bearing/podshipnik-fag-6206tvh-c4m-rotax">Подшипник FAG 6206TVH C4М Rotax</a></h4>
+			   <div class="product-info">	
+			<ul class="list-unstyled">
+                        <li>Производитель: Rotax</li>
+                        <li>Модель: 832533</li>
+				         </ul>
+		</div>
+      <div class="image"><a href="https://openkart.ru/rotax-crankshaft-bearing/podshipnik-fag-6206tvh-c4m-rotax"><img 
+				class="lazyload" data-src="https://openkart.ru/image/cache/catalog/data/832533-228x228.jpg"
+			 alt="Подшипник FAG 6206TVH C4М Rotax" title="Подшипник FAG 6206TVH C4М Rotax" class="img-responsive" /></a></div>
+      <div class="caption">      
+        <div class="price"> 
+						           1690.74&nbsp;<span class="currency-rub">₽</span>
+           
+          
+			            <br /><span class="product-quantity">В наличии: 17</span>
+					  </div>
+		  <div class="cart-btn-wrap">
+          <div class="category-plus-minus">
+  				<button type="button" onclick="event.stopPropagation(); if ($(this).next().val() > 1) {$(this).next().val($(this).next().val()-1);} $(this).parents('form').submit();" class="minus" window.event.cancelBubble = "true">&ndash;</button>
+            <input type="text" onclick="event.stopPropagation();" name="quantity" value="1" size="2" id="input-quantity" class="quantity-items" window.event.cancelBubble = "true" />
+  				<button type="button" onclick="event.stopPropagation(); $(this).prev().val(~~$(this).prev().val()+1); $(this).parents('form').submit();" class="plus" window.event.cancelBubble = "true">+</button>        
+          </div>
+        	 <button type="button" class="cart-btn" onclick="event.stopPropagation(); cart.add('2211',$(this).parent().find('.quantity-items').val());" window.event.cancelBubble = "true">Купить</button>   
+		  </div>
+		</div>        
+    </div>
+  </div>
+    
+  	<div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition" onclick="if (event.ctrlKey) { window.open('https://openkart.ru/rotax-crankshaft-bearing/podshipnik-koyo-6206-c4', '_blank'); return false; } else { location.href='https://openkart.ru/rotax-crankshaft-bearing/podshipnik-koyo-6206-c4'; return false; }">
+     <h4 class="h4-product-name"><a href="https://openkart.ru/rotax-crankshaft-bearing/podshipnik-koyo-6206-c4">Подшипник KOYO 6206 C4</a></h4>
+			   <div class="product-info">	
+			<ul class="list-unstyled">
+                        <li>Производитель: KCSP</li>
+                        <li>Модель: KOYO6206C4</li>
+				         </ul>
+		</div>
+      <div class="image"><a href="https://openkart.ru/rotax-crankshaft-bearing/podshipnik-koyo-6206-c4"><img 
+				class="lazyload" data-src="https://openkart.ru/image/cache/catalog/data/KOYO6205C4-228x228.jpg"
+			 alt="Подшипник KOYO 6206 C4" title="Подшипник KOYO 6206 C4" class="img-responsive" /></a></div>
+      <div class="caption">      
+        <div class="price"> 
+						           818.40&nbsp;<span class="currency-rub">₽</span>
+           
+          
+			            <br /><span class="product-quantity">В наличии: 3</span>
+					  </div>
+		  <div class="cart-btn-wrap">
+          <div class="category-plus-minus">
+  				<button type="button" onclick="event.stopPropagation(); if ($(this).next().val() > 1) {$(this).next().val($(this).next().val()-1);} $(this).parents('form').submit();" class="minus" window.event.cancelBubble = "true">&ndash;</button>
+            <input type="text" onclick="event.stopPropagation();" name="quantity" value="1" size="2" id="input-quantity" class="quantity-items" window.event.cancelBubble = "true" />
+  				<button type="button" onclick="event.stopPropagation(); $(this).prev().val(~~$(this).prev().val()+1); $(this).parents('form').submit();" class="plus" window.event.cancelBubble = "true">+</button>        
+          </div>
+        	 <button type="button" class="cart-btn" onclick="event.stopPropagation(); cart.add('2496',$(this).parent().find('.quantity-items').val());" window.event.cancelBubble = "true">Купить</button>   
+		  </div>
+		</div>        
+    </div>
+  </div>
+    
+  	<div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition" onclick="if (event.ctrlKey) { window.open('https://openkart.ru/rotax-crankshaft-bearing/podshipnik-skf-6206-c4', '_blank'); return false; } else { location.href='https://openkart.ru/rotax-crankshaft-bearing/podshipnik-skf-6206-c4'; return false; }">
+     <h4 class="h4-product-name"><a href="https://openkart.ru/rotax-crankshaft-bearing/podshipnik-skf-6206-c4">Подшипник SKF 6206 C4</a></h4>
+			   <div class="product-info">	
+			<ul class="list-unstyled">
+                        <li>Производитель: KCSP</li>
+                        <li>Модель: SKF6206C4</li>
+				         </ul>
+		</div>
+      <div class="image"><a href="https://openkart.ru/rotax-crankshaft-bearing/podshipnik-skf-6206-c4"><img 
+				class="lazyload" data-src="https://openkart.ru/image/cache/catalog/data/SKF6206C4-228x228.jpg"
+			 alt="Подшипник SKF 6206 C4" title="Подшипник SKF 6206 C4" class="img-responsive" /></a></div>
+      <div class="caption">      
+        <div class="price"> 
+						           1106.70&nbsp;<span class="currency-rub">₽</span>
+           
+          
+			            <br /><span class="product-quantity">В наличии: 13</span>
+					  </div>
+		  <div class="cart-btn-wrap">
+          <div class="category-plus-minus">
+  				<button type="button" onclick="event.stopPropagation(); if ($(this).next().val() > 1) {$(this).next().val($(this).next().val()-1);} $(this).parents('form').submit();" class="minus" window.event.cancelBubble = "true">&ndash;</button>
+            <input type="text" onclick="event.stopPropagation();" name="quantity" value="1" size="2" id="input-quantity" class="quantity-items" window.event.cancelBubble = "true" />
+  				<button type="button" onclick="event.stopPropagation(); $(this).prev().val(~~$(this).prev().val()+1); $(this).parents('form').submit();" class="plus" window.event.cancelBubble = "true">+</button>        
+          </div>
+        	 <button type="button" class="cart-btn" onclick="event.stopPropagation(); cart.add('1783',$(this).parent().find('.quantity-items').val());" window.event.cancelBubble = "true">Купить</button>   
+		  </div>
+		</div>        
+    </div>
+  </div>
+   
+
+	
+		</div>
+      <div class="row">
+        <div class="col-md-6 text-left category-pagination"></div>
+        <div class="col-md-6 text-right category-results"><span class="category-form-control-texts">Показано</span> с 1 по 3 из 3 (всего 1 страниц)</div>
+      </div>
+                  </div>
+    </div>
+</div>
+<footer>
+  <div class="container">
+    <div class="row footer-links">
+            <div class="col-md-2 col-sm-4">
+        <h5>Информация</h5>
+        <ul class="list-footer-links">
+          <li><a href="https://openkart.ru/contact-us">Адреса и телефоны</a></li>
+                   <li><a href="https://openkart.ru/delivery">Доставка запчастей для картинга</a></li>
+                    <li><a href="https://openkart.ru/oplata">Способы оплаты</a></li>
+                  </ul>
+      </div>
+       
+		<div class="col-md-4 col-sm-8">	
+		  <div class="row">	
+      	<div class="col-md-7 col-sm-7 footer-service">
+        	 <h5>Служба поддержки</h5>
+        	 <ul class="list-footer-links">
+          	<li><a href="https://openkart.ru/kak-sdelat-zakaz">Как сделать заказ</a></li>
+          	<li><a href="https://openkart.ru/katalogi-i-tablitsy-razmerov">Каталоги и таблицы размеров</a></li>
+          	<li><a href="https://openkart.ru/nastroyka-karta-i-prochee">Настройка карта и прочее</a></li>
+        	 </ul>
+      	</div>
+      	<div class="col-md-5 col-sm-5 footer-extra"> 
+          <h5>Дополнительно</h5>
+        	 <ul class="list-footer-links">
+          	<li><a href="https://openkart.ru/brands">Производители</a></li>
+          	<li><a href="https://openkart.ru/specials">Акции</a></li>
+          	<li><a href="https://openkart.ru/latest">Новинки</a></li>
+          	<li><a href="https://openkart.ru/sitemap">Карта сайта</a></li>
+          </ul>
+      	</div>
+		  </div>
+		</div>
+      <div class="col-md-2 col-sm-4 footer-account"> 
+        <h5>Личный Кабинет</h5>
+        <ul class="list-footer-links">
+          <li><a href="https://openkart.ru/my-account">Личный Кабинет</a></li>
+          <li><a href="https://openkart.ru/order-history">История заказов</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 col-sm-8 footer-map">   
+        <h5 class="h5-fix">НАШ АДРЕС</h5>
+        <ul class="list-unstyled">
+          <li><i class="fa fa-map-marker"></i> г. Санкт-Петербург, ул. Плуталова, д. 8</li>
+          <li><i class="fa fa-mobile"></i> +7-921-9672225</li>
+          <li><i class="fa fa-envelope-o"></i> <a href="/cdn-cgi/l/email-protection#2841464e476847584d4643495a5c065a5d" class="footer-email"><span class="__cf_email__" data-cfemail="e68f888089a6899683888d879492c89493">[email&#160;protected]</span></a></li>
+			 <li class="footer-icons">
+				<a href="https://www.facebook.com/openkart.ru/" class="fa fa-facebook" target="_blank"></a>
+				<a href="https://telegram.me/openkartnews" class="fa fa-telegram" target="_blank"></a>
+				<a href="https://www.instagram.com/openkart/" class="fa fa-instagram" target="_blank"></a>
+				<a href="https://vk.com/openkart" class="fa fa-vk" target="_blank"></a>
+			 </li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyrights">&copy; 2020 Openkart</div>
+  </div>
+</footer>
+<div class="in-stock-btn-form" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000000db; z-index: 9999999; text-align: center;">	
+	<div style="display: table-cell; vertical-align: middle;">	
+		<form method = "post">
+			<span style="font-size: 17px; color: #fff;">Уведомить о поступлении на e-mail:</span>
+			<input type="email" placeholder="username@example.ru" class="form-control" name="mail_in_stock" style="width: 80%; max-width: 400px; margin: 15px auto 25px;" />
+			<input type="hidden" class="form-control product-id-in-stock" name="product_id_in_stock" />
+			<button type="submit" name="send_in_stock" value = "OK" data-loading-text="Загрузка..." class="btn btn-success in-stock-btn-close">ОК</button>
+			<button type="button" class="btn btn-danger in-stock-btn-close" onclick="$('.in-stock-btn-form').hide();">Отмена</button> 
+		</form>
+	</div>
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript"><!--
+	$('.cart-btn').on('click', function(){
+	    setTimeout(function() {
+	        loadCart8(); //fix3
+		}, 1000);
+		$('.cart-total-href').css({ display: 'block' });
+		if ($(this).closest('.product-thumb').find('img').length == 1) {
+			var that = $(this).closest('.product-thumb').find('img');
+		} else {
+			var that = $(this).closest('#content').find('img');
+		}			
+		var cartTotalHref = $(".cart-total-href");
+		var w = that.width();		
+        that.clone()
+            .css({'width' : w,
+			'position' : 'absolute',
+			'z-index' : '9999',
+			top: that.offset().top,
+			left: that.offset().left })
+            .appendTo("body")
+            .animate({opacity: 0.05,
+                left: cartTotalHref.offset()['left'],
+                top: cartTotalHref.offset()['top'],						
+                width: 20}, 1000, function() {	
+					$(this).remove();
+				});
+	});
+//--></script>
+	<script type="text/javascript">
+  		WebFontConfig = {
+    		google: { families: [ 'Open+Sans:300,400,400i,700' , 'Roboto:300,400,500,700' ] }
+  		};
+  		(function() {
+    		var wf = document.createElement('script');
+    		wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+   		wf.type = 'text/javascript';
+    		wf.async = 'true';
+    		var s = document.getElementsByTagName('script')[0];
+    		s.parentNode.insertBefore(wf, s);
+  		})();
+	</script>
+</body></html>
+ 

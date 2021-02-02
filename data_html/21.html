@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]><html dir="ltr" lang="ru" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html dir="ltr" lang="ru" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html dir="ltr" lang="ru">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Катушка зажигания TM KZ для картов. Все для картинга на Openkart.ru</title>
+<base href="https://openkart.ru/" />
+<meta name="description" content="У нас вы можете купить катушка зажигания TM KZ для гоночных картов - в наличии и под заказ, с экспресс-доставкой по России. Все для картинга на Openkart.ru" />
+<meta name="yandex-verification" content="bf8adcc2e2331beb" />
+<script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script defer src="catalog/view/javascript/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!--<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700|Roboto:300,400,500,700&amp;subset=cyrillic,cyrillic-ext" rel="stylesheet">-->
+<link href="catalog/view/theme/ktemplate/stylesheet/stylesheet-v3.24.css" rel="stylesheet">
+			<!-- cdek -->
+				<!-- cdek -->
+	    <script defer src="catalog/view/javascript/common4.js" type="text/javascript"></script>
+<script defer src="catalog/view/javascript/custom4.3.js" type="text/javascript"></script>
+<script defer src="catalog/view/javascript/lazyload/lazysizes.min.js"></script>
+<link rel="apple-touch-icon" sizes="192x192" href="https://openkart.ru/image/catalog/favicons/favicon-192x192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://openkart.ru/image/catalog/favicons/favicon-192x192.png">
+<meta name="msapplication-config" content="https://openkart.ru/image/catalog/favicons/browserconfig.xml">
+<link href="https://openkart.ru/tm-kz-ignition-coil" rel="canonical" />
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(48771104, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true,
+        ecommerce:"dataLayer"
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/48771104" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2983350-12"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2983350-12');
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script type="text/javascript">
+	var selector = 'input.form-control.input-search';
+	var catTitle = 'Категории';
+	var prodTitle = 'Товары';
+	var viewAllTitle = 'Посмотреть все товары';
+	var noResTitle = 'Ничего не найдено';
+
+	console.log(selector);
+
+	$(document).ready(function() {
+
+		var timer = null;
+		$('input.form-control.input-search').keydown(function(){
+	       clearTimeout(timer); 
+	       timer = setTimeout(sphinxAutocomplete, 500)
+		});
+
+	});
+
+	$(document).mouseup(function (e) {
+		
+		if (!$('.sphinxsearch').is(e.target) && $('.sphinxsearch').has(e.target).length === 0) {
+			$('.sphinxsearch').hide();
+			$('input.form-control.input-search').removeClass('no-bottom-borders');
+			return false;
+		}
+		
+	});
+
+	function sphinxAutocomplete() {
+
+		if($(selector).val() == '') {
+			$('.sphinxsearch').hide();
+			$('input.form-control.input-search').removeClass('no-bottom-borders');
+			return false;
+		}
+
+		$.ajax({
+			url: 'https://openkart.ru/index.php?route=extension/module/sphinxautocomplete&search=' + $(selector).val(),
+			dataType: 'json',
+			success: function(json) {
+
+				var html = '';
+				
+				//Categories
+				if (json.categories.length) {
+					html += '<div class="categories"><span>'+catTitle+'</span>';
+					var categories = json.categories;
+					for (i = 0; i < categories.length; i++) {
+						html += '<a class="sphinxsearcha" href="' + categories[i]['href'] + '">';
+							if(categories[i]['image'] != '') {
+								html += '<img src="' + categories[i]['image'] + '" />';
+							}
+							html += categories[i]['name'];
+							html += '<br />';
+						html += '</a>';
+					}
+					html += '</div>';
+				}
+				
+				//Products
+				if (json.products.length) {
+					if (json.categories.length) { html += '<div class="products"><span>'+prodTitle+'</span>'; }
+					var products = json.products;
+					for (i = 0; i < products.length; i++) {
+						html += '<a class="sphinxsearcha" href="' + products[i]['href'] + '">';
+							html += '<img src="' + products[i]['image'] + '" />';
+							html += products[i]['name'];
+							html += '<br />';
+						html += '</a>';
+					}
+					if (json.categories.length) {  html += '</div>'; }
+					html += '<div class="sphinx-viewall"><a id="view-all" href="https://openkart.ru/search?wildcard=true&amp;search=' + encodeURIComponent($(selector).val()) + '">'+viewAllTitle+'</a></div>';
+				} else {
+					html = '<div class="sphinx-viewall">'+noResTitle+'</div>';
+				}
+
+                $('.sphinxsearch').remove();
+				$(selector).after('<div class="sphinxsearch">'+ html +'</div>');
+				$('.sphinxsearch').show();
+				$('input.form-control.input-search').addClass('no-bottom-borders');
+
+				$('.sphinxsearcha').hover(
+					function(){$(this).addClass('sphinxsearch-a-active');},
+ 					function(){$(this).removeClass('sphinxsearch-a-active');}
+				);
+
+			}
+		});
+			
+	}
+</script>
+
+</head>
+<body> 
+<header>
+  <div class="container">
+    <div class="row header-contacts">
+      <div class="col-sm-12">
+			<i class="fa fa-map-marker"></i>г. Санкт-Петербург, ул. Плуталова, д. 8
+			<i class="fa fa-mobile"></i><a href="tel:+79219672225">+7-921-9672225</a>
+			<i class="fa fa-envelope-o"></i><a href="/cdn-cgi/l/email-protection#7c15121a133c130c1912171d0e08520e09"><span class="__cf_email__" data-cfemail="553c3b333a153a25303b3e3427217b2720">[email&#160;protected]</span></a>
+			<i class="fa fa-calendar-o"></i>Время работы: ПН-ПТ 9:00-18:00
+	 	</div>
+	 </div>
+    <div class="row header-contacts-mobile">
+      <div class="col-sm-12">
+			<span class="dropdown"><a href="#" class="dropdown-toggle icon-map-marker" data-toggle="dropdown" aria-expanded="false">
+				<i class="fa fa-map-marker"></i></a>
+				<span class="dropdown-menu dropdown-menu-left dropdown-paddings">г. Санкт-Петербург,<br />ул. Плуталова, д. 8</span>
+			</span>
+			<a href="tel:+79219672225" class="icon-mobile"><i class="fa fa-mobile"></i></a>
+			<a href="/cdn-cgi/l/email-protection#5f363139301f302f3a31343e2d2b712d2a" class="icon-envelope"><i class="fa fa-envelope-o"></i></a>
+			<span class="dropdown"><a href="#" class="dropdown-toggle icon-calendar" data-toggle="dropdown" aria-expanded="false">
+				<i class="fa fa-calendar-o"></i></a>
+				<span class="dropdown-menu dropdown-menu-right dropdown-paddings">Время работы:<br />ПН-ПТ 9:00-18:00</span>
+			</span>
+	 	</div>
+	 </div>
+    <div class="row header">
+      <div class="col-sm-3">
+        <div id="logo">
+				<a href="https://openkart.ru/"><img src="/catalog/view/theme/ktemplate/image/logo.png" title="Openkart - Все для картинга" alt="Openkart - Все для картинга" class="img-responsive" /></a>
+			</div>
+      </div>
+		<div class="col-sm-9"> 
+	 	  <div class="row">
+      	<div class="col-sm-5 col-lg-7">
+  			  <nav class="navbar header-menu"> 
+    			<div class="navbar-header">
+      			<button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
+    			</div>
+    			<div class="collapse navbar-collapse navbar-ex1-collapse">
+      			<ul class="nav navbar-nav header-links">
+        				<li><a href="https://openkart.ru/" class="link-home">Главная</a></li> 
+        				<li><a href="https://openkart.ru/latest">Новинки</a></li> 
+        				<li><a href="https://openkart.ru/specials">Акции</a></li> 
+        				<li><a href="https://openkart.ru/oplata">Оплата</a></li> 
+        				<li><a href="https://openkart.ru/contact-us">Контакты</a></li>  
+      			</ul>
+    			</div> 
+  			  </nav>
+			</div> 
+	 	<div class="col-sm-7 col-lg-5 header-right-row">
+       <div class="header-search"><div id="search"> 
+  <input type="text" name="search" value="" placeholder="Поиск..." class="form-control input-search" autocomplete="off" /> 
+  <button type="submit" value="Искать" class="button search-submit"><i class="fa fa-search"></i></button>
+</div>
+</div>
+       <div class="header-account">
+		  <ul class="list-inline"> 
+         <li class="dropdown"><a href="https://openkart.ru/my-account" title="Личный кабинет" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i></a> 
+          <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="https://openkart.ru/create-account">Регистрация</a></li>
+            <li><a href="https://openkart.ru/login">Авторизация</a></li>
+                       </ul>
+          </li>
+		   </ul>
+        </div>
+        <div class="header-cart">
+		   <div id="cart">
+  <a data-toggle="dropdown" data-loading-text="Загрузка..." class="dropdown-toggle my-cart" title="Корзина"><i class="fa fa-shopping-cart"></i> <div id="cart-total">0</div></a>
+  <ul class="dropdown-menu pull-right dropdown-menu-wrap">
+        <li>
+        <div class="marker"></div>
+        <p class="text-center">Ваша корзина пуста!</p>
+    </li>
+      </ul>
+</div>
+<a class="cart-total-href" href="/checkout2" style="display:none;"><i class="fa fa-shopping-cart" style="font-size:22px;height:20px;width:28px;margin-left:-4px;"></i><div class="cart-total-btn">0</div></a>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript"><!--
+function loadCart8() {
+	$.ajax({
+		url: 'index.php?route=extension/quickcheckout/cart2',
+		dataType: 'html',
+		cache: false,
+		beforeSend: function() {
+			$('.tooltip').remove();
+		},
+		success: function(html) {			
+			$('.cart8 .quickcheckout-content').html(html);
+		}
+	});
+}
+
+$(document).ready(function(){
+    loadCart8();
+});
+
+$(document).on('click', '.cart8 .button-update', function() {
+	var quantity = $(this).parents('.quantity').find('input.qc-product-qantity');
+	if (quantity.length){
+		if ($(this).data('type')=='increase') {
+			quantity.val(parseInt(quantity.val())+1);
+		} else if ($(this).data('type')=='decrease') {
+			quantity.val(parseInt(quantity.val())-1);
+		}
+	}
+	
+	$.ajax({
+		url: 'index.php?route=extension/quickcheckout/cart2/update',
+		type: 'post',
+		data: $('.cart8 :input'),
+		dataType: 'json',
+		cache: false,
+		beforeSend: function() {
+			$('.cart8 .button-update').prop('disabled', true);
+		},
+		success: function(json) {
+			if (json['redirect']) {
+			    if (window.location.pathname == '/checkout2') {
+				    location = json['redirect'];
+				} else {
+				    $('ul.dropdown-menu.pull-right.dropdown-menu-wrap').html('<li><div class="marker"></div><p class="text-center">Ваша корзина пуста!</p></li>');
+			        $('#cart-total').html(json['count_products']);
+				    $('.cart-total-btn').html(json['count_products']);
+				}
+			} else {
+				if (json['error']['stock']) {
+					$('#button-payment-method').attr("disabled", true);
+				} else if (json['error']['warning']) {
+						$('#warning-messages').html('<div class="alert alert-danger" style="display: none;"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '</div>');
+						$('.alert-danger').fadeIn('slow');
+						$('#button-payment-method').attr("disabled", true);
+				} else {
+					$('#warning-messages').html('');
+					$('#button-payment-method').removeAttr("disabled");
+				}
+                if (window.location.pathname == '/checkout2') {
+			        reloadShippingMethodById($('#shipping-address select[name=\'address_id\']').val());			    
+				}				
+			    loadCart8();
+				$('#cart-total').html(json['count_products']);
+				$('.cart-total-btn').html(json['count_products']);				
+			}
+		}
+	});
+
+	return false;
+});
+
+$(document).on('click', '.button-remove', function() {
+	var remove_id = $(this).attr('data-remove');
+
+	$.ajax({
+		url: 'index.php?route=extension/quickcheckout/cart2/update&remove=' + remove_id,
+		type: 'get',
+		dataType: 'json',
+		cache: false,
+		beforeSend: function() {
+			$('.cart8 .button-remove').prop('disabled', true);
+		},
+		success: function(json) {
+			if (json['redirect']) {
+			    if (window.location.pathname == '/checkout2') {
+				    location = json['redirect'];
+				} else {
+				    $('ul.dropdown-menu.pull-right.dropdown-menu-wrap').html('<li><div class="marker"></div><p class="text-center">Ваша корзина пуста!</p></li>');
+			        $('#cart-total').html(json['count_products']);
+				    $('.cart-total-btn').html(json['count_products']);
+				}
+			} else {
+			    if (window.location.pathname == '/checkout2') {
+				    reloadShippingMethodById($('#shipping-address select[name=\'address_id\']').val());
+				}
+				loadCart8();
+				$('#cart-total').html(json['count_products']);
+				$('.cart-total-btn').html(json['count_products']);
+			}
+		}
+	});
+
+	return false;
+});
+//--></script>
+
+        </div>
+	 	</div>
+	 	</div>
+	  </div>
+    </div>
+  </div>
+</header>
+<div class="container categories-menu2">
+	<div class="row categories2">
+		<div class="category-menu2">
+			<a href="/chassis_parts">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category1.png" alt="ШАССИ И ЗАПЧАСТИ">
+					<div class="category-text2">ШАССИ И <br class="category-text-break" />ЗАПЧАСТИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/engines_and_parts">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category2.png" alt="МОТОРЫ И ЗАПЧАСТИ">
+					<div class="category-text2">МОТОРЫ И <br class="category-text-break" />ЗАПЧАСТИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2"> 
+			<a href="/kart_tools">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category3.png" alt="ОБОРУДОВАНИЕ">
+					<div class="category-text2">ОБОРУДОВА- <br class="category-text-break" />НИЕ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/data_systems">
+				<div class="category-link5 category-link5-fix2">
+					<img src="/catalog/view/theme/ktemplate/image/category4.png" alt="ЭЛЕКТРОННЫЕ СИСТЕМЫ">
+					<div class="category-text2">ЭЛЕКТРОННЫЕ <br class="category-text-break" />СИСТЕМЫ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/tyres_and_wheels">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category5.png" alt="ШИНЫ И ДИСКИ">
+					<div class="category-text2">ШИНЫ И <br class="category-text-break" />ДИСКИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/protection_wear">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category6.png" alt="ЭКИПИРОВКА И ШЛЕМЫ">
+					<div class="category-text2">ЭКИПИРОВКА <br class="category-text-break" />И ШЛЕМЫ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/lubricants">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category7.png" alt="МАСЛО И СМАЗКИ">
+					<div class="category-text2">МАСЛО И <br class="category-text-break" />СМАЗКИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/sprockets_and_chains">
+				<div class="category-link5 category-link5-fix">				
+					<img src="/catalog/view/theme/ktemplate/image/category8.png" alt="ЦЕПИ И ЗВЕЗДЫ">
+					<div class="category-text2">ЦЕПИ И <br class="category-text-break" />ЗВЕЗДЫ</div>
+				</div>
+			</a>
+		</div> 
+	</div>
+</div>
+
+<div id="product-category" class="container">
+  <ul class="breadcrumb-category">
+        <li><a href="https://openkart.ru/">Главная</a></li>
+        <li><a href="https://openkart.ru/tm-kz-ignition-coil">Катушка зажигания TM KZ</a></li>
+      </ul>
+  <h1>Катушка зажигания TM KZ</h1>
+  <div class="row">
+                <div id="content" class="col-sm-12">
+      	  		      <div class="row category-description">         
+        <div class="col-sm-12"><div class="interactive-scheme">
+		<svg viewBox="0 0 795 495">
+			<a href="https://openkart.ru/engines_and_parts/tm_racing_parts/tm_kz10_parts/tm-kz-ignition/tm-kz-ignition-coil">
+				<path class="part" d="m 11.508524,167.40392 0.396845,33.9303 c 0.04767,1.74398 2.960627,1.76878 5.555839,1.98423 l 7.341645,-5.75426 0.595268,4.3653 12.699061,1.98423 -0.198423,4.16688 36.311376,4.56373 c 4.449257,0.49988 5.101009,-2.16483 6.547953,-4.16688 l 0.595269,-45.63725 c -0.465053,-1.65352 -0.564838,-3.30705 -3.571611,-4.96057 l -9.325873,-0.79369 -0.992114,-13.29433 -1.984228,-1.38896 C 63.576092,134.00219 75.890775,129.81451 87.90131,125.53671 98.220127,120.29503 117.93585,106.86606 81.750202,96.96382 64.537355,93.209841 43.563268,94.888764 21.628088,97.955934 l 0.992114,3.968456 c 36.437925,-6.90904 55.500137,-3.223133 70.440101,2.97634 15.402877,11.12783 -3.933506,15.43188 -16.667517,21.03282 -11.915215,3.03573 -13.71494,9.61188 -15.278557,16.27067 -2.535258,0.0371 -3.124804,4.61416 -4.166879,8.13534 l -4.762148,0.19842 c -1.382606,-0.88145 -0.122232,-2.89561 2.182651,-5.35741 -2.537424,-0.43892 -5.15321,-0.79948 -8.730604,-0.19843 l -5.555839,0.39685 -4.365302,10.91325 -2.381074,-0.59526 -0.198423,-4.56373 c 1.440183,-3.96846 2.131313,-7.93691 1.984228,-11.90537 l 1.587383,-4.56372 5.754262,-5.35742 7.143221,-0.39685 c 5.407368,0.90439 10.423721,1.28743 12.699061,-1.98422 -0.327764,-0.66923 -1.193484,-1.26987 -2.579497,-2.97635 l -7.540067,0.19843 -2.777919,1.58738 -5.754262,0.19842 -7.143222,5.55584 3.770034,-6.34953 11.706946,-2.18265 c 2.090688,-2.3138 2.20077,-4.03342 -0.992114,-4.76215 l -10.714832,4.56373 c -3.484485,3.8536 -6.847563,7.73148 -7.73849,12.10379 -0.285189,4.62987 0.602397,9.25973 -1.587383,13.8896 l -0.992114,-4.96057 c -2.381075,0 -3.968456,0.79369 -4.762148,2.38107 l -0.198423,4.96057 -0.992114,1.38896 -0.198422,5.35742 -1.190537,-9.12745 -1.984229,0.59527 -2.182651,3.17476 0,4.56373 -1.190537,0.19842 -0.595268,5.95268 z" fill="red">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/tm_racing_parts/tm_kz10_parts/tm-kz-ignition/tm-kz-ignition-rotor-stator">
+				<path class="part" d="m 66.785714,330.84184 c -2.566386,1.95324 -5.200789,2.95425 -8.137755,-0.28062 1.056685,-5.157 1.354091,-6.13797 1.683674,-7.29591 0.561224,-2.85396 1.122449,-5.86011 1.683673,-6.17347 1.122449,-14.45021 2.244898,-13.86641 3.367347,-17.11735 l 1.683674,-4.20918 c 13.869797,-9.0907 32.298774,-31.18044 55.000003,-24.97449 8.37091,10.68095 -3.5448,25.58827 -12.34694,39.84694 -5.89341,8.6268 -14.78038,13.73177 -14.872451,29.18367 8.117211,-5.71092 17.549831,-11.09298 27.780611,-16.27551 l 4.77041,7.0153 c 0.44526,-0.23448 2.55361,-1.57769 6.17347,-3.92857 L 135.81633,330 c 16.95002,2.83342 55.28495,18.73936 39.0051,65.66327 -22.94902,22.84242 -35.0378,18.27568 -47.14286,13.75 l -5.05102,1.96428 -4.48979,3.64796 c -6.0436,2.70902 -9.83159,-2.85498 -5.89286,-7.57653 -5.22159,-5.2436 -11.0019,-10.30095 -13.188777,-16.55612 -9.413926,-1.00716 -5.681454,-11.87411 -7.576531,-18.52041 -4.641092,-1.96567 -4.177829,-5.46264 -3.647959,-8.97959 -4.153627,-8.45191 -4.586711,-8.9796 3.086734,-13.46939 l -2.244898,-4.4898 1.683674,-2.24489 c -2.95842,-20.9956 15.340137,-35.91796 23.010207,-47.70409 9.93374,-19.77698 9.28744,-29.85561 -16.556125,-16.83673 -11.675126,5.64842 -19.095635,14.4878 -28.061225,22.16837 -4.05143,1.80972 -2.712913,7.46939 -1.683673,12.90816 3.303934,1.06062 3.185023,3.83266 4.489795,5.89286 4.016257,0.97881 4.23509,4.12757 5.892858,6.45408 -4.267746,4.4013 -6.046004,3.28667 -7.857143,2.2449 -1.368386,-1.60401 -1.904901,-3.54076 -1.403061,-5.89286 l -1.403062,-3.08674 -0.561224,-4.48979 -1.122449,-8.41837 c -0.44292,2.53248 -1.347216,-1.1636 -1.122449,10.38265 0.415723,2.04742 1.369968,0.3252 1.122449,7.01531 1.25876,1.40839 1.530837,4.13236 1.683673,7.01531 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/tm_racing_parts/tm_kz10_parts/tm-kz-ignition/gajka-tsilindra-tm-kz">
+				<path class="part" d="m 345.05729,68.78778 c -0.21926,-3.111602 -0.64125,-6.252164 6.34953,-8.333759 7.80063,0.613302 9.34886,3.571258 8.7306,7.341645 1.29403,1.869195 0.6873,3.421597 -1.19054,4.762147 -4.52264,1.911077 -8.70451,2.118311 -12.69906,1.38896 -2.64207,-0.43668 -2.21181,-2.628971 -1.19053,-5.158993 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/tm_racing_parts/tm_kz10_parts/tm-kz-ignition/tm-kz-clutch-lever">
+				<path class="part" d="m 399.42514,24.539493 c 0.58283,-5.628766 4.1132,-9.64978 10.51641,-12.103792 l 78.17859,0 c 3.05858,0.633238 5.78103,1.854704 6.74637,6.151107 l -0.19842,46.629363 c 1.80051,2.252474 3.598,4.497412 4.3653,4.166879 l 0,1.190537 c -1.86696,0.366823 -2.97641,2.248646 -4.3653,3.571611 l -0.39684,30.557112 c -2.00055,4.31558 -3.88223,4.99768 -5.35742,5.159 l -81.15493,-0.39685 c -4.30075,-3.0465 -7.07402,-6.50243 -8.73061,-12.302215 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/tm_racing_parts/tm_kz10_parts/tm-kz-ignition/salnik-pompy-rychaga-pereklyucheniya">
+				<path class="part" d="m 524.82837,409.87661 c 10.23149,-2.3319 15.56237,2.33335 16.27066,12.69906 -5.75426,9.23561 -11.50852,8.14152 -17.26278,5.35742 -4.04812,-2.87837 -6.91987,-9.79128 0.99212,-18.05648 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/tm_racing_parts/tm_kz10_parts/tm-kz-ignition/tm-kz-gear-lever">
+				<path class="part" d="m 471.05578,448.96591 c 0.68237,5.78496 2.45867,2.81856 4.16688,0.39684 l 17.46121,2.38107 1.58738,2.38108 2.77792,1.58738 0,7.34165 41.27194,5.75426 0.99212,1.98423 -0.39685,12.30221 c -0.72755,1.32784 -1.4551,2.16784 -2.18265,2.97634 l -52.1852,-6.54795 c -0.1169,-0.68141 -0.34999,-1.71138 -0.99211,-3.96846 l -17.26279,-2.38107 c -2.71149,-5.68835 -0.85733,-15.02923 -1.19054,-22.6202 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/tm_racing_parts/tm_kz10_parts/tm-kz-ignition/salnik-26kh37kh7">
+				<path class="part" d="m 361.92323,374.55735 c 12.2166,-0.1057 21.12544,3.81543 21.23124,18.45332 -6.5855,14.93163 -14.46301,15.65129 -22.6202,13.29433 -7.20811,-4.0101 -20.3731,-18.52096 1.38896,-31.74765 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/tm_racing_parts/tm_kz10_parts/tm-kz-ignition/shtutser-vodyanogo-shlanga-tm">
+				<path class="part" d="m 293.8642,385.66903 c -3.55654,8.81747 -2.04112,15.16897 10.11956,13.29432 l 2.18265,-2.77792 c 4.97179,-3.04809 4.2817,-3.26524 5.35742,-4.3653 2.95511,-1.86787 5.67869,-3.90938 6.54795,-7.34164 3.33228,-2.47783 5.23099,-5.60729 2.77792,-10.71483 -6.32875,-4.82389 -9.45768,-2.18154 -12.69906,0.19842 -4.11467,0.71362 -5.83385,3.82273 -8.53218,5.95268 -1.48794,3.20852 -3.7963,3.95579 -5.75426,5.75427 z" fill="#87d7fb">
+			</path></a>
+          	<a href="https://openkart.ru/engines_and_parts/tm_racing_parts/tm_kz10_parts/tm-kz-ignition/separator-lapki-stsepleniya-14--14-tm-kz">
+				<path class="part" d="m 420.45796,117.79822 c -0.99995,4.67469 -1.6431,8.81417 -1.58739,11.90537 5.87194,2.57869 11.65944,3.93305 18.05648,1.78581 l 1.19054,-10.11957 c -5.50277,-4.26069 -11.66018,-3.28429 -17.65963,-3.57161 z" fill="#87d7fb">
+			</path></a>
+          	<a href="https://openkart.ru/engines_and_parts/tm_racing_parts/tm_kz10_parts/tm-kz-ignition/podshipnik-61901-2rs1-tm-kz-r1">
+				<path class="part" d="m 493.8744,433.68735 c 3.45058,-3.6265 7.01514,-7.13902 11.50852,-9.72272 18.40615,1.50538 16.45027,9.59847 17.65963,16.66752 -2.84342,6.88078 -7.10282,9.04165 -11.50852,10.71483 -1.44957,0.64305 -3.91068,0.61174 -6.9448,0.19842 -7.4055,-1.8632 -11.24438,-7.53079 -10.71483,-17.85805 z" fill="#87d7fb">
+			</path></a>
+		</svg>
+		<img src="https://openkart.ru/image/catalog/scheme/schemes/scheme-0010-v1.jpg" alt="ACCENSIONE">
+</div>
+<link href="https://openkart.ru/image/catalog/scheme/schemes/libs/scheme-v3.css" rel="stylesheet" media="screen"></div>
+      </div>
+                       <div class="row category-form-control-wrap">
+		  <div class="col-md-4 col-sm-12"></div>
+		  <div class="col-md-8 col-sm-12">
+			<div class="row">
+        		<div class="col-md-9 col-sm-6 category-control-sorts">
+          		<div class="category-form-control2">
+            		<span class="category-form-control-texts">Сортировка:</span>
+            		<select class="category-sorts2" onchange="location = this.value;"> 
+              		               		               			<option value="https://openkart.ru/tm-kz-ignition-coil?sort=p.sort_order&amp;order=ASC" selected="selected">По умолчанию</option>
+              		               		               		               			<option value="https://openkart.ru/tm-kz-ignition-coil?sort=pd.name&amp;order=ASC">Название (А - Я)</option>           
+              		               		               		               			<option value="https://openkart.ru/tm-kz-ignition-coil?sort=pd.name&amp;order=DESC">Название (Я - А)</option>           
+              		               		               		               			<option value="https://openkart.ru/tm-kz-ignition-coil?sort=p.price&amp;order=ASC">Цена (низкая &gt; высокая)</option>           
+              		               		               		               			<option value="https://openkart.ru/tm-kz-ignition-coil?sort=p.price&amp;order=DESC">Цена (высокая &gt; низкая)</option>           
+              		               		               		               			<option value="https://openkart.ru/tm-kz-ignition-coil?sort=rating&amp;order=DESC">Рейтинг (начиная с высокого)</option>           
+              		               		               		               			<option value="https://openkart.ru/tm-kz-ignition-coil?sort=rating&amp;order=ASC">Рейтинг (начиная с низкого)</option>           
+              		               		               		               			<option value="https://openkart.ru/tm-kz-ignition-coil?sort=p.model&amp;order=ASC">Модель (А - Я)</option>           
+              		               		               		               			<option value="https://openkart.ru/tm-kz-ignition-coil?sort=p.model&amp;order=DESC">Модель (Я - А)</option>           
+              		               		            
+            		</select>
+						<select id="width_tmp_select">
+ 							<option id="width_tmp_option"></option>
+						</select>
+          		</div>
+        		</div>
+        		<div class="col-md-3 col-sm-6 category-control-pages">
+          		<div class="category-form-control">
+            		<span class="category-form-control-texts">На странице:</span> 
+            		<select class="category-sorts3" onchange="location = this.value;">          
+              		               		               			<option value="https://openkart.ru/tm-kz-ignition-coil?limit=16">16</option>   
+              		               		               		               			<option value="https://openkart.ru/tm-kz-ignition-coil?limit=32">32</option>   
+              		               		               		               			<option value="https://openkart.ru/tm-kz-ignition-coil?limit=48">48</option>   
+              		               		               		                   	<option value="https://openkart.ru/tm-kz-ignition-coil?limit=96" selected="selected">96</option>            
+              		               		   
+            		</select>
+          		</div>
+        		</div>
+			</div>
+		 </div>
+      </div>
+      <div class="row"> 
+	  
+  	<div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition" onclick="if (event.ctrlKey) { window.open('https://openkart.ru/tm-kz-ignition-coil/kabel-massy-150mm', '_blank'); return false; } else { location.href='https://openkart.ru/tm-kz-ignition-coil/kabel-massy-150mm'; return false; }">
+     <h4 class="h4-product-name"><a href="https://openkart.ru/tm-kz-ignition-coil/kabel-massy-150mm">Кабель массы 150мм</a></h4>
+			   <div class="product-info">	
+			<ul class="list-unstyled">
+                        <li>Производитель: Righetti Ridolfi</li>
+                        <li>Модель: KM352</li>
+				         </ul>
+		</div>
+      <div class="image"><a href="https://openkart.ru/tm-kz-ignition-coil/kabel-massy-150mm"><img 
+				class="lazyload" data-src="https://openkart.ru/image/cache/catalog/data/KM352-228x228.jpg"
+			 alt="Кабель массы 150мм" title="Кабель массы 150мм" class="img-responsive" /></a></div>
+      <div class="caption">      
+        <div class="price"> 
+						           297.60&nbsp;<span class="currency-rub">₽</span>
+           
+          
+			            <br /><span class="product-quantity">В наличии: 19</span>
+					  </div>
+		  <div class="cart-btn-wrap">
+          <div class="category-plus-minus">
+  				<button type="button" onclick="event.stopPropagation(); if ($(this).next().val() > 1) {$(this).next().val($(this).next().val()-1);} $(this).parents('form').submit();" class="minus" window.event.cancelBubble = "true">&ndash;</button>
+            <input type="text" onclick="event.stopPropagation();" name="quantity" value="1" size="2" id="input-quantity" class="quantity-items" window.event.cancelBubble = "true" />
+  				<button type="button" onclick="event.stopPropagation(); $(this).prev().val(~~$(this).prev().val()+1); $(this).parents('form').submit();" class="plus" window.event.cancelBubble = "true">+</button>        
+          </div>
+        	 <button type="button" class="cart-btn" onclick="event.stopPropagation(); cart.add('3320',$(this).parent().find('.quantity-items').val());" window.event.cancelBubble = "true">Купить</button>   
+		  </div>
+		</div>        
+    </div>
+  </div>
+    
+  	<div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition" onclick="if (event.ctrlKey) { window.open('https://openkart.ru/tm-kz-ignition-coil/katushka-zazhiganiya-tm-kz', '_blank'); return false; } else { location.href='https://openkart.ru/tm-kz-ignition-coil/katushka-zazhiganiya-tm-kz'; return false; }">
+     <h4 class="h4-product-name"><a href="https://openkart.ru/tm-kz-ignition-coil/katushka-zazhiganiya-tm-kz">Катушка зажигания TM KZ</a></h4>
+			   <div class="product-info">	
+			<ul class="list-unstyled">
+                        <li>Производитель: TM Racing</li>
+                        <li>Модель: 15156</li>
+				         </ul>
+		</div>
+      <div class="image"><a href="https://openkart.ru/tm-kz-ignition-coil/katushka-zazhiganiya-tm-kz"><img 
+				class="lazyload" data-src="https://openkart.ru/image/cache/catalog/data/15156-228x228.jpg"
+			 alt="Катушка зажигания TM KZ" title="Катушка зажигания TM KZ" class="img-responsive" /></a></div>
+      <div class="caption">      
+        <div class="price"> 
+						           5731.59&nbsp;<span class="currency-rub">₽</span>
+           
+          
+			            <br /><span class="product-quantity">В наличии: 2</span>
+					  </div>
+		  <div class="cart-btn-wrap">
+          <div class="category-plus-minus">
+  				<button type="button" onclick="event.stopPropagation(); if ($(this).next().val() > 1) {$(this).next().val($(this).next().val()-1);} $(this).parents('form').submit();" class="minus" window.event.cancelBubble = "true">&ndash;</button>
+            <input type="text" onclick="event.stopPropagation();" name="quantity" value="1" size="2" id="input-quantity" class="quantity-items" window.event.cancelBubble = "true" />
+  				<button type="button" onclick="event.stopPropagation(); $(this).prev().val(~~$(this).prev().val()+1); $(this).parents('form').submit();" class="plus" window.event.cancelBubble = "true">+</button>        
+          </div>
+        	 <button type="button" class="cart-btn" onclick="event.stopPropagation(); cart.add('1167',$(this).parent().find('.quantity-items').val());" window.event.cancelBubble = "true">Купить</button>   
+		  </div>
+		</div>        
+    </div>
+  </div>
+    
+  	<div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition" onclick="if (event.ctrlKey) { window.open('https://openkart.ru/tm-kz-ignition-coil/kolpachok-ngk-trs1225-dlya-r7282', '_blank'); return false; } else { location.href='https://openkart.ru/tm-kz-ignition-coil/kolpachok-ngk-trs1225-dlya-r7282'; return false; }">
+     <h4 class="h4-product-name"><a href="https://openkart.ru/tm-kz-ignition-coil/kolpachok-ngk-trs1225-dlya-r7282">Колпачок NGK TRS1225 для короткой свечи NGK R7282</a></h4>
+		<div class="special-btn2">Хит</div>	   <div class="product-info">	
+			<ul class="list-unstyled">
+                        <li>Производитель: NGK</li>
+                        <li>Модель: TRS1225</li>
+				         </ul>
+		</div>
+      <div class="image"><a href="https://openkart.ru/tm-kz-ignition-coil/kolpachok-ngk-trs1225-dlya-r7282"><img 
+				class="lazyload" data-src="https://openkart.ru/image/cache/catalog/data/TRS1225-228x228.jpg"
+			 alt="Колпачок NGK TRS1225 для короткой свечи NGK R7282" title="Колпачок NGK TRS1225 для короткой свечи NGK R7282" class="img-responsive" /></a></div>
+      <div class="caption">      
+        <div class="price"> 
+						           5580.00&nbsp;<span class="currency-rub">₽</span>
+           
+          
+			            <br /><span class="product-quantity">В наличии: 8</span>
+					  </div>
+		  <div class="cart-btn-wrap">
+          <div class="category-plus-minus">
+  				<button type="button" onclick="event.stopPropagation(); if ($(this).next().val() > 1) {$(this).next().val($(this).next().val()-1);} $(this).parents('form').submit();" class="minus" window.event.cancelBubble = "true">&ndash;</button>
+            <input type="text" onclick="event.stopPropagation();" name="quantity" value="1" size="2" id="input-quantity" class="quantity-items" window.event.cancelBubble = "true" />
+  				<button type="button" onclick="event.stopPropagation(); $(this).prev().val(~~$(this).prev().val()+1); $(this).parents('form').submit();" class="plus" window.event.cancelBubble = "true">+</button>        
+          </div>
+        	 <button type="button" class="cart-btn" onclick="event.stopPropagation(); cart.add('1189',$(this).parent().find('.quantity-items').val());" window.event.cancelBubble = "true">Купить</button>   
+		  </div>
+		</div>        
+    </div>
+  </div>
+    
+  	<div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition" onclick="if (event.ctrlKey) { window.open('https://openkart.ru/tm-kz-ignition-coil/kolpachok-pvl-401255-dlya-korotkoj-svechi-ngk-r7282', '_blank'); return false; } else { location.href='https://openkart.ru/tm-kz-ignition-coil/kolpachok-pvl-401255-dlya-korotkoj-svechi-ngk-r7282'; return false; }">
+     <h4 class="h4-product-name"><a href="https://openkart.ru/tm-kz-ignition-coil/kolpachok-pvl-401255-dlya-korotkoj-svechi-ngk-r7282">Колпачок PVL 401255 для короткой свечи NGK R7282</a></h4>
+			   <div class="product-info">	
+			<ul class="list-unstyled">
+                        <li>Производитель: Righetti Ridolfi</li>
+                        <li>Модель: K188G</li>
+				         </ul>
+		</div>
+      <div class="image"><a href="https://openkart.ru/tm-kz-ignition-coil/kolpachok-pvl-401255-dlya-korotkoj-svechi-ngk-r7282"><img 
+				class="lazyload" data-src="https://openkart.ru/image/cache/catalog/data/K188G-228x228.jpg"
+			 alt="Колпачок PVL 401255 для короткой свечи NGK R7282" title="Колпачок PVL 401255 для короткой свечи NGK R7282" class="img-responsive" /></a></div>
+      <div class="caption">      
+        <div class="price"> 
+						           2976.00&nbsp;<span class="currency-rub">₽</span>
+           
+          
+			            <br /><span class="product-quantity">В наличии: 4</span>
+					  </div>
+		  <div class="cart-btn-wrap">
+          <div class="category-plus-minus">
+  				<button type="button" onclick="event.stopPropagation(); if ($(this).next().val() > 1) {$(this).next().val($(this).next().val()-1);} $(this).parents('form').submit();" class="minus" window.event.cancelBubble = "true">&ndash;</button>
+            <input type="text" onclick="event.stopPropagation();" name="quantity" value="1" size="2" id="input-quantity" class="quantity-items" window.event.cancelBubble = "true" />
+  				<button type="button" onclick="event.stopPropagation(); $(this).prev().val(~~$(this).prev().val()+1); $(this).parents('form').submit();" class="plus" window.event.cancelBubble = "true">+</button>        
+          </div>
+        	 <button type="button" class="cart-btn" onclick="event.stopPropagation(); cart.add('3321',$(this).parent().find('.quantity-items').val());" window.event.cancelBubble = "true">Купить</button>   
+		  </div>
+		</div>        
+    </div>
+  </div>
+    
+  	<div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition" onclick="if (event.ctrlKey) { window.open('https://openkart.ru/tm-kz-ignition-coil/kolpachok-svechi-tm-kz', '_blank'); return false; } else { location.href='https://openkart.ru/tm-kz-ignition-coil/kolpachok-svechi-tm-kz'; return false; }">
+     <h4 class="h4-product-name"><a href="https://openkart.ru/tm-kz-ignition-coil/kolpachok-svechi-tm-kz">Колпачок свечи TM KZ</a></h4>
+			   <div class="product-info">	
+			<ul class="list-unstyled">
+                        <li>Производитель: TM Racing</li>
+                        <li>Модель: 21014</li>
+				         </ul>
+		</div>
+      <div class="image"><a href="https://openkart.ru/tm-kz-ignition-coil/kolpachok-svechi-tm-kz"><img 
+				class="lazyload" data-src="https://openkart.ru/image/cache/catalog/data/21014-228x228.jpg"
+			 alt="Колпачок свечи TM KZ" title="Колпачок свечи TM KZ" class="img-responsive" /></a></div>
+      <div class="caption">      
+        <div class="price"> 
+						           545.91&nbsp;<span class="currency-rub">₽</span>
+           
+          
+			            <br /><span class="product-quantity">В наличии: 12</span>
+					  </div>
+		  <div class="cart-btn-wrap">
+          <div class="category-plus-minus">
+  				<button type="button" onclick="event.stopPropagation(); if ($(this).next().val() > 1) {$(this).next().val($(this).next().val()-1);} $(this).parents('form').submit();" class="minus" window.event.cancelBubble = "true">&ndash;</button>
+            <input type="text" onclick="event.stopPropagation();" name="quantity" value="1" size="2" id="input-quantity" class="quantity-items" window.event.cancelBubble = "true" />
+  				<button type="button" onclick="event.stopPropagation(); $(this).prev().val(~~$(this).prev().val()+1); $(this).parents('form').submit();" class="plus" window.event.cancelBubble = "true">+</button>        
+          </div>
+        	 <button type="button" class="cart-btn" onclick="event.stopPropagation(); cart.add('1731',$(this).parent().find('.quantity-items').val());" window.event.cancelBubble = "true">Купить</button>   
+		  </div>
+		</div>        
+    </div>
+  </div>
+    
+  	<div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition" onclick="if (event.ctrlKey) { window.open('https://openkart.ru/tm-kz-ignition-coil/sajlentblok-20x20mm-m6kh15mm', '_blank'); return false; } else { location.href='https://openkart.ru/tm-kz-ignition-coil/sajlentblok-20x20mm-m6kh15mm'; return false; }">
+     <h4 class="h4-product-name"><a href="https://openkart.ru/tm-kz-ignition-coil/sajlentblok-20x20mm-m6kh15mm">Сайлентблок 20x20мм М6х15мм</a></h4>
+			   <div class="product-info">	
+			<ul class="list-unstyled">
+                        <li>Производитель: Righetti Ridolfi</li>
+                        <li>Модель: K807</li>
+				         </ul>
+		</div>
+      <div class="image"><a href="https://openkart.ru/tm-kz-ignition-coil/sajlentblok-20x20mm-m6kh15mm"><img 
+				class="lazyload" data-src="https://openkart.ru/image/cache/catalog/data/K807-228x228.jpg"
+			 alt="Сайлентблок 20x20мм М6х15мм" title="Сайлентблок 20x20мм М6х15мм" class="img-responsive" /></a></div>
+      <div class="caption">      
+        <div class="price"> 
+						           167.40&nbsp;<span class="currency-rub">₽</span>
+           
+          
+			            <br /><span class="product-quantity">В наличии: 48</span>
+					  </div>
+		  <div class="cart-btn-wrap">
+          <div class="category-plus-minus">
+  				<button type="button" onclick="event.stopPropagation(); if ($(this).next().val() > 1) {$(this).next().val($(this).next().val()-1);} $(this).parents('form').submit();" class="minus" window.event.cancelBubble = "true">&ndash;</button>
+            <input type="text" onclick="event.stopPropagation();" name="quantity" value="1" size="2" id="input-quantity" class="quantity-items" window.event.cancelBubble = "true" />
+  				<button type="button" onclick="event.stopPropagation(); $(this).prev().val(~~$(this).prev().val()+1); $(this).parents('form').submit();" class="plus" window.event.cancelBubble = "true">+</button>        
+          </div>
+        	 <button type="button" class="cart-btn" onclick="event.stopPropagation(); cart.add('2765',$(this).parent().find('.quantity-items').val());" window.event.cancelBubble = "true">Купить</button>   
+		  </div>
+		</div>        
+    </div>
+  </div>
+    
+  	<div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition" onclick="if (event.ctrlKey) { window.open('https://openkart.ru/tm-kz-ignition-coil/sajlentblok-25kh20khm6', '_blank'); return false; } else { location.href='https://openkart.ru/tm-kz-ignition-coil/sajlentblok-25kh20khm6'; return false; }">
+     <h4 class="h4-product-name"><a href="https://openkart.ru/tm-kz-ignition-coil/sajlentblok-25kh20khm6">Сайлентблок 25х20хМ6</a></h4>
+			   <div class="product-info">	
+			<ul class="list-unstyled">
+                        <li>Производитель: Righetti Ridolfi</li>
+                        <li>Модель: K548S</li>
+				         </ul>
+		</div>
+      <div class="image"><a href="https://openkart.ru/tm-kz-ignition-coil/sajlentblok-25kh20khm6"><img 
+				class="lazyload" data-src="https://openkart.ru/image/cache/catalog/data/K548S-228x228.jpg"
+			 alt="Сайлентблок 25х20хМ6" title="Сайлентблок 25х20хМ6" class="img-responsive" /></a></div>
+      <div class="caption">      
+        <div class="price"> 
+						           297.60&nbsp;<span class="currency-rub">₽</span>
+           
+          
+			            <br /><span class="product-quantity">В наличии: 20</span>
+					  </div>
+		  <div class="cart-btn-wrap">
+          <div class="category-plus-minus">
+  				<button type="button" onclick="event.stopPropagation(); if ($(this).next().val() > 1) {$(this).next().val($(this).next().val()-1);} $(this).parents('form').submit();" class="minus" window.event.cancelBubble = "true">&ndash;</button>
+            <input type="text" onclick="event.stopPropagation();" name="quantity" value="1" size="2" id="input-quantity" class="quantity-items" window.event.cancelBubble = "true" />
+  				<button type="button" onclick="event.stopPropagation(); $(this).prev().val(~~$(this).prev().val()+1); $(this).parents('form').submit();" class="plus" window.event.cancelBubble = "true">+</button>        
+          </div>
+        	 <button type="button" class="cart-btn" onclick="event.stopPropagation(); cart.add('2764',$(this).parent().find('.quantity-items').val());" window.event.cancelBubble = "true">Купить</button>   
+		  </div>
+		</div>        
+    </div>
+  </div>
+    
+  	<div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition" onclick="if (event.ctrlKey) { window.open('https://openkart.ru/tm-kz-ignition-coil/sajlentblok-tm-kz-20x20mm-m6', '_blank'); return false; } else { location.href='https://openkart.ru/tm-kz-ignition-coil/sajlentblok-tm-kz-20x20mm-m6'; return false; }">
+     <h4 class="h4-product-name"><a href="https://openkart.ru/tm-kz-ignition-coil/sajlentblok-tm-kz-20x20mm-m6">Сайлентблок TM KZ 20x20мм М6</a></h4>
+			   <div class="product-info">	
+			<ul class="list-unstyled">
+                        <li>Производитель: TM Racing</li>
+                        <li>Модель: 21003</li>
+				         </ul>
+		</div>
+      <div class="image"><a href="https://openkart.ru/tm-kz-ignition-coil/sajlentblok-tm-kz-20x20mm-m6"><img 
+				class="lazyload" data-src="https://openkart.ru/image/cache/catalog/data/660920-228x228.jpg"
+			 alt="Сайлентблок TM KZ 20x20мм М6" title="Сайлентблок TM KZ 20x20мм М6" class="img-responsive" /></a></div>
+      <div class="caption">      
+        <div class="price"> 
+						           290.16&nbsp;<span class="currency-rub">₽</span>
+           
+          
+			            <br /><span class="product-quantity">В наличии: 15</span>
+					  </div>
+		  <div class="cart-btn-wrap">
+          <div class="category-plus-minus">
+  				<button type="button" onclick="event.stopPropagation(); if ($(this).next().val() > 1) {$(this).next().val($(this).next().val()-1);} $(this).parents('form').submit();" class="minus" window.event.cancelBubble = "true">&ndash;</button>
+            <input type="text" onclick="event.stopPropagation();" name="quantity" value="1" size="2" id="input-quantity" class="quantity-items" window.event.cancelBubble = "true" />
+  				<button type="button" onclick="event.stopPropagation(); $(this).prev().val(~~$(this).prev().val()+1); $(this).parents('form').submit();" class="plus" window.event.cancelBubble = "true">+</button>        
+          </div>
+        	 <button type="button" class="cart-btn" onclick="event.stopPropagation(); cart.add('3257',$(this).parent().find('.quantity-items').val());" window.event.cancelBubble = "true">Купить</button>   
+		  </div>
+		</div>        
+    </div>
+  </div>
+   
+
+	
+		</div>
+      <div class="row">
+        <div class="col-md-6 text-left category-pagination"></div>
+        <div class="col-md-6 text-right category-results"><span class="category-form-control-texts">Показано</span> с 1 по 8 из 8 (всего 1 страниц)</div>
+      </div>
+                  </div>
+    </div>
+</div>
+<footer>
+  <div class="container">
+    <div class="row footer-links">
+            <div class="col-md-2 col-sm-4">
+        <h5>Информация</h5>
+        <ul class="list-footer-links">
+          <li><a href="https://openkart.ru/contact-us">Адреса и телефоны</a></li>
+                   <li><a href="https://openkart.ru/delivery">Доставка запчастей для картинга</a></li>
+                    <li><a href="https://openkart.ru/oplata">Способы оплаты</a></li>
+                  </ul>
+      </div>
+       
+		<div class="col-md-4 col-sm-8">	
+		  <div class="row">	
+      	<div class="col-md-7 col-sm-7 footer-service">
+        	 <h5>Служба поддержки</h5>
+        	 <ul class="list-footer-links">
+          	<li><a href="https://openkart.ru/kak-sdelat-zakaz">Как сделать заказ</a></li>
+          	<li><a href="https://openkart.ru/katalogi-i-tablitsy-razmerov">Каталоги и таблицы размеров</a></li>
+          	<li><a href="https://openkart.ru/nastroyka-karta-i-prochee">Настройка карта и прочее</a></li>
+        	 </ul>
+      	</div>
+      	<div class="col-md-5 col-sm-5 footer-extra"> 
+          <h5>Дополнительно</h5>
+        	 <ul class="list-footer-links">
+          	<li><a href="https://openkart.ru/brands">Производители</a></li>
+          	<li><a href="https://openkart.ru/specials">Акции</a></li>
+          	<li><a href="https://openkart.ru/latest">Новинки</a></li>
+          	<li><a href="https://openkart.ru/sitemap">Карта сайта</a></li>
+          </ul>
+      	</div>
+		  </div>
+		</div>
+      <div class="col-md-2 col-sm-4 footer-account"> 
+        <h5>Личный Кабинет</h5>
+        <ul class="list-footer-links">
+          <li><a href="https://openkart.ru/my-account">Личный Кабинет</a></li>
+          <li><a href="https://openkart.ru/order-history">История заказов</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 col-sm-8 footer-map">   
+        <h5 class="h5-fix">НАШ АДРЕС</h5>
+        <ul class="list-unstyled">
+          <li><i class="fa fa-map-marker"></i> г. Санкт-Петербург, ул. Плуталова, д. 8</li>
+          <li><i class="fa fa-mobile"></i> +7-921-9672225</li>
+          <li><i class="fa fa-envelope-o"></i> <a href="/cdn-cgi/l/email-protection#167f78707956796673787d776462386463" class="footer-email"><span class="__cf_email__" data-cfemail="e58c8b838aa58a95808b8e849791cb9790">[email&#160;protected]</span></a></li>
+			 <li class="footer-icons">
+				<a href="https://www.facebook.com/openkart.ru/" class="fa fa-facebook" target="_blank"></a>
+				<a href="https://telegram.me/openkartnews" class="fa fa-telegram" target="_blank"></a>
+				<a href="https://www.instagram.com/openkart/" class="fa fa-instagram" target="_blank"></a>
+				<a href="https://vk.com/openkart" class="fa fa-vk" target="_blank"></a>
+			 </li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyrights">&copy; 2020 Openkart</div>
+  </div>
+</footer>
+<div class="in-stock-btn-form" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000000db; z-index: 9999999; text-align: center;">	
+	<div style="display: table-cell; vertical-align: middle;">	
+		<form method = "post">
+			<span style="font-size: 17px; color: #fff;">Уведомить о поступлении на e-mail:</span>
+			<input type="email" placeholder="username@example.ru" class="form-control" name="mail_in_stock" style="width: 80%; max-width: 400px; margin: 15px auto 25px;" />
+			<input type="hidden" class="form-control product-id-in-stock" name="product_id_in_stock" />
+			<button type="submit" name="send_in_stock" value = "OK" data-loading-text="Загрузка..." class="btn btn-success in-stock-btn-close">ОК</button>
+			<button type="button" class="btn btn-danger in-stock-btn-close" onclick="$('.in-stock-btn-form').hide();">Отмена</button> 
+		</form>
+	</div>
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript"><!--
+	$('.cart-btn').on('click', function(){
+	    setTimeout(function() {
+	        loadCart8(); //fix3
+		}, 1000);
+		$('.cart-total-href').css({ display: 'block' });
+		if ($(this).closest('.product-thumb').find('img').length == 1) {
+			var that = $(this).closest('.product-thumb').find('img');
+		} else {
+			var that = $(this).closest('#content').find('img');
+		}			
+		var cartTotalHref = $(".cart-total-href");
+		var w = that.width();		
+        that.clone()
+            .css({'width' : w,
+			'position' : 'absolute',
+			'z-index' : '9999',
+			top: that.offset().top,
+			left: that.offset().left })
+            .appendTo("body")
+            .animate({opacity: 0.05,
+                left: cartTotalHref.offset()['left'],
+                top: cartTotalHref.offset()['top'],						
+                width: 20}, 1000, function() {	
+					$(this).remove();
+				});
+	});
+//--></script>
+	<script type="text/javascript">
+  		WebFontConfig = {
+    		google: { families: [ 'Open+Sans:300,400,400i,700' , 'Roboto:300,400,500,700' ] }
+  		};
+  		(function() {
+    		var wf = document.createElement('script');
+    		wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+   		wf.type = 'text/javascript';
+    		wf.async = 'true';
+    		var s = document.getElementsByTagName('script')[0];
+    		s.parentNode.insertBefore(wf, s);
+  		})();
+	</script>
+</body></html>
+ 

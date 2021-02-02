@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]><html dir="ltr" lang="ru" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html dir="ltr" lang="ru" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html dir="ltr" lang="ru">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Пружина коробки передач для картов. Все для картинга на Openkart.ru</title>
+<base href="https://openkart.ru/" />
+<meta name="description" content="У нас вы можете купить пружина коробки передач для гоночных картов - в наличии и под заказ, с экспресс-доставкой по России. Все для картинга на Openkart.ru" />
+<meta name="yandex-verification" content="bf8adcc2e2331beb" />
+<script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script defer src="catalog/view/javascript/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!--<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700|Roboto:300,400,500,700&amp;subset=cyrillic,cyrillic-ext" rel="stylesheet">-->
+<link href="catalog/view/theme/ktemplate/stylesheet/stylesheet-v3.24.css" rel="stylesheet">
+			<!-- cdek -->
+				<!-- cdek -->
+	    <script defer src="catalog/view/javascript/common4.js" type="text/javascript"></script>
+<script defer src="catalog/view/javascript/custom4.3.js" type="text/javascript"></script>
+<script defer src="catalog/view/javascript/lazyload/lazysizes.min.js"></script>
+<link rel="apple-touch-icon" sizes="192x192" href="https://openkart.ru/image/catalog/favicons/favicon-192x192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://openkart.ru/image/catalog/favicons/favicon-192x192.png">
+<meta name="msapplication-config" content="https://openkart.ru/image/catalog/favicons/browserconfig.xml">
+<link href="https://openkart.ru/gearbox-spring" rel="canonical" />
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(48771104, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true,
+        ecommerce:"dataLayer"
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/48771104" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2983350-12"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2983350-12');
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script type="text/javascript">
+	var selector = 'input.form-control.input-search';
+	var catTitle = 'Категории';
+	var prodTitle = 'Товары';
+	var viewAllTitle = 'Посмотреть все товары';
+	var noResTitle = 'Ничего не найдено';
+
+	console.log(selector);
+
+	$(document).ready(function() {
+
+		var timer = null;
+		$('input.form-control.input-search').keydown(function(){
+	       clearTimeout(timer); 
+	       timer = setTimeout(sphinxAutocomplete, 500)
+		});
+
+	});
+
+	$(document).mouseup(function (e) {
+		
+		if (!$('.sphinxsearch').is(e.target) && $('.sphinxsearch').has(e.target).length === 0) {
+			$('.sphinxsearch').hide();
+			$('input.form-control.input-search').removeClass('no-bottom-borders');
+			return false;
+		}
+		
+	});
+
+	function sphinxAutocomplete() {
+
+		if($(selector).val() == '') {
+			$('.sphinxsearch').hide();
+			$('input.form-control.input-search').removeClass('no-bottom-borders');
+			return false;
+		}
+
+		$.ajax({
+			url: 'https://openkart.ru/index.php?route=extension/module/sphinxautocomplete&search=' + $(selector).val(),
+			dataType: 'json',
+			success: function(json) {
+
+				var html = '';
+				
+				//Categories
+				if (json.categories.length) {
+					html += '<div class="categories"><span>'+catTitle+'</span>';
+					var categories = json.categories;
+					for (i = 0; i < categories.length; i++) {
+						html += '<a class="sphinxsearcha" href="' + categories[i]['href'] + '">';
+							if(categories[i]['image'] != '') {
+								html += '<img src="' + categories[i]['image'] + '" />';
+							}
+							html += categories[i]['name'];
+							html += '<br />';
+						html += '</a>';
+					}
+					html += '</div>';
+				}
+				
+				//Products
+				if (json.products.length) {
+					if (json.categories.length) { html += '<div class="products"><span>'+prodTitle+'</span>'; }
+					var products = json.products;
+					for (i = 0; i < products.length; i++) {
+						html += '<a class="sphinxsearcha" href="' + products[i]['href'] + '">';
+							html += '<img src="' + products[i]['image'] + '" />';
+							html += products[i]['name'];
+							html += '<br />';
+						html += '</a>';
+					}
+					if (json.categories.length) {  html += '</div>'; }
+					html += '<div class="sphinx-viewall"><a id="view-all" href="https://openkart.ru/search?wildcard=true&amp;search=' + encodeURIComponent($(selector).val()) + '">'+viewAllTitle+'</a></div>';
+				} else {
+					html = '<div class="sphinx-viewall">'+noResTitle+'</div>';
+				}
+
+                $('.sphinxsearch').remove();
+				$(selector).after('<div class="sphinxsearch">'+ html +'</div>');
+				$('.sphinxsearch').show();
+				$('input.form-control.input-search').addClass('no-bottom-borders');
+
+				$('.sphinxsearcha').hover(
+					function(){$(this).addClass('sphinxsearch-a-active');},
+ 					function(){$(this).removeClass('sphinxsearch-a-active');}
+				);
+
+			}
+		});
+			
+	}
+</script>
+
+</head>
+<body> 
+<header>
+  <div class="container">
+    <div class="row header-contacts">
+      <div class="col-sm-12">
+			<i class="fa fa-map-marker"></i>г. Санкт-Петербург, ул. Плуталова, д. 8
+			<i class="fa fa-mobile"></i><a href="tel:+79219672225">+7-921-9672225</a>
+			<i class="fa fa-envelope-o"></i><a href="/cdn-cgi/l/email-protection#3d54535b527d524d5853565c4f49134f48"><span class="__cf_email__" data-cfemail="6900070f062906190c0702081b1d471b1c">[email&#160;protected]</span></a>
+			<i class="fa fa-calendar-o"></i>Время работы: ПН-ПТ 9:00-18:00
+	 	</div>
+	 </div>
+    <div class="row header-contacts-mobile">
+      <div class="col-sm-12">
+			<span class="dropdown"><a href="#" class="dropdown-toggle icon-map-marker" data-toggle="dropdown" aria-expanded="false">
+				<i class="fa fa-map-marker"></i></a>
+				<span class="dropdown-menu dropdown-menu-left dropdown-paddings">г. Санкт-Петербург,<br />ул. Плуталова, д. 8</span>
+			</span>
+			<a href="tel:+79219672225" class="icon-mobile"><i class="fa fa-mobile"></i></a>
+			<a href="/cdn-cgi/l/email-protection#5c35323a331c332c3932373d2e28722e29" class="icon-envelope"><i class="fa fa-envelope-o"></i></a>
+			<span class="dropdown"><a href="#" class="dropdown-toggle icon-calendar" data-toggle="dropdown" aria-expanded="false">
+				<i class="fa fa-calendar-o"></i></a>
+				<span class="dropdown-menu dropdown-menu-right dropdown-paddings">Время работы:<br />ПН-ПТ 9:00-18:00</span>
+			</span>
+	 	</div>
+	 </div>
+    <div class="row header">
+      <div class="col-sm-3">
+        <div id="logo">
+				<a href="https://openkart.ru/"><img src="/catalog/view/theme/ktemplate/image/logo.png" title="Openkart - Все для картинга" alt="Openkart - Все для картинга" class="img-responsive" /></a>
+			</div>
+      </div>
+		<div class="col-sm-9"> 
+	 	  <div class="row">
+      	<div class="col-sm-5 col-lg-7">
+  			  <nav class="navbar header-menu"> 
+    			<div class="navbar-header">
+      			<button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
+    			</div>
+    			<div class="collapse navbar-collapse navbar-ex1-collapse">
+      			<ul class="nav navbar-nav header-links">
+        				<li><a href="https://openkart.ru/" class="link-home">Главная</a></li> 
+        				<li><a href="https://openkart.ru/latest">Новинки</a></li> 
+        				<li><a href="https://openkart.ru/specials">Акции</a></li> 
+        				<li><a href="https://openkart.ru/oplata">Оплата</a></li> 
+        				<li><a href="https://openkart.ru/contact-us">Контакты</a></li>  
+      			</ul>
+    			</div> 
+  			  </nav>
+			</div> 
+	 	<div class="col-sm-7 col-lg-5 header-right-row">
+       <div class="header-search"><div id="search"> 
+  <input type="text" name="search" value="" placeholder="Поиск..." class="form-control input-search" autocomplete="off" /> 
+  <button type="submit" value="Искать" class="button search-submit"><i class="fa fa-search"></i></button>
+</div>
+</div>
+       <div class="header-account">
+		  <ul class="list-inline"> 
+         <li class="dropdown"><a href="https://openkart.ru/my-account" title="Личный кабинет" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i></a> 
+          <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="https://openkart.ru/create-account">Регистрация</a></li>
+            <li><a href="https://openkart.ru/login">Авторизация</a></li>
+                       </ul>
+          </li>
+		   </ul>
+        </div>
+        <div class="header-cart">
+		   <div id="cart">
+  <a data-toggle="dropdown" data-loading-text="Загрузка..." class="dropdown-toggle my-cart" title="Корзина"><i class="fa fa-shopping-cart"></i> <div id="cart-total">0</div></a>
+  <ul class="dropdown-menu pull-right dropdown-menu-wrap">
+        <li>
+        <div class="marker"></div>
+        <p class="text-center">Ваша корзина пуста!</p>
+    </li>
+      </ul>
+</div>
+<a class="cart-total-href" href="/checkout2" style="display:none;"><i class="fa fa-shopping-cart" style="font-size:22px;height:20px;width:28px;margin-left:-4px;"></i><div class="cart-total-btn">0</div></a>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript"><!--
+function loadCart8() {
+	$.ajax({
+		url: 'index.php?route=extension/quickcheckout/cart2',
+		dataType: 'html',
+		cache: false,
+		beforeSend: function() {
+			$('.tooltip').remove();
+		},
+		success: function(html) {			
+			$('.cart8 .quickcheckout-content').html(html);
+		}
+	});
+}
+
+$(document).ready(function(){
+    loadCart8();
+});
+
+$(document).on('click', '.cart8 .button-update', function() {
+	var quantity = $(this).parents('.quantity').find('input.qc-product-qantity');
+	if (quantity.length){
+		if ($(this).data('type')=='increase') {
+			quantity.val(parseInt(quantity.val())+1);
+		} else if ($(this).data('type')=='decrease') {
+			quantity.val(parseInt(quantity.val())-1);
+		}
+	}
+	
+	$.ajax({
+		url: 'index.php?route=extension/quickcheckout/cart2/update',
+		type: 'post',
+		data: $('.cart8 :input'),
+		dataType: 'json',
+		cache: false,
+		beforeSend: function() {
+			$('.cart8 .button-update').prop('disabled', true);
+		},
+		success: function(json) {
+			if (json['redirect']) {
+			    if (window.location.pathname == '/checkout2') {
+				    location = json['redirect'];
+				} else {
+				    $('ul.dropdown-menu.pull-right.dropdown-menu-wrap').html('<li><div class="marker"></div><p class="text-center">Ваша корзина пуста!</p></li>');
+			        $('#cart-total').html(json['count_products']);
+				    $('.cart-total-btn').html(json['count_products']);
+				}
+			} else {
+				if (json['error']['stock']) {
+					$('#button-payment-method').attr("disabled", true);
+				} else if (json['error']['warning']) {
+						$('#warning-messages').html('<div class="alert alert-danger" style="display: none;"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '</div>');
+						$('.alert-danger').fadeIn('slow');
+						$('#button-payment-method').attr("disabled", true);
+				} else {
+					$('#warning-messages').html('');
+					$('#button-payment-method').removeAttr("disabled");
+				}
+                if (window.location.pathname == '/checkout2') {
+			        reloadShippingMethodById($('#shipping-address select[name=\'address_id\']').val());			    
+				}				
+			    loadCart8();
+				$('#cart-total').html(json['count_products']);
+				$('.cart-total-btn').html(json['count_products']);				
+			}
+		}
+	});
+
+	return false;
+});
+
+$(document).on('click', '.button-remove', function() {
+	var remove_id = $(this).attr('data-remove');
+
+	$.ajax({
+		url: 'index.php?route=extension/quickcheckout/cart2/update&remove=' + remove_id,
+		type: 'get',
+		dataType: 'json',
+		cache: false,
+		beforeSend: function() {
+			$('.cart8 .button-remove').prop('disabled', true);
+		},
+		success: function(json) {
+			if (json['redirect']) {
+			    if (window.location.pathname == '/checkout2') {
+				    location = json['redirect'];
+				} else {
+				    $('ul.dropdown-menu.pull-right.dropdown-menu-wrap').html('<li><div class="marker"></div><p class="text-center">Ваша корзина пуста!</p></li>');
+			        $('#cart-total').html(json['count_products']);
+				    $('.cart-total-btn').html(json['count_products']);
+				}
+			} else {
+			    if (window.location.pathname == '/checkout2') {
+				    reloadShippingMethodById($('#shipping-address select[name=\'address_id\']').val());
+				}
+				loadCart8();
+				$('#cart-total').html(json['count_products']);
+				$('.cart-total-btn').html(json['count_products']);
+			}
+		}
+	});
+
+	return false;
+});
+//--></script>
+
+        </div>
+	 	</div>
+	 	</div>
+	  </div>
+    </div>
+  </div>
+</header>
+<div class="container categories-menu2">
+	<div class="row categories2">
+		<div class="category-menu2">
+			<a href="/chassis_parts">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category1.png" alt="ШАССИ И ЗАПЧАСТИ">
+					<div class="category-text2">ШАССИ И <br class="category-text-break" />ЗАПЧАСТИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/engines_and_parts">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category2.png" alt="МОТОРЫ И ЗАПЧАСТИ">
+					<div class="category-text2">МОТОРЫ И <br class="category-text-break" />ЗАПЧАСТИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2"> 
+			<a href="/kart_tools">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category3.png" alt="ОБОРУДОВАНИЕ">
+					<div class="category-text2">ОБОРУДОВА- <br class="category-text-break" />НИЕ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/data_systems">
+				<div class="category-link5 category-link5-fix2">
+					<img src="/catalog/view/theme/ktemplate/image/category4.png" alt="ЭЛЕКТРОННЫЕ СИСТЕМЫ">
+					<div class="category-text2">ЭЛЕКТРОННЫЕ <br class="category-text-break" />СИСТЕМЫ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/tyres_and_wheels">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category5.png" alt="ШИНЫ И ДИСКИ">
+					<div class="category-text2">ШИНЫ И <br class="category-text-break" />ДИСКИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/protection_wear">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category6.png" alt="ЭКИПИРОВКА И ШЛЕМЫ">
+					<div class="category-text2">ЭКИПИРОВКА <br class="category-text-break" />И ШЛЕМЫ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/lubricants">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category7.png" alt="МАСЛО И СМАЗКИ">
+					<div class="category-text2">МАСЛО И <br class="category-text-break" />СМАЗКИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/sprockets_and_chains">
+				<div class="category-link5 category-link5-fix">				
+					<img src="/catalog/view/theme/ktemplate/image/category8.png" alt="ЦЕПИ И ЗВЕЗДЫ">
+					<div class="category-text2">ЦЕПИ И <br class="category-text-break" />ЗВЕЗДЫ</div>
+				</div>
+			</a>
+		</div> 
+	</div>
+</div>
+
+<div id="product-category" class="container">
+  <ul class="breadcrumb-category">
+        <li><a href="https://openkart.ru/">Главная</a></li>
+        <li><a href="https://openkart.ru/gearbox-spring">Пружина коробки передач</a></li>
+      </ul>
+  <h1>Пружина коробки передач</h1>
+  <div class="row">
+                <div id="content" class="col-sm-12">
+      	  		      <div class="row category-description">         
+        <div class="col-sm-12"><div class="interactive-scheme">
+		<svg viewBox="0 0 795 581">
+			<a href="https://openkart.ru/engines_and_parts/tm_racing_parts/tm_kz10_parts/tm-kz-gear-shift/vilka-korobki-peredach-tm-kz-vtorichnyj-val--tip-2">
+				<path class="part" d="m 129.25744,99.37049 c -1.68279,7.41854 -27.10006,30.86812 -15.60405,59.38855 4.35399,0.76568 5.8801,2.25025 6.98688,-4.19213 -7.32862,-21.85501 24.18512,-38.80281 30.50942,-18.16591 1.09749,3.9486 1.44797,8.6442 7.91847,7.21978 l 0,-9.54874 c 1.17624,-1.81848 1.45737,-4.08451 1.39738,-6.5211 -3.48379,-4.94319 -5.2219,-10.9338 -7.21979,-16.76853 6.58957,-3.77954 6.52354,-8.09872 1.63028,-12.809297 0.52973,-6.476968 -4.79002,-5.154614 -8.61717,-5.822407 -5.46576,-4.495036 -10.75658,-6.016035 -15.60405,0 -3.40747,5.348272 -1.33351,5.215122 -1.39737,7.219784 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/tm_racing_parts/tm_kz10_parts/tm-kz-gear-shift/vilka-korobki-peredach-tm-kz-vtorichnyj-val">
+				<path class="part" d="m 188.64599,127.2016 c -11.98066,-8.07016 -16.58459,4.64966 -16.65209,7.91847 -7.24593,11.98886 -15.08035,24.88745 -19.33039,38.42789 l -0.46579,16.41918 c 2.77191,5.72102 7.17858,5.60359 12.11061,3.6099 l -0.58224,-3.26055 c -8.95265,-29.3806 28.75878,-40.03246 33.18772,-11.52837 l 3.72634,-2.56186 0.93158,-13.04219 c -2.52716,-5.29942 -4.65029,-10.49783 -5.93885,-15.4876 6.38825,-4.58029 4.45803,-9.16059 0.69869,-13.74088 0.84805,-4.16088 -0.79357,-6.92754 -7.68558,-6.75399 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/tm_racing_parts/tm_kz10_parts/tm-kz-gear-shift/vilka-korobki-peredach-tm-kz-pervichnyj-val">
+				<path class="part" d="m 184.5703,84.232232 c -4.31085,9.215583 -4.64279,14.81397 -5.70596,21.077118 3.26858,5.53461 5.95749,3.8233 8.61717,1.74672 14.32344,-18.662046 31.11369,-1.11793 20.72777,11.17902 l 0,2.32896 c 2.64458,1.07972 5.4883,1.88065 9.66519,0.81514 1.30203,-2.96057 2.22961,-5.73392 2.9112,-8.38427 0.91521,-3.60989 0.51816,-7.21978 0.2329,-10.82967 -3.65603,-9.851953 -7.24872,-19.767253 -10.59678,-29.927177 l 2.32896,-1.280929 c 0.12963,-1.176201 0.28696,-2.213892 0.11645,-4.890822 -1.45778,-1.917826 -3.80234,-5.018037 -6.17175,-8.15137 l -2.32896,-0.349344 -5.58951,-4.308582 c -3.85881,-0.512226 -7.77866,-0.816956 -13.15864,3.842789 -0.11645,2.343213 -0.2329,4.603295 -0.34935,6.637544 -0.309,2.541687 -0.4744,5.011578 1.04804,6.637544 -0.58224,4.461705 -1.16449,8.803385 -1.74673,13.857329 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/tm_racing_parts/tm_kz10_parts/tm-kz-gear-shift/probka-sliva-masla-magnitnaya-kz">
+				<path class="part" d="m 373.44919,453.60573 -0.2329,4.30859 c 8.36421,7.63374 16.09337,3.92602 20.49487,0.93158 l 0,-5.35661 -2.67831,-2.67831 1e-5,-11.06258 -1.74673,-1.86316 -0.46579,-5.58952 c -3.53226,-1.7491 -7.06452,-2.01471 -10.59678,-0.34934 l -0.2329,6.75399 -1.28092,1.28093 -0.34935,11.17902 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/tm_racing_parts/tm_kz10_parts/tm-kz-gear-shift/tm-kz-ratchet-gear">
+				<path class="part" d="m 614.03105,477.4776 c -5.12914,1.97962 -4.89811,3.95924 -5.24017,5.93886 l 7.91847,6.17175 c -1.82551,3.81162 -1.13326,7.87502 0.11645,11.99416 l 0.34935,1.74672 2.9112,2.44541 1.16448,2.79476 0.11645,3.1441 4.30858,4.07568 2.32896,-0.2329 4.07569,3.72635 3.49344,-1.63028 1.51383,2.32896 2.44541,-0.11644 1.51382,-1.86317 -0.23289,-2.21252 2.79475,-0.11645 1.51383,1.16448 2.56186,-0.11644 0.23289,-2.67831 -1.04803,-1.39738 0.2329,-1.28093 5.12372,-0.23289 c 0.61767,-1.31975 0.15188,-2.63949 -0.11645,-3.95924 l -1.51383,-0.58224 1.63028,-1.39738 2.44541,-0.69869 0,-3.1441 -1.97962,-2.56186 1.39738,-2.79475 -0.2329,-2.21252 -1.63027,-0.11645 -8.96651,-8.85005 -3.60989,1.86317 -7.91848,-4.89083 -3.60989,3.95924 -4.07568,0.11645 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/tm_racing_parts/tm_kz10_parts/tm-kz-gear-shift/gearbox-spring">
+				<path class="part" d="m 641.27991,434.74114 c -0.61069,4.09336 -2.54125,8.4067 -5.00727,12.80929 2.44984,0.8402 3.62843,1.1719 4.54148,1.39738 1.90199,-4.55641 3.80397,-8.60204 5.70596,-12.22706 -1.25317,0.10257 -3.03286,0.4684 -3.1441,0 -0.58224,-0.4879 -1.16448,-0.99974 -1.74672,-2.09606 z" fill="red">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/tm_racing_parts/tm_kz10_parts/tm-kz-gear-shift/gearbox-spring">
+				<path class="part" d="m 636.50554,538.84577 -7.33624,-12.1106 c 0.76892,-0.36416 1.49465,-0.81467 2.56186,-0.58224 0.57164,-0.64752 0.61558,-1.16311 2.32897,-2.09607 l 6.63754,12.22705 c -1.00428,1.64015 -2.26083,2.77575 -4.19213,2.56186 z" fill="red">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/tm_racing_parts/tm_kz10_parts/tm-kz-gear-shift/shtift-sobachki-korobki-peredach-tm-kz">
+				<path class="part" d="m 637.67002,543.62015 c 1.7393,3.90444 4.08513,7.00016 6.75399,9.66519 1.07776,-0.21226 2.13813,-0.45929 2.9112,-1.28093 l 0.58224,-5.8224 c -1.93047,-2.7514 -2.70459,-4.44258 -3.95923,-6.40465 -1.11725,0.85605 -2.08733,1.7489 -1.97962,2.9112 -1.05598,-0.0697 -2.04692,-0.20441 -4.30858,0.93159 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/tm_racing_parts/tm_kz10_parts/tm-kz-gear-shift/shtift-sobachki-korobki-peredach-tm-kz">
+				<path class="part" d="m 642.79374,427.52135 4.54147,-8.15137 c 4.86187,-0.65099 5.56174,1.96817 6.17176,4.65793 l -3.6099,7.33623 c -2.32498,-0.21109 -4.49627,3.42028 -7.10333,-3.84279 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/tm_racing_parts/tm_kz10_parts/tm-kz-gear-shift/sobachka-korobki-peredach-tm-kz-verkhnyaya">
+				<path class="part" d="m 658.63068,416.57523 13.0422,5.00727 2.09606,-1.04804 0,-3.02765 -6.98689,-12.22705 -12.80929,-5.70596 c -3.5127,5.2217 -0.96615,5.78905 1.74672,9.1994 0.48626,1.39033 1.86425,5.00997 2.9112,7.80203 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/tm_racing_parts/tm_kz10_parts/tm-kz-gear-shift/sobachka-korobki-peredach-tm-kz-nizhnyaya">
+				<path class="part" d="m 649.66418,570.05387 c 5.9536,-1.01462 12.0188,-2.36408 18.28236,-4.30858 -0.60992,-3.48234 -1.81258,-7.03878 -4.89083,-10.82967 -5.44571,1.2033 -10.11671,2.40659 -17.58367,3.60989 1.14373,4.09643 2.15402,8.32632 4.19214,11.52836 z" fill="#87d7fb">
+			</path></a>
+          	<a href="https://openkart.ru/engines_and_parts/tm_racing_parts/tm_kz10_parts/tm-kz-gear-shift/tm-kz-piastrino-fine-corsa">
+				<path class="part" d="m 492.34274,418.2055 c 10.90457,9.2688 21.62104,17.97333 31.90679,25.38569 1.99034,7.04308 6.62718,8.79316 14.20667,4.65793 l 17.00143,-23.05673 c 0.0293,-7.83721 -5.53384,-7.97804 -10.94613,-7.91848 l -16.76853,12.11061 c -3.57985,3.12823 -10.87333,0.88665 -2.79475,-6.2882 -0.42772,-3.21147 -4.29399,-3.84403 -6.98689,-5.35661 -3.9688,4.5382 -7.31325,6.75733 -6.98689,-4.65793 -1.26452,-2.88159 -4.55858,-5.42493 -9.54875,-7.68558 -6.49875,2.53422 -11.20825,5.96306 -9.08295,12.8093 z" fill="#87d7fb">
+			</path></a>
+		</svg>
+		<img src="https://openkart.ru/image/catalog/scheme/schemes/scheme-0009-v1.jpg" alt="DESMO CAMBIO – GEAR SHIFT">
+</div>
+<link href="https://openkart.ru/image/catalog/scheme/schemes/libs/scheme-v3.css" rel="stylesheet" media="screen"></div>
+      </div>
+                       <div class="row category-form-control-wrap">
+		  <div class="col-md-4 col-sm-12"></div>
+		  <div class="col-md-8 col-sm-12">
+			<div class="row">
+        		<div class="col-md-9 col-sm-6 category-control-sorts">
+          		<div class="category-form-control2">
+            		<span class="category-form-control-texts">Сортировка:</span>
+            		<select class="category-sorts2" onchange="location = this.value;"> 
+              		               		               			<option value="https://openkart.ru/gearbox-spring?sort=p.sort_order&amp;order=ASC" selected="selected">По умолчанию</option>
+              		               		               		               			<option value="https://openkart.ru/gearbox-spring?sort=pd.name&amp;order=ASC">Название (А - Я)</option>           
+              		               		               		               			<option value="https://openkart.ru/gearbox-spring?sort=pd.name&amp;order=DESC">Название (Я - А)</option>           
+              		               		               		               			<option value="https://openkart.ru/gearbox-spring?sort=p.price&amp;order=ASC">Цена (низкая &gt; высокая)</option>           
+              		               		               		               			<option value="https://openkart.ru/gearbox-spring?sort=p.price&amp;order=DESC">Цена (высокая &gt; низкая)</option>           
+              		               		               		               			<option value="https://openkart.ru/gearbox-spring?sort=rating&amp;order=DESC">Рейтинг (начиная с высокого)</option>           
+              		               		               		               			<option value="https://openkart.ru/gearbox-spring?sort=rating&amp;order=ASC">Рейтинг (начиная с низкого)</option>           
+              		               		               		               			<option value="https://openkart.ru/gearbox-spring?sort=p.model&amp;order=ASC">Модель (А - Я)</option>           
+              		               		               		               			<option value="https://openkart.ru/gearbox-spring?sort=p.model&amp;order=DESC">Модель (Я - А)</option>           
+              		               		            
+            		</select>
+						<select id="width_tmp_select">
+ 							<option id="width_tmp_option"></option>
+						</select>
+          		</div>
+        		</div>
+        		<div class="col-md-3 col-sm-6 category-control-pages">
+          		<div class="category-form-control">
+            		<span class="category-form-control-texts">На странице:</span> 
+            		<select class="category-sorts3" onchange="location = this.value;">          
+              		               		               			<option value="https://openkart.ru/gearbox-spring?limit=16">16</option>   
+              		               		               		               			<option value="https://openkart.ru/gearbox-spring?limit=32">32</option>   
+              		               		               		               			<option value="https://openkart.ru/gearbox-spring?limit=48">48</option>   
+              		               		               		                   	<option value="https://openkart.ru/gearbox-spring?limit=96" selected="selected">96</option>            
+              		               		   
+            		</select>
+          		</div>
+        		</div>
+			</div>
+		 </div>
+      </div>
+      <div class="row"> 
+	  
+  	<div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition" onclick="if (event.ctrlKey) { window.open('https://openkart.ru/gearbox-spring/pruzhina-korobki-peredach-tm-kz-r1', '_blank'); return false; } else { location.href='https://openkart.ru/gearbox-spring/pruzhina-korobki-peredach-tm-kz-r1'; return false; }">
+     <h4 class="h4-product-name"><a href="https://openkart.ru/gearbox-spring/pruzhina-korobki-peredach-tm-kz-r1">Пружина коробки передач TM KZ R1</a></h4>
+			   <div class="product-info">	
+			<ul class="list-unstyled">
+                        <li>Производитель: TM Racing</li>
+                        <li>Модель: 16070</li>
+				         </ul>
+		</div>
+      <div class="image"><a href="https://openkart.ru/gearbox-spring/pruzhina-korobki-peredach-tm-kz-r1"><img 
+				class="lazyload" data-src="https://openkart.ru/image/cache/catalog/data/16070-228x228.jpg"
+			 alt="Пружина коробки передач TM KZ R1" title="Пружина коробки передач TM KZ R1" class="img-responsive" /></a></div>
+      <div class="caption">      
+        <div class="price"> 
+						           74.40&nbsp;<span class="currency-rub">₽</span>
+           
+          
+			            <br /><span class="product-quantity">В наличии: 10</span>
+					  </div>
+		  <div class="cart-btn-wrap">
+          <div class="category-plus-minus">
+  				<button type="button" onclick="event.stopPropagation(); if ($(this).next().val() > 1) {$(this).next().val($(this).next().val()-1);} $(this).parents('form').submit();" class="minus" window.event.cancelBubble = "true">&ndash;</button>
+            <input type="text" onclick="event.stopPropagation();" name="quantity" value="1" size="2" id="input-quantity" class="quantity-items" window.event.cancelBubble = "true" />
+  				<button type="button" onclick="event.stopPropagation(); $(this).prev().val(~~$(this).prev().val()+1); $(this).parents('form').submit();" class="plus" window.event.cancelBubble = "true">+</button>        
+          </div>
+        	 <button type="button" class="cart-btn" onclick="event.stopPropagation(); cart.add('3453',$(this).parent().find('.quantity-items').val());" window.event.cancelBubble = "true">Купить</button>   
+		  </div>
+		</div>        
+    </div>
+  </div>
+    
+  	<div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition" onclick="if (event.ctrlKey) { window.open('https://openkart.ru/gearbox-spring/komplekt-pruzhin-korobki-peredach-tm-kz', '_blank'); return false; } else { location.href='https://openkart.ru/gearbox-spring/komplekt-pruzhin-korobki-peredach-tm-kz'; return false; }">
+     <h4 class="h4-product-name"><a href="https://openkart.ru/gearbox-spring/komplekt-pruzhin-korobki-peredach-tm-kz">Пружина коробки передач TM KZ</a></h4>
+			   <div class="product-info">	
+			<ul class="list-unstyled">
+                        <li>Производитель: TM Racing</li>
+                        <li>Модель: 16012</li>
+				         </ul>
+		</div>
+      <div class="image"><a href="https://openkart.ru/gearbox-spring/komplekt-pruzhin-korobki-peredach-tm-kz"><img 
+				class="lazyload" data-src="https://openkart.ru/image/cache/catalog/data/16012-228x228.jpg"
+			 alt="Пружина коробки передач TM KZ" title="Пружина коробки передач TM KZ" class="img-responsive" /></a></div>
+      <div class="caption">      
+        <div class="price"> 
+						           74.40&nbsp;<span class="currency-rub">₽</span>
+           
+          
+			            <br /><span class="product-quantity">В наличии: 61</span>
+					  </div>
+		  <div class="cart-btn-wrap">
+          <div class="category-plus-minus">
+  				<button type="button" onclick="event.stopPropagation(); if ($(this).next().val() > 1) {$(this).next().val($(this).next().val()-1);} $(this).parents('form').submit();" class="minus" window.event.cancelBubble = "true">&ndash;</button>
+            <input type="text" onclick="event.stopPropagation();" name="quantity" value="1" size="2" id="input-quantity" class="quantity-items" window.event.cancelBubble = "true" />
+  				<button type="button" onclick="event.stopPropagation(); $(this).prev().val(~~$(this).prev().val()+1); $(this).parents('form').submit();" class="plus" window.event.cancelBubble = "true">+</button>        
+          </div>
+        	 <button type="button" class="cart-btn" onclick="event.stopPropagation(); cart.add('2662',$(this).parent().find('.quantity-items').val());" window.event.cancelBubble = "true">Купить</button>   
+		  </div>
+		</div>        
+    </div>
+  </div>
+   
+
+	
+		</div>
+      <div class="row">
+        <div class="col-md-6 text-left category-pagination"></div>
+        <div class="col-md-6 text-right category-results"><span class="category-form-control-texts">Показано</span> с 1 по 2 из 2 (всего 1 страниц)</div>
+      </div>
+                  </div>
+    </div>
+</div>
+<footer>
+  <div class="container">
+    <div class="row footer-links">
+            <div class="col-md-2 col-sm-4">
+        <h5>Информация</h5>
+        <ul class="list-footer-links">
+          <li><a href="https://openkart.ru/contact-us">Адреса и телефоны</a></li>
+                   <li><a href="https://openkart.ru/delivery">Доставка запчастей для картинга</a></li>
+                    <li><a href="https://openkart.ru/oplata">Способы оплаты</a></li>
+                  </ul>
+      </div>
+       
+		<div class="col-md-4 col-sm-8">	
+		  <div class="row">	
+      	<div class="col-md-7 col-sm-7 footer-service">
+        	 <h5>Служба поддержки</h5>
+        	 <ul class="list-footer-links">
+          	<li><a href="https://openkart.ru/kak-sdelat-zakaz">Как сделать заказ</a></li>
+          	<li><a href="https://openkart.ru/katalogi-i-tablitsy-razmerov">Каталоги и таблицы размеров</a></li>
+          	<li><a href="https://openkart.ru/nastroyka-karta-i-prochee">Настройка карта и прочее</a></li>
+        	 </ul>
+      	</div>
+      	<div class="col-md-5 col-sm-5 footer-extra"> 
+          <h5>Дополнительно</h5>
+        	 <ul class="list-footer-links">
+          	<li><a href="https://openkart.ru/brands">Производители</a></li>
+          	<li><a href="https://openkart.ru/specials">Акции</a></li>
+          	<li><a href="https://openkart.ru/latest">Новинки</a></li>
+          	<li><a href="https://openkart.ru/sitemap">Карта сайта</a></li>
+          </ul>
+      	</div>
+		  </div>
+		</div>
+      <div class="col-md-2 col-sm-4 footer-account"> 
+        <h5>Личный Кабинет</h5>
+        <ul class="list-footer-links">
+          <li><a href="https://openkart.ru/my-account">Личный Кабинет</a></li>
+          <li><a href="https://openkart.ru/order-history">История заказов</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 col-sm-8 footer-map">   
+        <h5 class="h5-fix">НАШ АДРЕС</h5>
+        <ul class="list-unstyled">
+          <li><i class="fa fa-map-marker"></i> г. Санкт-Петербург, ул. Плуталова, д. 8</li>
+          <li><i class="fa fa-mobile"></i> +7-921-9672225</li>
+          <li><i class="fa fa-envelope-o"></i> <a href="/cdn-cgi/l/email-protection#e68f888089a6899683888d879492c89493" class="footer-email"><span class="__cf_email__" data-cfemail="51383f373e113e21343f3a3023257f2324">[email&#160;protected]</span></a></li>
+			 <li class="footer-icons">
+				<a href="https://www.facebook.com/openkart.ru/" class="fa fa-facebook" target="_blank"></a>
+				<a href="https://telegram.me/openkartnews" class="fa fa-telegram" target="_blank"></a>
+				<a href="https://www.instagram.com/openkart/" class="fa fa-instagram" target="_blank"></a>
+				<a href="https://vk.com/openkart" class="fa fa-vk" target="_blank"></a>
+			 </li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyrights">&copy; 2020 Openkart</div>
+  </div>
+</footer>
+<div class="in-stock-btn-form" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000000db; z-index: 9999999; text-align: center;">	
+	<div style="display: table-cell; vertical-align: middle;">	
+		<form method = "post">
+			<span style="font-size: 17px; color: #fff;">Уведомить о поступлении на e-mail:</span>
+			<input type="email" placeholder="username@example.ru" class="form-control" name="mail_in_stock" style="width: 80%; max-width: 400px; margin: 15px auto 25px;" />
+			<input type="hidden" class="form-control product-id-in-stock" name="product_id_in_stock" />
+			<button type="submit" name="send_in_stock" value = "OK" data-loading-text="Загрузка..." class="btn btn-success in-stock-btn-close">ОК</button>
+			<button type="button" class="btn btn-danger in-stock-btn-close" onclick="$('.in-stock-btn-form').hide();">Отмена</button> 
+		</form>
+	</div>
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript"><!--
+	$('.cart-btn').on('click', function(){
+	    setTimeout(function() {
+	        loadCart8(); //fix3
+		}, 1000);
+		$('.cart-total-href').css({ display: 'block' });
+		if ($(this).closest('.product-thumb').find('img').length == 1) {
+			var that = $(this).closest('.product-thumb').find('img');
+		} else {
+			var that = $(this).closest('#content').find('img');
+		}			
+		var cartTotalHref = $(".cart-total-href");
+		var w = that.width();		
+        that.clone()
+            .css({'width' : w,
+			'position' : 'absolute',
+			'z-index' : '9999',
+			top: that.offset().top,
+			left: that.offset().left })
+            .appendTo("body")
+            .animate({opacity: 0.05,
+                left: cartTotalHref.offset()['left'],
+                top: cartTotalHref.offset()['top'],						
+                width: 20}, 1000, function() {	
+					$(this).remove();
+				});
+	});
+//--></script>
+	<script type="text/javascript">
+  		WebFontConfig = {
+    		google: { families: [ 'Open+Sans:300,400,400i,700' , 'Roboto:300,400,500,700' ] }
+  		};
+  		(function() {
+    		var wf = document.createElement('script');
+    		wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+   		wf.type = 'text/javascript';
+    		wf.async = 'true';
+    		var s = document.getElementsByTagName('script')[0];
+    		s.parentNode.insertBefore(wf, s);
+  		})();
+	</script>
+</body></html>
+ 

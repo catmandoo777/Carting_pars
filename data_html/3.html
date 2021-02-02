@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]><html dir="ltr" lang="ru" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html dir="ltr" lang="ru" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html dir="ltr" lang="ru">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Гайка муфты Rotax для картов. Все для картинга на Openkart.ru</title>
+<base href="https://openkart.ru/" />
+<meta name="description" content="У нас вы можете купить гайка муфты Rotax для гоночных картов - в наличии и под заказ, с экспресс-доставкой по России. Все для картинга на Openkart.ru" />
+<meta name="yandex-verification" content="bf8adcc2e2331beb" />
+<script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script defer src="catalog/view/javascript/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!--<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700|Roboto:300,400,500,700&amp;subset=cyrillic,cyrillic-ext" rel="stylesheet">-->
+<link href="catalog/view/theme/ktemplate/stylesheet/stylesheet-v3.24.css" rel="stylesheet">
+			<!-- cdek -->
+				<!-- cdek -->
+	    <script defer src="catalog/view/javascript/common4.js" type="text/javascript"></script>
+<script defer src="catalog/view/javascript/custom4.3.js" type="text/javascript"></script>
+<script defer src="catalog/view/javascript/lazyload/lazysizes.min.js"></script>
+<link rel="apple-touch-icon" sizes="192x192" href="https://openkart.ru/image/catalog/favicons/favicon-192x192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://openkart.ru/image/catalog/favicons/favicon-192x192.png">
+<meta name="msapplication-config" content="https://openkart.ru/image/catalog/favicons/browserconfig.xml">
+<link href="https://openkart.ru/rotax-clutch-nut" rel="canonical" />
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(48771104, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true,
+        ecommerce:"dataLayer"
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/48771104" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2983350-12"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2983350-12');
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script type="text/javascript">
+	var selector = 'input.form-control.input-search';
+	var catTitle = 'Категории';
+	var prodTitle = 'Товары';
+	var viewAllTitle = 'Посмотреть все товары';
+	var noResTitle = 'Ничего не найдено';
+
+	console.log(selector);
+
+	$(document).ready(function() {
+
+		var timer = null;
+		$('input.form-control.input-search').keydown(function(){
+	       clearTimeout(timer); 
+	       timer = setTimeout(sphinxAutocomplete, 500)
+		});
+
+	});
+
+	$(document).mouseup(function (e) {
+		
+		if (!$('.sphinxsearch').is(e.target) && $('.sphinxsearch').has(e.target).length === 0) {
+			$('.sphinxsearch').hide();
+			$('input.form-control.input-search').removeClass('no-bottom-borders');
+			return false;
+		}
+		
+	});
+
+	function sphinxAutocomplete() {
+
+		if($(selector).val() == '') {
+			$('.sphinxsearch').hide();
+			$('input.form-control.input-search').removeClass('no-bottom-borders');
+			return false;
+		}
+
+		$.ajax({
+			url: 'https://openkart.ru/index.php?route=extension/module/sphinxautocomplete&search=' + $(selector).val(),
+			dataType: 'json',
+			success: function(json) {
+
+				var html = '';
+				
+				//Categories
+				if (json.categories.length) {
+					html += '<div class="categories"><span>'+catTitle+'</span>';
+					var categories = json.categories;
+					for (i = 0; i < categories.length; i++) {
+						html += '<a class="sphinxsearcha" href="' + categories[i]['href'] + '">';
+							if(categories[i]['image'] != '') {
+								html += '<img src="' + categories[i]['image'] + '" />';
+							}
+							html += categories[i]['name'];
+							html += '<br />';
+						html += '</a>';
+					}
+					html += '</div>';
+				}
+				
+				//Products
+				if (json.products.length) {
+					if (json.categories.length) { html += '<div class="products"><span>'+prodTitle+'</span>'; }
+					var products = json.products;
+					for (i = 0; i < products.length; i++) {
+						html += '<a class="sphinxsearcha" href="' + products[i]['href'] + '">';
+							html += '<img src="' + products[i]['image'] + '" />';
+							html += products[i]['name'];
+							html += '<br />';
+						html += '</a>';
+					}
+					if (json.categories.length) {  html += '</div>'; }
+					html += '<div class="sphinx-viewall"><a id="view-all" href="https://openkart.ru/search?wildcard=true&amp;search=' + encodeURIComponent($(selector).val()) + '">'+viewAllTitle+'</a></div>';
+				} else {
+					html = '<div class="sphinx-viewall">'+noResTitle+'</div>';
+				}
+
+                $('.sphinxsearch').remove();
+				$(selector).after('<div class="sphinxsearch">'+ html +'</div>');
+				$('.sphinxsearch').show();
+				$('input.form-control.input-search').addClass('no-bottom-borders');
+
+				$('.sphinxsearcha').hover(
+					function(){$(this).addClass('sphinxsearch-a-active');},
+ 					function(){$(this).removeClass('sphinxsearch-a-active');}
+				);
+
+			}
+		});
+			
+	}
+</script>
+
+</head>
+<body> 
+<header>
+  <div class="container">
+    <div class="row header-contacts">
+      <div class="col-sm-12">
+			<i class="fa fa-map-marker"></i>г. Санкт-Петербург, ул. Плуталова, д. 8
+			<i class="fa fa-mobile"></i><a href="tel:+79219672225">+7-921-9672225</a>
+			<i class="fa fa-envelope-o"></i><a href="/cdn-cgi/l/email-protection#f891969e97b897889d9693998a8cd68a8d"><span class="__cf_email__" data-cfemail="3950575f567956495c5752584b4d174b4c">[email&#160;protected]</span></a>
+			<i class="fa fa-calendar-o"></i>Время работы: ПН-ПТ 9:00-18:00
+	 	</div>
+	 </div>
+    <div class="row header-contacts-mobile">
+      <div class="col-sm-12">
+			<span class="dropdown"><a href="#" class="dropdown-toggle icon-map-marker" data-toggle="dropdown" aria-expanded="false">
+				<i class="fa fa-map-marker"></i></a>
+				<span class="dropdown-menu dropdown-menu-left dropdown-paddings">г. Санкт-Петербург,<br />ул. Плуталова, д. 8</span>
+			</span>
+			<a href="tel:+79219672225" class="icon-mobile"><i class="fa fa-mobile"></i></a>
+			<a href="/cdn-cgi/l/email-protection#0b62656d644b647b6e65606a797f25797e" class="icon-envelope"><i class="fa fa-envelope-o"></i></a>
+			<span class="dropdown"><a href="#" class="dropdown-toggle icon-calendar" data-toggle="dropdown" aria-expanded="false">
+				<i class="fa fa-calendar-o"></i></a>
+				<span class="dropdown-menu dropdown-menu-right dropdown-paddings">Время работы:<br />ПН-ПТ 9:00-18:00</span>
+			</span>
+	 	</div>
+	 </div>
+    <div class="row header">
+      <div class="col-sm-3">
+        <div id="logo">
+				<a href="https://openkart.ru/"><img src="/catalog/view/theme/ktemplate/image/logo.png" title="Openkart - Все для картинга" alt="Openkart - Все для картинга" class="img-responsive" /></a>
+			</div>
+      </div>
+		<div class="col-sm-9"> 
+	 	  <div class="row">
+      	<div class="col-sm-5 col-lg-7">
+  			  <nav class="navbar header-menu"> 
+    			<div class="navbar-header">
+      			<button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
+    			</div>
+    			<div class="collapse navbar-collapse navbar-ex1-collapse">
+      			<ul class="nav navbar-nav header-links">
+        				<li><a href="https://openkart.ru/" class="link-home">Главная</a></li> 
+        				<li><a href="https://openkart.ru/latest">Новинки</a></li> 
+        				<li><a href="https://openkart.ru/specials">Акции</a></li> 
+        				<li><a href="https://openkart.ru/oplata">Оплата</a></li> 
+        				<li><a href="https://openkart.ru/contact-us">Контакты</a></li>  
+      			</ul>
+    			</div> 
+  			  </nav>
+			</div> 
+	 	<div class="col-sm-7 col-lg-5 header-right-row">
+       <div class="header-search"><div id="search"> 
+  <input type="text" name="search" value="" placeholder="Поиск..." class="form-control input-search" autocomplete="off" /> 
+  <button type="submit" value="Искать" class="button search-submit"><i class="fa fa-search"></i></button>
+</div>
+</div>
+       <div class="header-account">
+		  <ul class="list-inline"> 
+         <li class="dropdown"><a href="https://openkart.ru/my-account" title="Личный кабинет" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i></a> 
+          <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="https://openkart.ru/create-account">Регистрация</a></li>
+            <li><a href="https://openkart.ru/login">Авторизация</a></li>
+                       </ul>
+          </li>
+		   </ul>
+        </div>
+        <div class="header-cart">
+		   <div id="cart">
+  <a data-toggle="dropdown" data-loading-text="Загрузка..." class="dropdown-toggle my-cart" title="Корзина"><i class="fa fa-shopping-cart"></i> <div id="cart-total">0</div></a>
+  <ul class="dropdown-menu pull-right dropdown-menu-wrap">
+        <li>
+        <div class="marker"></div>
+        <p class="text-center">Ваша корзина пуста!</p>
+    </li>
+      </ul>
+</div>
+<a class="cart-total-href" href="/checkout2" style="display:none;"><i class="fa fa-shopping-cart" style="font-size:22px;height:20px;width:28px;margin-left:-4px;"></i><div class="cart-total-btn">0</div></a>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript"><!--
+function loadCart8() {
+	$.ajax({
+		url: 'index.php?route=extension/quickcheckout/cart2',
+		dataType: 'html',
+		cache: false,
+		beforeSend: function() {
+			$('.tooltip').remove();
+		},
+		success: function(html) {			
+			$('.cart8 .quickcheckout-content').html(html);
+		}
+	});
+}
+
+$(document).ready(function(){
+    loadCart8();
+});
+
+$(document).on('click', '.cart8 .button-update', function() {
+	var quantity = $(this).parents('.quantity').find('input.qc-product-qantity');
+	if (quantity.length){
+		if ($(this).data('type')=='increase') {
+			quantity.val(parseInt(quantity.val())+1);
+		} else if ($(this).data('type')=='decrease') {
+			quantity.val(parseInt(quantity.val())-1);
+		}
+	}
+	
+	$.ajax({
+		url: 'index.php?route=extension/quickcheckout/cart2/update',
+		type: 'post',
+		data: $('.cart8 :input'),
+		dataType: 'json',
+		cache: false,
+		beforeSend: function() {
+			$('.cart8 .button-update').prop('disabled', true);
+		},
+		success: function(json) {
+			if (json['redirect']) {
+			    if (window.location.pathname == '/checkout2') {
+				    location = json['redirect'];
+				} else {
+				    $('ul.dropdown-menu.pull-right.dropdown-menu-wrap').html('<li><div class="marker"></div><p class="text-center">Ваша корзина пуста!</p></li>');
+			        $('#cart-total').html(json['count_products']);
+				    $('.cart-total-btn').html(json['count_products']);
+				}
+			} else {
+				if (json['error']['stock']) {
+					$('#button-payment-method').attr("disabled", true);
+				} else if (json['error']['warning']) {
+						$('#warning-messages').html('<div class="alert alert-danger" style="display: none;"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '</div>');
+						$('.alert-danger').fadeIn('slow');
+						$('#button-payment-method').attr("disabled", true);
+				} else {
+					$('#warning-messages').html('');
+					$('#button-payment-method').removeAttr("disabled");
+				}
+                if (window.location.pathname == '/checkout2') {
+			        reloadShippingMethodById($('#shipping-address select[name=\'address_id\']').val());			    
+				}				
+			    loadCart8();
+				$('#cart-total').html(json['count_products']);
+				$('.cart-total-btn').html(json['count_products']);				
+			}
+		}
+	});
+
+	return false;
+});
+
+$(document).on('click', '.button-remove', function() {
+	var remove_id = $(this).attr('data-remove');
+
+	$.ajax({
+		url: 'index.php?route=extension/quickcheckout/cart2/update&remove=' + remove_id,
+		type: 'get',
+		dataType: 'json',
+		cache: false,
+		beforeSend: function() {
+			$('.cart8 .button-remove').prop('disabled', true);
+		},
+		success: function(json) {
+			if (json['redirect']) {
+			    if (window.location.pathname == '/checkout2') {
+				    location = json['redirect'];
+				} else {
+				    $('ul.dropdown-menu.pull-right.dropdown-menu-wrap').html('<li><div class="marker"></div><p class="text-center">Ваша корзина пуста!</p></li>');
+			        $('#cart-total').html(json['count_products']);
+				    $('.cart-total-btn').html(json['count_products']);
+				}
+			} else {
+			    if (window.location.pathname == '/checkout2') {
+				    reloadShippingMethodById($('#shipping-address select[name=\'address_id\']').val());
+				}
+				loadCart8();
+				$('#cart-total').html(json['count_products']);
+				$('.cart-total-btn').html(json['count_products']);
+			}
+		}
+	});
+
+	return false;
+});
+//--></script>
+
+        </div>
+	 	</div>
+	 	</div>
+	  </div>
+    </div>
+  </div>
+</header>
+<div class="container categories-menu2">
+	<div class="row categories2">
+		<div class="category-menu2">
+			<a href="/chassis_parts">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category1.png" alt="ШАССИ И ЗАПЧАСТИ">
+					<div class="category-text2">ШАССИ И <br class="category-text-break" />ЗАПЧАСТИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/engines_and_parts">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category2.png" alt="МОТОРЫ И ЗАПЧАСТИ">
+					<div class="category-text2">МОТОРЫ И <br class="category-text-break" />ЗАПЧАСТИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2"> 
+			<a href="/kart_tools">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category3.png" alt="ОБОРУДОВАНИЕ">
+					<div class="category-text2">ОБОРУДОВА- <br class="category-text-break" />НИЕ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/data_systems">
+				<div class="category-link5 category-link5-fix2">
+					<img src="/catalog/view/theme/ktemplate/image/category4.png" alt="ЭЛЕКТРОННЫЕ СИСТЕМЫ">
+					<div class="category-text2">ЭЛЕКТРОННЫЕ <br class="category-text-break" />СИСТЕМЫ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/tyres_and_wheels">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category5.png" alt="ШИНЫ И ДИСКИ">
+					<div class="category-text2">ШИНЫ И <br class="category-text-break" />ДИСКИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/protection_wear">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category6.png" alt="ЭКИПИРОВКА И ШЛЕМЫ">
+					<div class="category-text2">ЭКИПИРОВКА <br class="category-text-break" />И ШЛЕМЫ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/lubricants">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category7.png" alt="МАСЛО И СМАЗКИ">
+					<div class="category-text2">МАСЛО И <br class="category-text-break" />СМАЗКИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/sprockets_and_chains">
+				<div class="category-link5 category-link5-fix">				
+					<img src="/catalog/view/theme/ktemplate/image/category8.png" alt="ЦЕПИ И ЗВЕЗДЫ">
+					<div class="category-text2">ЦЕПИ И <br class="category-text-break" />ЗВЕЗДЫ</div>
+				</div>
+			</a>
+		</div> 
+	</div>
+</div>
+
+<div id="product-category" class="container">
+  <ul class="breadcrumb-category">
+        <li><a href="https://openkart.ru/">Главная</a></li>
+        <li><a href="https://openkart.ru/rotax-clutch-nut">Гайка муфты Rotax</a></li>
+      </ul>
+  <h1>Гайка муфты Rotax</h1>
+  <div class="row">
+                <div id="content" class="col-sm-12">
+      	  		      <div class="row category-description">         
+        <div class="col-sm-12"><div class="interactive-scheme">
+		<svg viewBox="0 0 795 607">
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-clutch-gearing/zubchatoe-koleso-rotax">
+				<path class="part" d="m 256.35771,333.43707 c -34.46738,-3.46439 -36.1625,-22.41379 -35.44275,-49.55102 7.85341,-32.27575 20.8308,-66.44556 58.15364,-96.0051 11.58003,-3.04974 57.08197,-32.52946 63.31519,32.34581 -9.60339,70.11378 -50.51094,104.24725 -86.02608,113.21031 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-clutch-gearing/stseplenie-rotax">
+				<path class="part" d="m 367.5034,306.94104 c 18.37256,-23.25607 37.26564,-38.44393 57.46542,-33.37812 17.17226,7.01538 25.88735,15.89389 24.08731,36.47506 -3.57859,40.94387 -36.14822,70.99992 -54.36848,76.39116 -17.53335,1.50272 -33.39063,-6.21128 -39.91611,-23.05499 -0.98815,-16.94243 0.96208,-34.93428 12.73186,-56.43311 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-clutch-gearing/rotax-engine-sprocket">
+				<path class="part" d="m 683.73526,473.48753 c -11.15243,7.37337 -21.41671,16.22698 -24.4314,37.16326 0.48944,9.83368 4.44283,15.85932 11.35543,19.26984 4.77173,0.40509 10.73883,-0.55426 18.23754,-3.78514 l 2.40873,2.06462 4.47335,-5.50567 3.78515,1.37643 2.06463,-6.53799 5.84977,-4.12925 -1.03231,-4.47336 4.47335,-5.84977 -2.40873,-2.40873 2.40873,-6.53799 -5.16156,10e-6 c 2.90572,-8.32222 -0.85252,-15.53378 -8.94672,-22.02268 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-clutch-gearing/baraban-rotax-evo-rotax">
+				<path class="part" d="m 642.78685,400.53741 c 27.50276,44.04337 -17.90395,95.37997 -39.22789,106.67234 -8.03182,1.94448 -17.68467,5.46437 -27.52835,3.78515 -12.15957,0.26019 -21.72758,-6.27805 -28.56066,-27.18424 -0.04,-73.18318 55.43701,-101.58295 76.04706,-96.34921 5.88545,1.91134 11.35866,1.94683 19.26984,13.07596 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-clutch-gearing/rotax-clutch-nut">
+				<path class="part" d="m 528.88832,398.81689 22.36678,-13.76417 c 1.26172,1.49112 2.98224,2.58078 3.78515,3.6131 l 9.63492,12.5598 -7.57029,24.43141 c -1.80423,3.25814 -3.81706,5.68721 -6.53799,7.57029 l -15.48469,9.11876 c -2.52343,0.15546 -4.70276,-0.21357 -7.22619,-1.89257 l -10.15108,-13.07596 9.11877,-24.77551 c 0.80041,-1.95737 1.86055,-2.95795 2.06462,-3.78515 z" fill="red">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-clutch-gearing/vtulka-mufty-rotax-dlya-zvezdy-z11">
+				<path class="part" d="m 456.79847,431.85091 c -0.44935,-9.8596 2.13876,-18.20046 14.45238,-21.67857 l 21.85062,14.62443 c 1.20881,8.92908 -0.2953,16.95385 -12.73185,21.33447 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-clutch-gearing/separator-mufty-rotax">
+				<path class="part" d="m 485.35913,395.71995 19.26984,11.69955 c 9.36954,0.31723 16.3796,-3.63506 16.1729,-20.64626 l -19.26984,-12.38775 c -13.53571,2.74823 -15.24804,11.83042 -16.1729,21.33446 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-clutch-gearing/uplotnitelnoe-koltso-zvezdy-rotax">
+				<path class="part" d="m 467.63776,382.81604 c 3.32533,2.15127 13.96089,4.23907 17.03316,-12.04365 -2.14704,-4.53793 -2.96121,-10.53723 -10.83929,-3.61309 -3.45097,4.08224 -6.33073,7.5382 -6.19387,15.65674 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-clutch-gearing/shajba-stsepleniya-rotax">
+				<path class="part" d="m 439.59325,370.77239 c 5.73507,11.22611 11.47015,4.27303 17.20522,1.72052 6.33884,-7.6382 9.25976,-15.70364 8.2585,-24.25935 -4.3365,-4.41104 -9.2051,-7.01293 -18.06547,3.9572 -2.46608,3.511 -4.93217,6.60477 -7.39825,18.58163 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/sprockets_and_chains/chains">
+				<path class="part" d="m 781.80499,349.43792 0.17205,19.95805 c -5.42171,5.20056 -10.51992,8.78368 -15.48469,11.69955 -6.30148,7.08201 -10.69604,9.03256 -15.4847,12.04365 -5.48326,7.28886 -10.43869,9.29948 -15.48469,12.21571 l -1.89257,1.03231 c -6.39401,8.46447 -10.24796,8.67372 -14.96854,11.69954 -5.53442,7.14098 -10.75156,10.79196 -15.8288,12.90392 -7.54734,8.28662 -11.00369,8.65769 -15.48469,11.01133 -4.62013,4.77697 -9.50068,9.38032 -15.4847,13.24802 -0.41879,5.36497 -2.4156,8.36291 -4.64541,11.01134 -0.68821,2.52057 -1.37641,4.92304 -2.06462,6.53798 -1.37272,1.95362 -1.54066,5.11203 -2.06463,7.9144 -3.05367,3.3359 -6.15964,5.11362 -7.39824,-0.17205 -5.57188,0.6675 -7.03845,-1.87802 -3.44104,-9.46287 -2.04013,-4.18415 -0.0738,-7.96767 2.40873,-11.69955 l 1.54847,-1.89257 c 0.48103,-2.61062 2.55996,-5.82046 6.71003,-9.80697 -0.3117,-6.21883 3.54523,-8.26902 7.74235,-9.97903 10.74504,-3.98851 11.66067,-8.67912 16.68906,-13.07596 l 7.05414,-2.23668 c 2.29143,-2.41198 3.61984,-6.02773 7.57029,-6.36593 1.69686,-1.93645 0.71615,-3.5331 4.47335,-4.64541 l 7.5703,-5.67772 c 0.66257,-2.1388 6.8631,-5.21771 9.63492,-7.39824 l 7.74235,-6.02183 c 2.68594,-3.81379 6.03584,-5.63567 9.63492,-6.71003 l 5.84977,-5.33362 c 1.85887,-3.44176 6.63144,-6.63606 10.15108,-7.57029 l 5.50567,-4.30131 c 1.87935,-5.82767 5.63497,-6.65198 8.77466,-9.11876 l 5.84977,-3.09694 c -0.53413,-0.74911 2.04222,-3.71999 4.64541,-6.71004 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/sprockets_and_chains/sprockets/219">
+				<path class="part" d="m 574.82625,55.228741 c 11.41528,4.56086 20.94676,9.768812 27.87365,25.230046 l 0.97327,5.839644 3.16314,1.459911 -1.70323,3.163141 3.16315,3.893095 -2.43319,3.163141 1.94655,1.946548 -1.45991,3.893093 3.16314,3.8931 -2.43319,3.89309 1.70323,3.16314 -2.43318,3.8931 2.43318,3.40646 -2.6765,3.40646 1.45991,2.91982 -2.91982,3.8931 1.45991,4.62305 -3.16314,3.16314 1.21659,5.353 -3.16314,1.45992 0.48664,5.59632 -3.64978,3.40646 1.21659,4.37973 -3.89309,2.67651 1.21659,4.37973 -4.37973,2.6765 0.97327,5.10969 -3.8931,1.94655 0,5.10969 -4.13641,2.6765 0,4.62305 -5.35301,3.64978 0.72996,3.64978 -3.40646,1.70323 -1.45991,5.353 -3.64978,0.72996 -1.70323,5.59632 -3.64978,0.48664 -1.45991,5.83964 -4.86637,1.2166 -0.97327,5.353 -2.91982,-0.24332 -1.94655,4.62306 -4.13641,0.72995 -1.70323,4.86637 -3.8931,0.24332 -2.43318,4.86637 -3.40646,-0.48664 -2.91982,4.13642 -2.43319,-0.72996 -3.64978,4.37973 -2.18986,-0.72995 -3.64978,2.91982 -2.91982,-0.48664 -2.43319,3.40646 -3.40646,-1.45991 -2.6765,3.40646 -2.6765,-1.21659 -3.8931,2.43318 -1.70323,-1.45991 -3.89309,1.94655 -1.70323,-1.94655 -2.67651,1.94655 -3.16314,-1.21659 -3.40646,0 -1.94654,-1.70323 -2.18987,0.24332 -1.70323,-1.45991 -3.40646,0.48663 -1.45991,-2.43318 -2.6765,0 -1.2166,-3.16314 -3.40645,-0.24332 0.24331,-3.40646 -5.10968,-1.45991 0.97327,-3.16314 -3.16314,-1.21659 0,-2.91983 -2.43319,-1.21659 0,-3.40646 -2.18986,-1.94655 0.24332,-3.40645 -1.94655,-1.94655 0.24332,-5.10969 -2.18987,-0.97327 1.70323,-4.13642 -2.6765,-2.6765 2.18986,-4.13642 -1.70323,-2.6765 2.43319,-4.37973 -2.67651,-2.43319 3.16315,-4.86637 -2.67651,-1.94655 3.40646,-4.86637 -3.16314,-2.91982 3.64978,-4.86637 -1.70323,-2.6765 3.89309,-5.10969 -1.94654,-2.43318 3.64977,-5.59633 -2.43318,-3.64978 5.35301,-4.13641 -1.94655,-2.6765 4.13641,-4.37974 -1.45991,-4.86637 4.37973,-0.97327 -1.21659,-5.83964 3.64978,-2.18987 1.70323,-5.35301 3.40646,-1.21659 -0.24332,-5.35301 4.62305,-1.94654 0,-6.5696 5.10969,-1.2166 -0.48664,-4.86637 4.62305,0 0,-7.299551 4.86637,0.729956 0.48664,-6.569599 3.8931,0.729955 2.43318,-5.839644 3.64978,-0.729955 2.43318,-5.596325 2.43319,1.45991 2.6765,-6.082962 3.8931,0.729956 1.70323,-5.109689 3.89309,1.459911 3.16314,-4.866369 2.43319,0.973273 3.64977,-5.109688 1.94655,0.486637 3.64978,-3.893096 2.18987,1.70323 3.16314,-4.379733 2.6765,2.919822 2.91982,-3.893096 2.43319,1.459911 3.89309,-2.919822 1.45991,1.459911 4.62305,-1.946548 1.45992,2.189866 3.89309,-2.676503 1.70323,2.919822 3.16314,-2.919822 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-clutch-gearing/rem-komplekt-stsepleniya-rotax">
+				<path class="part" d="m 144.17971,380.57936 c 39.21857,0.6209 106.24327,28.55774 99.79024,112.52211 -6.50767,66.69558 -68.34414,95.01583 -112.5221,89.12302 C 68.81326,573.36942 35.844937,517.6815 45.421769,458.34694 62.404938,404.53616 97.879685,383.08564 144.17971,380.57936 Z" fill="#87d7fb">
+			</path></a>
+		</svg>
+		<img src="https://openkart.ru/image/catalog/scheme/schemes/scheme-0015-v1.jpg" alt="Сцепление, звезда">
+</div>
+<link href="https://openkart.ru/image/catalog/scheme/schemes/libs/scheme-v3.css" rel="stylesheet" media="screen"></div>
+      </div>
+                       <div class="row category-form-control-wrap">
+		  <div class="col-md-4 col-sm-12"></div>
+		  <div class="col-md-8 col-sm-12">
+			<div class="row">
+        		<div class="col-md-9 col-sm-6 category-control-sorts">
+          		<div class="category-form-control2">
+            		<span class="category-form-control-texts">Сортировка:</span>
+            		<select class="category-sorts2" onchange="location = this.value;"> 
+              		               		               			<option value="https://openkart.ru/rotax-clutch-nut?sort=p.sort_order&amp;order=ASC" selected="selected">По умолчанию</option>
+              		               		               		               			<option value="https://openkart.ru/rotax-clutch-nut?sort=pd.name&amp;order=ASC">Название (А - Я)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-clutch-nut?sort=pd.name&amp;order=DESC">Название (Я - А)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-clutch-nut?sort=p.price&amp;order=ASC">Цена (низкая &gt; высокая)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-clutch-nut?sort=p.price&amp;order=DESC">Цена (высокая &gt; низкая)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-clutch-nut?sort=rating&amp;order=DESC">Рейтинг (начиная с высокого)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-clutch-nut?sort=rating&amp;order=ASC">Рейтинг (начиная с низкого)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-clutch-nut?sort=p.model&amp;order=ASC">Модель (А - Я)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-clutch-nut?sort=p.model&amp;order=DESC">Модель (Я - А)</option>           
+              		               		            
+            		</select>
+						<select id="width_tmp_select">
+ 							<option id="width_tmp_option"></option>
+						</select>
+          		</div>
+        		</div>
+        		<div class="col-md-3 col-sm-6 category-control-pages">
+          		<div class="category-form-control">
+            		<span class="category-form-control-texts">На странице:</span> 
+            		<select class="category-sorts3" onchange="location = this.value;">          
+              		               		               			<option value="https://openkart.ru/rotax-clutch-nut?limit=16">16</option>   
+              		               		               		               			<option value="https://openkart.ru/rotax-clutch-nut?limit=32">32</option>   
+              		               		               		               			<option value="https://openkart.ru/rotax-clutch-nut?limit=48">48</option>   
+              		               		               		                   	<option value="https://openkart.ru/rotax-clutch-nut?limit=96" selected="selected">96</option>            
+              		               		   
+            		</select>
+          		</div>
+        		</div>
+			</div>
+		 </div>
+      </div>
+      <div class="row"> 
+	  
+  	<div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition" onclick="if (event.ctrlKey) { window.open('https://openkart.ru/rotax-clutch-nut/gajka-mufty-rotax-m28x1', '_blank'); return false; } else { location.href='https://openkart.ru/rotax-clutch-nut/gajka-mufty-rotax-m28x1'; return false; }">
+     <h4 class="h4-product-name"><a href="https://openkart.ru/rotax-clutch-nut/gajka-mufty-rotax-m28x1">Гайка муфты Rotax M28x1</a></h4>
+			   <div class="product-info">	
+			<ul class="list-unstyled">
+                        <li>Производитель: Rotax</li>
+                        <li>Модель: 242925</li>
+				         </ul>
+		</div>
+      <div class="image"><a href="https://openkart.ru/rotax-clutch-nut/gajka-mufty-rotax-m28x1"><img 
+				class="lazyload" data-src="https://openkart.ru/image/cache/catalog/data/242925-228x228.jpg"
+			 alt="Гайка муфты Rotax M28x1" title="Гайка муфты Rotax M28x1" class="img-responsive" /></a></div>
+      <div class="caption">      
+        <div class="price"> 
+						           599.85&nbsp;<span class="currency-rub">₽</span>
+           
+          
+			            <br /><span class="product-quantity">В наличии: 11</span>
+					  </div>
+		  <div class="cart-btn-wrap">
+          <div class="category-plus-minus">
+  				<button type="button" onclick="event.stopPropagation(); if ($(this).next().val() > 1) {$(this).next().val($(this).next().val()-1);} $(this).parents('form').submit();" class="minus" window.event.cancelBubble = "true">&ndash;</button>
+            <input type="text" onclick="event.stopPropagation();" name="quantity" value="1" size="2" id="input-quantity" class="quantity-items" window.event.cancelBubble = "true" />
+  				<button type="button" onclick="event.stopPropagation(); $(this).prev().val(~~$(this).prev().val()+1); $(this).parents('form').submit();" class="plus" window.event.cancelBubble = "true">+</button>        
+          </div>
+        	 <button type="button" class="cart-btn" onclick="event.stopPropagation(); cart.add('1741',$(this).parent().find('.quantity-items').val());" window.event.cancelBubble = "true">Купить</button>   
+		  </div>
+		</div>        
+    </div>
+  </div>
+    
+  	<div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition" onclick="if (event.ctrlKey) { window.open('https://openkart.ru/rotax-clutch-nut/gajka-mufty-rotax-m28x1-neoriginalnaya', '_blank'); return false; } else { location.href='https://openkart.ru/rotax-clutch-nut/gajka-mufty-rotax-m28x1-neoriginalnaya'; return false; }">
+     <h4 class="h4-product-name"><a href="https://openkart.ru/rotax-clutch-nut/gajka-mufty-rotax-m28x1-neoriginalnaya">Гайка муфты Rotax M28x1 неоригинальная</a></h4>
+			   <div class="product-info">	
+			<ul class="list-unstyled">
+                        <li>Производитель: Righetti Ridolfi</li>
+                        <li>Модель: KM005</li>
+				 
+            	<li><a href="javascript:void(0)" class="in-stock-btn" onmouseover="this.style.color='#ddd';" onmouseout="this.style.color='#F5F5F5';" onclick="$('.in-stock-btn-form').css('display', 'table'); $('.product-id-in-stock').val('2525'); event.stopPropagation();" style="color: #F5F5F5; border-bottom: 1px solid rgba(245,245,245,0.5); text-decoration: none;">Уведомить&nbsp;о&nbsp;поступлении</a></li>
+				         </ul>
+		</div>
+      <div class="image"><a href="https://openkart.ru/rotax-clutch-nut/gajka-mufty-rotax-m28x1-neoriginalnaya"><img 
+				class="lazyload" data-src="https://openkart.ru/image/cache/catalog/data/KM005-228x228.jpg"
+			 alt="Гайка муфты Rotax M28x1 неоригинальная" title="Гайка муфты Rotax M28x1 неоригинальная" class="img-responsive" /></a></div>
+      <div class="caption">      
+        <div class="price"> 
+						           325.50&nbsp;<span class="currency-rub">₽</span>
+           
+          
+			 
+            <br /><span class="product-quantity">В наличии: 0</span>
+					  </div>
+		  <div class="cart-btn-wrap">
+          <div class="category-plus-minus">
+  				<button type="button" onclick="event.stopPropagation(); if ($(this).next().val() > 1) {$(this).next().val($(this).next().val()-1);} $(this).parents('form').submit();" class="minus" window.event.cancelBubble = "true">&ndash;</button>
+            <input type="text" onclick="event.stopPropagation();" name="quantity" value="1" size="2" id="input-quantity" class="quantity-items" window.event.cancelBubble = "true" />
+  				<button type="button" onclick="event.stopPropagation(); $(this).prev().val(~~$(this).prev().val()+1); $(this).parents('form').submit();" class="plus" window.event.cancelBubble = "true">+</button>        
+          </div>
+        	 <button type="button" class="cart-btn" onclick="event.stopPropagation(); cart.add('2525',$(this).parent().find('.quantity-items').val());" window.event.cancelBubble = "true">Купить</button>   
+		  </div>
+		</div>        
+    </div>
+  </div>
+   
+
+	
+		</div>
+      <div class="row">
+        <div class="col-md-6 text-left category-pagination"></div>
+        <div class="col-md-6 text-right category-results"><span class="category-form-control-texts">Показано</span> с 1 по 2 из 2 (всего 1 страниц)</div>
+      </div>
+                  </div>
+    </div>
+</div>
+<footer>
+  <div class="container">
+    <div class="row footer-links">
+            <div class="col-md-2 col-sm-4">
+        <h5>Информация</h5>
+        <ul class="list-footer-links">
+          <li><a href="https://openkart.ru/contact-us">Адреса и телефоны</a></li>
+                   <li><a href="https://openkart.ru/delivery">Доставка запчастей для картинга</a></li>
+                    <li><a href="https://openkart.ru/oplata">Способы оплаты</a></li>
+                  </ul>
+      </div>
+       
+		<div class="col-md-4 col-sm-8">	
+		  <div class="row">	
+      	<div class="col-md-7 col-sm-7 footer-service">
+        	 <h5>Служба поддержки</h5>
+        	 <ul class="list-footer-links">
+          	<li><a href="https://openkart.ru/kak-sdelat-zakaz">Как сделать заказ</a></li>
+          	<li><a href="https://openkart.ru/katalogi-i-tablitsy-razmerov">Каталоги и таблицы размеров</a></li>
+          	<li><a href="https://openkart.ru/nastroyka-karta-i-prochee">Настройка карта и прочее</a></li>
+        	 </ul>
+      	</div>
+      	<div class="col-md-5 col-sm-5 footer-extra"> 
+          <h5>Дополнительно</h5>
+        	 <ul class="list-footer-links">
+          	<li><a href="https://openkart.ru/brands">Производители</a></li>
+          	<li><a href="https://openkart.ru/specials">Акции</a></li>
+          	<li><a href="https://openkart.ru/latest">Новинки</a></li>
+          	<li><a href="https://openkart.ru/sitemap">Карта сайта</a></li>
+          </ul>
+      	</div>
+		  </div>
+		</div>
+      <div class="col-md-2 col-sm-4 footer-account"> 
+        <h5>Личный Кабинет</h5>
+        <ul class="list-footer-links">
+          <li><a href="https://openkart.ru/my-account">Личный Кабинет</a></li>
+          <li><a href="https://openkart.ru/order-history">История заказов</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 col-sm-8 footer-map">   
+        <h5 class="h5-fix">НАШ АДРЕС</h5>
+        <ul class="list-unstyled">
+          <li><i class="fa fa-map-marker"></i> г. Санкт-Петербург, ул. Плуталова, д. 8</li>
+          <li><i class="fa fa-mobile"></i> +7-921-9672225</li>
+          <li><i class="fa fa-envelope-o"></i> <a href="/cdn-cgi/l/email-protection#dab3b4bcb59ab5aabfb4b1bba8aef4a8af" class="footer-email"><span class="__cf_email__" data-cfemail="10797e767f507f60757e7b7162643e6265">[email&#160;protected]</span></a></li>
+			 <li class="footer-icons">
+				<a href="https://www.facebook.com/openkart.ru/" class="fa fa-facebook" target="_blank"></a>
+				<a href="https://telegram.me/openkartnews" class="fa fa-telegram" target="_blank"></a>
+				<a href="https://www.instagram.com/openkart/" class="fa fa-instagram" target="_blank"></a>
+				<a href="https://vk.com/openkart" class="fa fa-vk" target="_blank"></a>
+			 </li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyrights">&copy; 2020 Openkart</div>
+  </div>
+</footer>
+<div class="in-stock-btn-form" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000000db; z-index: 9999999; text-align: center;">	
+	<div style="display: table-cell; vertical-align: middle;">	
+		<form method = "post">
+			<span style="font-size: 17px; color: #fff;">Уведомить о поступлении на e-mail:</span>
+			<input type="email" placeholder="username@example.ru" class="form-control" name="mail_in_stock" style="width: 80%; max-width: 400px; margin: 15px auto 25px;" />
+			<input type="hidden" class="form-control product-id-in-stock" name="product_id_in_stock" />
+			<button type="submit" name="send_in_stock" value = "OK" data-loading-text="Загрузка..." class="btn btn-success in-stock-btn-close">ОК</button>
+			<button type="button" class="btn btn-danger in-stock-btn-close" onclick="$('.in-stock-btn-form').hide();">Отмена</button> 
+		</form>
+	</div>
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript"><!--
+	$('.cart-btn').on('click', function(){
+	    setTimeout(function() {
+	        loadCart8(); //fix3
+		}, 1000);
+		$('.cart-total-href').css({ display: 'block' });
+		if ($(this).closest('.product-thumb').find('img').length == 1) {
+			var that = $(this).closest('.product-thumb').find('img');
+		} else {
+			var that = $(this).closest('#content').find('img');
+		}			
+		var cartTotalHref = $(".cart-total-href");
+		var w = that.width();		
+        that.clone()
+            .css({'width' : w,
+			'position' : 'absolute',
+			'z-index' : '9999',
+			top: that.offset().top,
+			left: that.offset().left })
+            .appendTo("body")
+            .animate({opacity: 0.05,
+                left: cartTotalHref.offset()['left'],
+                top: cartTotalHref.offset()['top'],						
+                width: 20}, 1000, function() {	
+					$(this).remove();
+				});
+	});
+//--></script>
+	<script type="text/javascript">
+  		WebFontConfig = {
+    		google: { families: [ 'Open+Sans:300,400,400i,700' , 'Roboto:300,400,500,700' ] }
+  		};
+  		(function() {
+    		var wf = document.createElement('script');
+    		wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+   		wf.type = 'text/javascript';
+    		wf.async = 'true';
+    		var s = document.getElementsByTagName('script')[0];
+    		s.parentNode.insertBefore(wf, s);
+  		})();
+	</script>
+</body></html>
+ 

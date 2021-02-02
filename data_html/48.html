@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]><html dir="ltr" lang="ru" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html dir="ltr" lang="ru" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html dir="ltr" lang="ru">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Прокладка цилиндра Raket 85 для картов. Все для картинга на Openkart.ru</title>
+<base href="https://openkart.ru/" />
+<meta name="description" content="У нас вы можете купить прокладка цилиндра Raket 85 для гоночных картов - в наличии и под заказ, с экспресс-доставкой по России. Все для картинга на Openkart.ru" />
+<meta name="yandex-verification" content="bf8adcc2e2331beb" />
+<script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script defer src="catalog/view/javascript/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!--<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700|Roboto:300,400,500,700&amp;subset=cyrillic,cyrillic-ext" rel="stylesheet">-->
+<link href="catalog/view/theme/ktemplate/stylesheet/stylesheet-v3.24.css" rel="stylesheet">
+			<!-- cdek -->
+				<!-- cdek -->
+	    <script defer src="catalog/view/javascript/common4.js" type="text/javascript"></script>
+<script defer src="catalog/view/javascript/custom4.3.js" type="text/javascript"></script>
+<script defer src="catalog/view/javascript/lazyload/lazysizes.min.js"></script>
+<link rel="apple-touch-icon" sizes="192x192" href="https://openkart.ru/image/catalog/favicons/favicon-192x192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://openkart.ru/image/catalog/favicons/favicon-192x192.png">
+<meta name="msapplication-config" content="https://openkart.ru/image/catalog/favicons/browserconfig.xml">
+<link href="https://openkart.ru/raket-85-cylinder-gasket" rel="canonical" />
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(48771104, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true,
+        ecommerce:"dataLayer"
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/48771104" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2983350-12"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2983350-12');
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script type="text/javascript">
+	var selector = 'input.form-control.input-search';
+	var catTitle = 'Категории';
+	var prodTitle = 'Товары';
+	var viewAllTitle = 'Посмотреть все товары';
+	var noResTitle = 'Ничего не найдено';
+
+	console.log(selector);
+
+	$(document).ready(function() {
+
+		var timer = null;
+		$('input.form-control.input-search').keydown(function(){
+	       clearTimeout(timer); 
+	       timer = setTimeout(sphinxAutocomplete, 500)
+		});
+
+	});
+
+	$(document).mouseup(function (e) {
+		
+		if (!$('.sphinxsearch').is(e.target) && $('.sphinxsearch').has(e.target).length === 0) {
+			$('.sphinxsearch').hide();
+			$('input.form-control.input-search').removeClass('no-bottom-borders');
+			return false;
+		}
+		
+	});
+
+	function sphinxAutocomplete() {
+
+		if($(selector).val() == '') {
+			$('.sphinxsearch').hide();
+			$('input.form-control.input-search').removeClass('no-bottom-borders');
+			return false;
+		}
+
+		$.ajax({
+			url: 'https://openkart.ru/index.php?route=extension/module/sphinxautocomplete&search=' + $(selector).val(),
+			dataType: 'json',
+			success: function(json) {
+
+				var html = '';
+				
+				//Categories
+				if (json.categories.length) {
+					html += '<div class="categories"><span>'+catTitle+'</span>';
+					var categories = json.categories;
+					for (i = 0; i < categories.length; i++) {
+						html += '<a class="sphinxsearcha" href="' + categories[i]['href'] + '">';
+							if(categories[i]['image'] != '') {
+								html += '<img src="' + categories[i]['image'] + '" />';
+							}
+							html += categories[i]['name'];
+							html += '<br />';
+						html += '</a>';
+					}
+					html += '</div>';
+				}
+				
+				//Products
+				if (json.products.length) {
+					if (json.categories.length) { html += '<div class="products"><span>'+prodTitle+'</span>'; }
+					var products = json.products;
+					for (i = 0; i < products.length; i++) {
+						html += '<a class="sphinxsearcha" href="' + products[i]['href'] + '">';
+							html += '<img src="' + products[i]['image'] + '" />';
+							html += products[i]['name'];
+							html += '<br />';
+						html += '</a>';
+					}
+					if (json.categories.length) {  html += '</div>'; }
+					html += '<div class="sphinx-viewall"><a id="view-all" href="https://openkart.ru/search?wildcard=true&amp;search=' + encodeURIComponent($(selector).val()) + '">'+viewAllTitle+'</a></div>';
+				} else {
+					html = '<div class="sphinx-viewall">'+noResTitle+'</div>';
+				}
+
+                $('.sphinxsearch').remove();
+				$(selector).after('<div class="sphinxsearch">'+ html +'</div>');
+				$('.sphinxsearch').show();
+				$('input.form-control.input-search').addClass('no-bottom-borders');
+
+				$('.sphinxsearcha').hover(
+					function(){$(this).addClass('sphinxsearch-a-active');},
+ 					function(){$(this).removeClass('sphinxsearch-a-active');}
+				);
+
+			}
+		});
+			
+	}
+</script>
+
+</head>
+<body> 
+<header>
+  <div class="container">
+    <div class="row header-contacts">
+      <div class="col-sm-12">
+			<i class="fa fa-map-marker"></i>г. Санкт-Петербург, ул. Плуталова, д. 8
+			<i class="fa fa-mobile"></i><a href="tel:+79219672225">+7-921-9672225</a>
+			<i class="fa fa-envelope-o"></i><a href="/cdn-cgi/l/email-protection#a6cfc8c0c9e6c9d6c3c8cdc7d4d288d4d3"><span class="__cf_email__" data-cfemail="f0999e969fb09f80959e9b918284de8285">[email&#160;protected]</span></a>
+			<i class="fa fa-calendar-o"></i>Время работы: ПН-ПТ 9:00-18:00
+	 	</div>
+	 </div>
+    <div class="row header-contacts-mobile">
+      <div class="col-sm-12">
+			<span class="dropdown"><a href="#" class="dropdown-toggle icon-map-marker" data-toggle="dropdown" aria-expanded="false">
+				<i class="fa fa-map-marker"></i></a>
+				<span class="dropdown-menu dropdown-menu-left dropdown-paddings">г. Санкт-Петербург,<br />ул. Плуталова, д. 8</span>
+			</span>
+			<a href="tel:+79219672225" class="icon-mobile"><i class="fa fa-mobile"></i></a>
+			<a href="/cdn-cgi/l/email-protection#d3babdb5bc93bca3b6bdb8b2a1a7fda1a6" class="icon-envelope"><i class="fa fa-envelope-o"></i></a>
+			<span class="dropdown"><a href="#" class="dropdown-toggle icon-calendar" data-toggle="dropdown" aria-expanded="false">
+				<i class="fa fa-calendar-o"></i></a>
+				<span class="dropdown-menu dropdown-menu-right dropdown-paddings">Время работы:<br />ПН-ПТ 9:00-18:00</span>
+			</span>
+	 	</div>
+	 </div>
+    <div class="row header">
+      <div class="col-sm-3">
+        <div id="logo">
+				<a href="https://openkart.ru/"><img src="/catalog/view/theme/ktemplate/image/logo.png" title="Openkart - Все для картинга" alt="Openkart - Все для картинга" class="img-responsive" /></a>
+			</div>
+      </div>
+		<div class="col-sm-9"> 
+	 	  <div class="row">
+      	<div class="col-sm-5 col-lg-7">
+  			  <nav class="navbar header-menu"> 
+    			<div class="navbar-header">
+      			<button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
+    			</div>
+    			<div class="collapse navbar-collapse navbar-ex1-collapse">
+      			<ul class="nav navbar-nav header-links">
+        				<li><a href="https://openkart.ru/" class="link-home">Главная</a></li> 
+        				<li><a href="https://openkart.ru/latest">Новинки</a></li> 
+        				<li><a href="https://openkart.ru/specials">Акции</a></li> 
+        				<li><a href="https://openkart.ru/oplata">Оплата</a></li> 
+        				<li><a href="https://openkart.ru/contact-us">Контакты</a></li>  
+      			</ul>
+    			</div> 
+  			  </nav>
+			</div> 
+	 	<div class="col-sm-7 col-lg-5 header-right-row">
+       <div class="header-search"><div id="search"> 
+  <input type="text" name="search" value="" placeholder="Поиск..." class="form-control input-search" autocomplete="off" /> 
+  <button type="submit" value="Искать" class="button search-submit"><i class="fa fa-search"></i></button>
+</div>
+</div>
+       <div class="header-account">
+		  <ul class="list-inline"> 
+         <li class="dropdown"><a href="https://openkart.ru/my-account" title="Личный кабинет" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i></a> 
+          <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="https://openkart.ru/create-account">Регистрация</a></li>
+            <li><a href="https://openkart.ru/login">Авторизация</a></li>
+                       </ul>
+          </li>
+		   </ul>
+        </div>
+        <div class="header-cart">
+		   <div id="cart">
+  <a data-toggle="dropdown" data-loading-text="Загрузка..." class="dropdown-toggle my-cart" title="Корзина"><i class="fa fa-shopping-cart"></i> <div id="cart-total">0</div></a>
+  <ul class="dropdown-menu pull-right dropdown-menu-wrap">
+        <li>
+        <div class="marker"></div>
+        <p class="text-center">Ваша корзина пуста!</p>
+    </li>
+      </ul>
+</div>
+<a class="cart-total-href" href="/checkout2" style="display:none;"><i class="fa fa-shopping-cart" style="font-size:22px;height:20px;width:28px;margin-left:-4px;"></i><div class="cart-total-btn">0</div></a>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript"><!--
+function loadCart8() {
+	$.ajax({
+		url: 'index.php?route=extension/quickcheckout/cart2',
+		dataType: 'html',
+		cache: false,
+		beforeSend: function() {
+			$('.tooltip').remove();
+		},
+		success: function(html) {			
+			$('.cart8 .quickcheckout-content').html(html);
+		}
+	});
+}
+
+$(document).ready(function(){
+    loadCart8();
+});
+
+$(document).on('click', '.cart8 .button-update', function() {
+	var quantity = $(this).parents('.quantity').find('input.qc-product-qantity');
+	if (quantity.length){
+		if ($(this).data('type')=='increase') {
+			quantity.val(parseInt(quantity.val())+1);
+		} else if ($(this).data('type')=='decrease') {
+			quantity.val(parseInt(quantity.val())-1);
+		}
+	}
+	
+	$.ajax({
+		url: 'index.php?route=extension/quickcheckout/cart2/update',
+		type: 'post',
+		data: $('.cart8 :input'),
+		dataType: 'json',
+		cache: false,
+		beforeSend: function() {
+			$('.cart8 .button-update').prop('disabled', true);
+		},
+		success: function(json) {
+			if (json['redirect']) {
+			    if (window.location.pathname == '/checkout2') {
+				    location = json['redirect'];
+				} else {
+				    $('ul.dropdown-menu.pull-right.dropdown-menu-wrap').html('<li><div class="marker"></div><p class="text-center">Ваша корзина пуста!</p></li>');
+			        $('#cart-total').html(json['count_products']);
+				    $('.cart-total-btn').html(json['count_products']);
+				}
+			} else {
+				if (json['error']['stock']) {
+					$('#button-payment-method').attr("disabled", true);
+				} else if (json['error']['warning']) {
+						$('#warning-messages').html('<div class="alert alert-danger" style="display: none;"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '</div>');
+						$('.alert-danger').fadeIn('slow');
+						$('#button-payment-method').attr("disabled", true);
+				} else {
+					$('#warning-messages').html('');
+					$('#button-payment-method').removeAttr("disabled");
+				}
+                if (window.location.pathname == '/checkout2') {
+			        reloadShippingMethodById($('#shipping-address select[name=\'address_id\']').val());			    
+				}				
+			    loadCart8();
+				$('#cart-total').html(json['count_products']);
+				$('.cart-total-btn').html(json['count_products']);				
+			}
+		}
+	});
+
+	return false;
+});
+
+$(document).on('click', '.button-remove', function() {
+	var remove_id = $(this).attr('data-remove');
+
+	$.ajax({
+		url: 'index.php?route=extension/quickcheckout/cart2/update&remove=' + remove_id,
+		type: 'get',
+		dataType: 'json',
+		cache: false,
+		beforeSend: function() {
+			$('.cart8 .button-remove').prop('disabled', true);
+		},
+		success: function(json) {
+			if (json['redirect']) {
+			    if (window.location.pathname == '/checkout2') {
+				    location = json['redirect'];
+				} else {
+				    $('ul.dropdown-menu.pull-right.dropdown-menu-wrap').html('<li><div class="marker"></div><p class="text-center">Ваша корзина пуста!</p></li>');
+			        $('#cart-total').html(json['count_products']);
+				    $('.cart-total-btn').html(json['count_products']);
+				}
+			} else {
+			    if (window.location.pathname == '/checkout2') {
+				    reloadShippingMethodById($('#shipping-address select[name=\'address_id\']').val());
+				}
+				loadCart8();
+				$('#cart-total').html(json['count_products']);
+				$('.cart-total-btn').html(json['count_products']);
+			}
+		}
+	});
+
+	return false;
+});
+//--></script>
+
+        </div>
+	 	</div>
+	 	</div>
+	  </div>
+    </div>
+  </div>
+</header>
+<div class="container categories-menu2">
+	<div class="row categories2">
+		<div class="category-menu2">
+			<a href="/chassis_parts">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category1.png" alt="ШАССИ И ЗАПЧАСТИ">
+					<div class="category-text2">ШАССИ И <br class="category-text-break" />ЗАПЧАСТИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/engines_and_parts">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category2.png" alt="МОТОРЫ И ЗАПЧАСТИ">
+					<div class="category-text2">МОТОРЫ И <br class="category-text-break" />ЗАПЧАСТИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2"> 
+			<a href="/kart_tools">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category3.png" alt="ОБОРУДОВАНИЕ">
+					<div class="category-text2">ОБОРУДОВА- <br class="category-text-break" />НИЕ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/data_systems">
+				<div class="category-link5 category-link5-fix2">
+					<img src="/catalog/view/theme/ktemplate/image/category4.png" alt="ЭЛЕКТРОННЫЕ СИСТЕМЫ">
+					<div class="category-text2">ЭЛЕКТРОННЫЕ <br class="category-text-break" />СИСТЕМЫ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/tyres_and_wheels">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category5.png" alt="ШИНЫ И ДИСКИ">
+					<div class="category-text2">ШИНЫ И <br class="category-text-break" />ДИСКИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/protection_wear">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category6.png" alt="ЭКИПИРОВКА И ШЛЕМЫ">
+					<div class="category-text2">ЭКИПИРОВКА <br class="category-text-break" />И ШЛЕМЫ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/lubricants">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category7.png" alt="МАСЛО И СМАЗКИ">
+					<div class="category-text2">МАСЛО И <br class="category-text-break" />СМАЗКИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/sprockets_and_chains">
+				<div class="category-link5 category-link5-fix">				
+					<img src="/catalog/view/theme/ktemplate/image/category8.png" alt="ЦЕПИ И ЗВЕЗДЫ">
+					<div class="category-text2">ЦЕПИ И <br class="category-text-break" />ЗВЕЗДЫ</div>
+				</div>
+			</a>
+		</div> 
+	</div>
+</div>
+
+<div id="product-category" class="container">
+  <ul class="breadcrumb-category">
+        <li><a href="https://openkart.ru/">Главная</a></li>
+        <li><a href="https://openkart.ru/raket-85-cylinder-gasket">Прокладка цилиндра Raket 85</a></li>
+      </ul>
+  <h1>Прокладка цилиндра Raket 85</h1>
+  <div class="row">
+                <div id="content" class="col-sm-12">
+      	  		      <div class="row category-description">         
+        <div class="col-sm-12"><div class="interactive-scheme"> 
+		<svg viewBox="0 0 795 820">
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/kryshka-tsilindra-raket-85">
+				<path class="part" d="m 687.97,476.83675 c 24.79921,9.60127 49.99003,16.46121 73.6289,34.18484 6.96875,5.61693 7.55684,15.48763 9.20361,24.65254 1.20566,11.94404 3.13599,26.06211 4.93051,39.77275 -1.30171,0.0171 2.08359,6.88689 5.58791,14.13412 6.60144,21.1399 9.75851,46.1342 -11.17582,87.76301 -12.64762,19.63774 -27.25063,37.49712 -42.73106,30.89784 -5.39155,-3.18396 -6.2522,0.63537 -8.21751,2.30091 -1.26958,2.43657 -3.07919,3.25304 -5.5879,1.9722 -5.80195,-0.70654 -6.9247,-3.41845 -8.54621,-5.91661 1.25239,-4.62956 -0.71833,-6.59162 -2.30091,-8.87491 -11.7383,-12.60053 -14.90626,-50.6164 -5.5879,-75.9298 -4.79736,-9.84923 -0.31885,-15.06051 5.9166,-19.39333 l 0,-22.68033 c 1.07674,-3.71716 -2.86225,-5.28471 -5.9166,-7.2314 l -60.15218,-20.05073 -8.21751,-42.40236 c -0.22001,-3.31843 0.51508,-6.50042 4.6018,-9.20361 l 43.38846,-23.33773 c 5.72806,-1.86388 8.43082,-1.2433 11.17581,-0.6574 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/flanets-alyuminievyj-raket-85">
+				<path class="part" d="m 115.7483,11.388888 c 12.99422,2.009507 24.4789,13.617783 21.61565,36.026077 -0.70312,12.775566 -15.83463,29.451457 -29.75057,25.334467 C 79.547075,69.009942 79.257597,50.959383 79.024943,37.420634 85.235075,9.1844722 104.69952,8.4312999 115.7483,11.388888 Z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/karbyurator-tillotson-hs205-dlya-raket-60-85">
+				<path class="part" d="m 96.22449,190.12472 6.39172,-0.11622 1.7432,2.6729 4.99717,0.34864 0.9297,-2.09183 4.4161,0.34864 1.51077,1.74319 5.92687,0 0.11622,-2.6729 c 1.32117,0.57328 2.99118,1.08313 7.67006,1.04592 l 0,1.62698 c 2.23051,0.22625 4.4418,0.49094 6.97279,0.11622 l 0.11622,-2.90533 3.83503,-0.46485 0.46485,-8.48356 0.58107,0 c 0.94653,6.30561 5.71484,6.15397 8.13492,1.62698 l 0.11621,-11.62132 -3.25397,0 -0.11621,-1.74319 c 1.33438,-0.0357 2.91332,0.33614 3.37018,-1.16213 l 0,-4.29989 c -1.18255,-0.6777 -4.76206,-0.87601 -7.32143,-1.27835 l 0,-1.51077 2.20805,-0.46485 -0.11621,-3.71882 c -0.67351,-0.50359 -1.70414,-1.00718 -2.6729,-1.51077 l -0.11621,-2.55669 -1.27835,-1.04592 -4.64853,0.11621 c -0.90878,-1.83715 -2.54859,-2.7605 -5.92687,-1.51077 l -1.85941,1.7432 -0.46485,-2.09184 -7.089,-0.23242 -0.81349,-0.46485 -17.78062,-0.46486 c -1.2466,-0.40137 -2.19397,-0.20428 -3.137751,0 l -0.697279,-0.23242 -0.232426,1.16213 -2.324264,0.11621 0.116214,-1.51077 c -1.50155,-0.65669 -2.902107,-1.71735 -4.997166,0 l -2.091837,1.16213 -1.278344,0.11621 c -0.558354,0.73403 -1.528611,-0.0766 -0.929706,4.99717 1.647113,1.05598 2.12357,1.52664 2.55669,1.97562 l 2.324263,-0.23242 0.348639,3.95124 -1.975623,2.20805 c 0.05008,-0.0209 -0.533895,5.60333 -0.813492,9.87812 l -2.905329,3.60261 -0.116213,7.55386 c 0.774754,1.26504 1.549509,2.1111 2.324263,4.53231 l 0.813492,3.48639 c 3.152515,0.77882 4.746424,0.31075 6.391723,-0.11621 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/prokladka-karbyuratora-raket-60-85">
+				<path class="part" d="m 128.06689,275.6576 c 3.86395,-7.01153 7.51837,-14.02306 10.45919,-21.03459 0.8821,-1.60058 0.64371,-3.36123 -2.78912,-5.57823 l -12.43481,-2.90533 c -3.14427,-0.56512 -5.13394,0.29604 -7.67006,1.85941 l -10.45919,15.22393 -0.11621,4.29988 3.71882,3.25397 14.9915,4.88096 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/vpusknoj-flanets-raket-85">
+				<path class="part" d="m 185.01134,245.79082 c 0.15722,-1.3638 1.81049,-1.60557 3.13775,-2.09184 l 37.30443,5.3458 c 3.19234,1.63467 5.43077,3.44278 5.22959,5.69445 l 0.23242,5.22959 4.18368,7.67007 0.11621,4.06746 c -1.71489,2.06652 -3.11897,2.57898 -4.53231,3.13775 l -0.69728,12.78345 c -1.53296,2.14931 -4.24962,2.4047 -7.32143,2.09184 -2.66212,0.48774 -5.33342,0.99997 -7.089,-0.92971 -2.33305,0.80113 -4.21026,0.23471 -5.92687,-0.81349 -3.85078,0.82136 -4.36573,-0.0252 -5.2296,-0.69728 -2.53612,0.32548 -4.72302,0.35162 -5.11337,-1.16213 -2.07699,-0.0549 -4.93598,0.44882 -4.99717,-1.04592 -2.69631,0.63938 -4.19892,-0.21336 -4.4161,-2.6729 l -3.71882,-1.62699 c -0.50241,-0.0822 -0.96553,-0.32155 -1.16213,-1.62698 l 0.34864,-7.90249 -1.04592,-0.69728 c -0.37321,-0.8664 -0.47876,-2.00046 -0.23243,-3.4864 l 1.27835,-1.7432 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/vpusknaya-prokladka-raket-85">
+				<path class="part" d="m 245.90703,253.92573 c 4.18319,0.29595 10.69685,0.21422 10.34297,1.04592 2.29441,0.21084 6.081,0.0486 6.1593,0.8135 4.05743,0.0973 7.62601,0.89303 9.52948,4.06746 l 3.83503,7.67006 c 1.84252,2.84944 0.95447,5.20241 -0.58107,7.43765 l -10.22675,4.64852 c -5.468,1.86176 -7.35311,-0.25748 -10.22676,-1.27834 l -6.97279,-3.13776 c -2.82607,-1.1259 -4.88274,-3.32894 -6.1593,-6.62415 l -3.37018,-6.04308 c -0.69146,-1.0682 -0.89549,-2.38011 -0.34864,-4.06746 1.81348,-1.54951 4.0488,-2.98281 8.01871,-4.53232 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/kolpachok-svechi-raket">
+				<path class="part" d="m 254.97166,98.200112 c 2.66358,2.076628 5.39609,3.119358 8.36734,0.581066 l 3.71882,-9.645692 c 3.98727,3.888535 12.671,1.379036 13.94558,-5.810657 -1.12412,-2.594699 -2.33139,-5.106252 -4.06746,-7.089003 1.02542,-1.556343 2.36059,-3.009434 0.69728,-5.462018 -1.00718,-1.759329 -2.01436,-3.625892 -3.02154,-5.694444 -8.99113,-6.637771 -15.25664,2.571922 -16.61848,3.602608 -1.69516,10.355368 -2.56265,20.089976 -3.02154,29.51814 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/svecha-ngk-bpm7y---denso-w22mp-u">
+				<path class="part" d="m 295.06519,136.0856 0.92971,1.7432 4.53231,-1.16213 -0.9297,-2.44048 c 3.58136,-3.80519 1.08894,-6.89581 -0.34864,-10.11054 0.58124,-1.54954 0.90642,-3.0564 -0.34864,-4.29989 0.57027,-7.09837 -2.13189,-9.69715 -6.50794,-9.99433 l -4.76474,-9.76191 -4.06746,-0.929703 -1.7432,-4.532312 c -3.21331,-0.44177 -5.44374,0.420928 -5.92687,3.602607 l 2.44048,4.416098 c -1.9655,0.55245 -1.60574,3.43016 -0.81349,6.74036 l 3.37018,5.34581 c -1.63158,2.04791 -2.45266,4.39054 -0.69728,7.67007 l 3.13775,3.02154 c 1.15877,2.81604 2.71858,4.72976 5.11338,4.76474 0.95431,3.3258 1.75334,6.81883 6.62415,5.92687 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/raket-85-120-exhaust">
+				<path class="part" d="m 627.20238,50.785146 c 15.24217,7.537822 19.00591,41.751553 5.46202,52.528344 l -1.39456,-0.23243 -0.23242,23.8237 c -1.24966,3.76388 -14.06244,5.94619 -17.19955,0.23243 l 0.23243,-21.61565 -79.14116,12.55102 -100.40816,-2.20805 -15.22393,1.27835 c -5.0872,-3.90006 -5.87245,-19.015638 -1.39456,-20.918371 l 14.41044,-1.510771 95.64342,-28.820862 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/raket-85-120-exhaust">
+				<path class="part" d="m 374.90363,102.96485 c 5.82618,-1.71222 6.66289,-0.92971 9.99433,-1.39456 0.0708,-1.02467 5.30699,-0.49974 8.13492,-0.69728 -0.26149,-1.877163 4.70939,-0.75128 7.20522,-1.045914 2.94064,1.468244 5.07728,5.080504 6.15929,11.505104 1.64464,-0.75945 3.2384,-1.3081 4.29989,0.34864 0.0509,0.95413 0.39318,1.33956 -0.46485,4.06746 0.0507,1.62425 -0.0899,2.67443 -0.34864,3.37018 l -1.85941,1.7432 c -1.7688,0.52919 -2.62179,0.14257 -3.83504,0.11621 -1.91378,0.80532 -4.05341,0.93313 -6.27551,0.81349 -0.90131,0.88062 -2.59695,0.96692 -4.4161,0.92971 -1.79239,0.43134 -2.72337,0.43198 -3.95124,0.58106 -2.48143,0.82237 -4.80125,0.99825 -6.97279,0.58107 -2.23896,1.3546 -4.45714,2.39741 -6.39173,-0.81349 -3.0294,-6.70163 -4.99084,-13.40325 -1.27834,-20.10488 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/raket-85-120-exhaust">
+				<path class="part" d="m 476.59014,183.84921 c 10.58077,-8.50151 30.974,-11.45072 47.64739,-13.94558 l 26.72902,-4.06746 1.62699,-2.09184 6.1593,-0.34864 c 1.00682,-1.94992 0.64194,-4.35707 4.18367,-5.46202 l 4.76474,-0.11621 c 11.97618,9.00133 9.4546,35.71984 4.18367,38.81519 -1.93016,0.45557 -4.30966,0.23713 -6.85657,-0.23242 l -1.85941,-2.32427 c -3.11589,-0.0909 -6.84274,0.73463 -8.8322,-1.04592 l -27.07767,3.37019 c -9.10773,2.71782 -15.05763,7.18999 -21.49943,11.38888 -2.60956,1.84215 -4.89567,1.42012 -7.20522,1.16214 l -29.1695,-4.88096 c -3.03355,-1.3839 -5.06967,-5.26138 -7.55385,-8.0187 -0.75712,-1.30653 -0.75226,-2.99406 0.34864,-5.2296 3.47922,-2.47657 6.6631,-5.23061 10.92403,-6.97278 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/prokladka-vykhlopa-raket-85-95-120">
+				<path class="part" d="m 413.83503,211.97279 0.11622,-3.71882 c 3.56387,-2.88638 7.12774,-5.93049 10.69161,-7.32143 10.06507,0.94795 20.08334,1.8881 31.95861,3.13775 l 9.41327,9.76191 c 0.78425,1.79317 1.80298,3.53436 -0.11621,5.92687 -3.37674,2.05846 -5.85494,4.26668 -10.92404,6.04308 -12.19024,-1.55725 -27.00202,-3.13102 -32.88832,-4.64852 -3.27563,-2.18486 -5.90167,-5.45238 -8.25114,-9.18084 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/tsilindr-raket-85-v-sbore-s-porshnem">
+				<path class="part" d="m 289.02211,187.21939 28.2398,-9.06463 c 4.41618,-1.20872 7.32333,-0.60659 10.22675,0 l 42.06916,6.39172 c 1.03806,0.70459 2.30666,0.15066 2.90533,3.25397 l 21.49944,3.25397 c 3.71488,1.60394 0.33882,3.56243 -1.85941,5.46202 l 7.20521,1.97562 c 1.99476,1.47752 0.24739,3.26603 -2.20805,5.11338 l 6.85658,1.85941 c 1.48671,3.83866 -2.64342,3.59236 -4.18368,5.22959 l 4.99717,1.16214 c 2.05482,4.04417 -1.73692,4.32409 -3.83504,5.69444 3.72388,1.56068 8.9942,2.79579 1.39456,6.74036 l -5.57823,1.85941 0.34864,1.04592 c 6.84956,1.34908 4.92788,5.55957 0.34864,5.92687 -2.86166,0.80985 -0.94612,1.22161 -0.34864,1.7432 5.4294,0.85319 5.04352,3.06765 1.39456,5.81066 3.92399,0.94825 4.3224,2.81054 -0.11621,5.92687 1.3673,0.99542 3.68369,1.68806 0.34863,4.18367 4.22147,2.74681 2.725,4.25058 -0.11621,5.46202 2.15194,1.347 4.87431,2.76685 0.23243,4.99716 l -9.99433,4.06746 c 5.14948,1.70274 3.80962,3.13509 1.62698,4.53232 l -6.97279,2.6729 c 0.27334,1.92884 0.26056,3.64308 -0.69728,4.64853 l -16.38605,6.04308 0.81349,6.39172 c -1.98098,6.73029 -20.7506,9.08758 -29.05329,8.36735 -12.7059,0.49607 -23.75797,-0.59807 -28.47222,-7.78628 l 0.11621,-5.11338 -11.15646,-2.20805 c -3.05235,-1.0328 -3.62115,-2.81067 -3.60261,-4.76474 l 2.55669,-0.81349 -4.64852,-0.58107 c -2.68067,-0.92195 -0.95331,-3.10334 0.58106,-5.22959 -4.33274,-3.44525 -2.61211,-4.41412 -0.23242,-5.11338 -2.21839,-1.76153 -4.09507,-3.55724 -0.23243,-5.92687 -1.02766,-0.70568 -3.94312,-5.88633 3.13775,-4.99716 l 0.92971,-2.55669 4.4161,-1.62699 -8.59977,-1.62698 c -2.90426,-1.0935 -3.1386,-2.78032 -0.46486,-5.11338 -2.6761,-1.44275 -3.75648,-3.181 1.85941,-6.1593 -6.51727,-1.61847 -6.00822,-4.60726 -0.58106,-6.74036 -4.98413,-2.2885 -4.79953,-4.83304 -0.69728,-7.089 -5.13593,-2.66886 -1.45486,-4.96786 1.04592,-5.92687 -9.47373,-2.76963 -4.09793,-5.32086 0.23242,-7.43764 l -7.32142,-2.20805 c -2.44255,-1.21202 -1.53832,-2.81778 1.27834,-4.64853 l 16.38605,-4.99717 -13.24829,-2.09183 c -5.17709,-1.7432 -1.96906,-3.48639 2.32426,-5.22959 l -4.64853,-1.04592 c -1.66478,-1.23961 -0.45262,-2.47921 -0.11621,-3.71882 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/raket-85-cylinder-gasket">
+				<path class="part" d="m 295.06519,318.30782 c -1.38041,-1.31826 -2.28933,-2.67581 0,-4.29988 l 36.14229,-10.22676 8.13492,0.34864 41.02325,7.32143 c 3.90369,2.45465 2.81771,4.16084 0.58106,5.69444 l -31.95861,11.62132 -8.59978,0 z" fill="red">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/porshnevoe-koltso-raket-85">
+				<path class="part" d="m 319.81859,351.77721 c 2.1918,-1.11523 2.76309,-2.60442 0.92971,-4.64853 -5.86983,-2.47363 -2.64804,-3.60036 -0.46485,-4.88095 14.70901,-3.36831 25.33503,-2.07034 35.79365,-0.58106 5.13606,1.82189 8.50888,4.02024 -0.11622,5.81065 -10.09688,3.00946 -19.53348,2.93756 -28.70464,1.62699 -1.79581,1.10171 -2.71232,2.34998 -0.8135,4.06746 13.13839,2.43959 33.50145,0.36749 40.20975,-4.99717 l 0.11622,-5.57823 c -5.34881,-5.35991 -17.20317,-5.76933 -28.47222,-6.62415 -11.16849,0.15138 -20.76536,1.61245 -26.38039,6.39172 l 0.34864,6.1593 c 2.0382,2.20406 4.58614,3.21875 7.55385,3.25397 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/porshnevoe-koltso-raket-85">
+				<path class="part" d="m 351.77721,374.55499 c 2.96242,-2.11238 0.79286,-2.6457 0,-3.60261 -11.24127,-0.13768 -23.69798,1.30473 -32.07483,-2.55669 -2.16095,-1.46325 -3.90462,-2.90835 0.92971,-4.06746 10.88296,-4.09391 32.70499,-1.87509 38.46655,0 0.81901,1.07275 4.42019,0.71844 1.39456,3.71882 l -3.37018,0.81349 c -0.19244,1.27835 -1.03061,2.55669 0.81349,3.83504 3.30213,0.44865 6.49254,0.17107 9.18084,-3.37018 l -0.34864,-5.2296 c -7.90063,-7.04296 -17.72348,-5.62821 -27.07767,-6.27551 -15.00888,-0.26201 -23.84019,2.12351 -28.00737,6.50794 l 0.23243,5.46202 c 7.00141,5.40213 16.3617,5.41254 25.45068,6.04308 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/stopor-porshnevogo-paltsa-raket-60--85">
+				<path class="part" d="m 256.13379,391.52211 c 1.54586,1.05268 1.93315,-0.23527 2.55669,-1.04592 l 0.23242,-4.88095 1.04592,-0.34864 0,-1.62699 c 3.00777,-1.17135 3.42617,1.02349 3.37018,3.83504 l -0.81349,2.55669 -2.20805,0.11621 -1.27834,1.16213 c -0.35273,0.91136 -0.3023,1.72193 0.58106,2.32426 0.80733,1.45796 7.72767,-2.18627 5.92687,-6.39172 l 0.11622,-4.64852 c -0.63683,-1.89205 -1.13738,-3.86738 -7.20522,-2.44048 -2.49753,3.00117 -3.83844,6.53616 -2.32426,11.38889 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/stopor-porshnevogo-paltsa-raket-60--85">
+				<path class="part" d="m 380.13322,421.27268 c -0.70111,0.63343 -1.03955,1.81085 -2.90533,0.69727 0.10929,-4.39135 0.51298,-8.55373 3.37018,-10.80782 l 5.11338,0 c 0.53752,0.4106 6.47245,6.66078 -2.90533,13.71315 l -2.44047,-0.11621 c -0.19369,-1.06696 -0.38738,-1.78645 -0.58107,-2.55669 2.37394,-0.0446 4.36575,-1.23572 5.81066,-4.06746 -0.88327,-4.93221 -1.87498,-3.71475 -2.90533,-4.76474 -2.22711,1.49973 -2.38582,4.70613 -2.55669,7.9025 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/porshen-raket-85-v-sbore">
+				<path class="part" d="m 271.12528,396.63549 c -1.75895,-3.61313 -3.5852,-10.73305 4.76474,-13.94558 l 30.21542,8.36735 c 5.90371,5.73595 0.46052,15.0906 -4.99716,13.82936 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/porshen-raket-85-v-sbore">
+				<path class="part" d="m 313.89172,431.49943 c 5.41137,4.21621 14.47914,6.94 34.98016,4.99717 l 1.39456,-2.6729 -0.23243,-8.59978 5.92687,-0.34864 c 6.16394,-2.19588 7.24609,1.86275 9.6457,4.29989 1.39402,0.69375 2.91489,2.21212 3.71882,-0.92971 l -0.46486,-40.79081 c -9.69455,-10.98445 -48.94117,-7.59251 -54.8526,-0.69728 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket-manual-starter">
+				<path class="part" d="m 396.51928,294.2517 c 7.18175,-26.9869 85.06956,-40.67635 141.23462,-58.02367 30.13088,-7.76726 60.26175,-33.03648 90.39263,-52.92077 51.74463,-21.7989 66.74779,69.66427 74.61499,133.12368 5.83965,42.40696 18.84974,114.28484 -5.91661,132.46627 -49.74954,42.32278 -69.87075,54.4377 -123.59135,53.57817 -95.89148,-20.27858 -140.67043,-64.4679 -159.41971,-75.9298 -43.05257,-26.50455 -37.58356,-50.74954 -33.52745,-72.97149 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/stseplenie-raket-85">
+				<path class="part" d="m 44.374558,486.36906 c -14.547764,-15.93663 -2.411784,-62.23089 24.074989,-56.03176 1.83445,0.66313 0.610144,0.30668 9.297052,3.25397 14.446384,6.88446 14.421804,51.50142 -14.178005,59.38492 -7.308454,-0.38149 -13.74483,-2.50714 -19.194036,-6.60713 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/chashka-zvezda-raket-85-z12-2017">
+				<path class="part" d="m 98.664966,505.99206 c -19.183275,-27.44523 2.078334,-60.27729 17.548184,-64.03344 8.27945,-1.71587 20.42164,3.33396 24.28855,5.69444 24.60457,23.49701 -2.65531,66.73757 -16.38605,66.00907 -3.74688,0.55685 -7.60114,0.95766 -13.82937,-2.09184 -3.83434,-1.63987 -7.45692,-2.10081 -11.621314,-5.57823 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/verkhnij-separator-shatuna-raket-85">
+				<path class="part" d="m 365.02551,476.59014 12.78345,2.55668 c 8.83977,-3.56745 6.09607,-12.08617 2.78911,-14.99149 -1.33628,-0.34977 -1.5557,-0.63384 -7.90249,-1.27835 -2.57626,-1.35621 -4.38674,-1.18087 -6.04309,-0.69728 -3.86506,1.85822 -8.19338,8.53404 -1.62698,14.41044 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/podshipnik-skf-6203-c3-raket-85-95">
+				<path class="part" d="m 242.65306,533.88322 c -9.80516,-8.56474 -4.17479,-28.51231 7.78628,-33.93424 l 7.20522,0.81349 c 12.16657,1.20905 13.65155,10.25128 11.96995,21.61565 -2.15872,5.95116 -4.72452,11.75234 -12.66723,15.57256 -1.88978,0.70875 -3.95981,0.33601 -6.1593,-0.81349 -2.71164,-0.36256 -5.42328,-1.65966 -8.13492,-3.25397 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/podshipnik-skf-6203-c3-raket-85-95">
+				<path class="part" d="m 420.80782,579.55499 c -6.12508,-6.21284 -4.25535,-28.03658 8.59978,-32.53968 4.34162,-0.98945 8.39733,0.0225 12.4348,1.16213 8.82081,3.18476 9.02079,11.78833 7.08901,21.73186 -2.91751,8.8106 -6.77508,12.21584 -10.92404,13.94557 -5.09757,0.3941 -9.73525,2.11039 -17.19955,-4.29988 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/kolenchatyj-val-raket-85">
+				<path class="part" d="m 320.05103,527.02665 c -3.95656,-1.46142 -7.85531,-3.03845 -13.01588,-2.09184 l -22.19671,-6.04309 c -9.693,0.69137 -8.1147,12.4954 -4.53232,14.17801 l 23.70749,6.27551 c 4.84221,2.3362 9.68443,3.39402 14.52664,4.88095 l -7.67007,4.99717 0.34864,6.15929 c 2.59816,8.14548 7.78868,13.82183 16.7347,15.9212 4.47408,1.44727 8.31631,2.32013 9.41326,0.69728 14.7823,8.25418 25.68944,1.78278 34.28288,-13.48072 2.89609,0.21394 6.25343,1.3504 8.59977,0.46485 18.55006,4.81162 19.93628,4.0959 20.56973,3.13776 l 4.76474,1.04591 c 5.86792,0.69391 6.96677,-2.73092 6.04308,-7.90249 -1.18296,-1.45815 -3.95411,-1.8575 -6.97278,-2.09184 -1.90385,-4.41604 -12.90476,-5.29432 -19.75624,-7.78628 -2.32064,-3.96938 -5.71997,-2.54524 -8.59977,-3.71882 0.51136,-4.92811 -3.94372,-4.4759 -6.85658,-5.69444 -4.12288,0.3004 -4.57949,-2.27832 -4.4161,-5.34581 l 0,-13.01587 c -3.63485,-7.65273 -8.50112,-6.80266 -13.82936,-7.55386 l -0.11622,-35.67743 c 6.41927,-6.30596 9.73208,-13.00024 1.39456,-21.1508 l -10.34297,-1.97562 -5.69444,-0.46485 c -8.64539,5.09516 -9.63196,16.43274 -1.62699,21.15079 l 0,34.16667 c -11.19148,0.10249 -12.80607,6.69255 -14.64286,13.13208 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/shponka-krylchatki">
+				<path class="part" d="m 394.54365,528.76984 c 0.11844,1.3763 -0.20296,2.53268 0.46485,4.18367 2.6511,1.48294 3.29254,3.9707 11.73753,2.55669 2.92078,-2.33421 1.40734,-3.4015 0.11622,-4.53231 -4.25251,-0.90671 -9.71903,-3.22976 -12.3186,-2.20805 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/katushka-zazhiganiya-chernaya-raket-85-starye-raket-120">
+				<path class="part" d="m 510.05952,625.5754 c 2.71789,3.0353 6.15378,3.19857 10.11055,1.27834 l 6.1593,-6.74036 0,-6.04309 c 2.6729,0.60825 5.3458,3.07246 8.0187,0 3.26191,3.34237 6.22141,1.84605 9.18084,0.34864 l 10.5754,-5.57823 3.71882,-5.81065 c 2.20398,4.04633 5.70553,2.46987 9.7619,-1.51078 6.64603,-0.78005 7.6771,-2.09485 7.9025,-3.48639 l 5.22959,-1.39456 c 1.47042,-3.26634 0.25489,-5.63737 -1.97562,-7.67007 l -3.37018,0.69728 c -3.29945,-2.37798 -6.38779,-1.1961 -9.41327,1.04592 l -2.78911,-2.20805 -0.23243,-8.59977 c -0.89858,-3.33939 -4.65272,-2.39545 -7.20522,-3.25397 l -3.02154,1.39456 -10.22676,-0.11622 -3.02154,-2.32426 0.11622,-1.04592 c 2.40174,1.72485 4.80347,-0.17535 7.20521,-1.39456 l 0.11621,-5.22959 c 5.54467,-3.52125 8.83534,-8.733 4.53232,-19.64002 -3.02153,-8.03475 -11.47558,-13.07224 -23.47506,-16.15363 -12.89074,-6.09729 -21.53534,-16.926 -23.59127,-35.09637 -0.85239,-0.12004 -1.70491,-0.36753 -2.55669,0.11621 1.1211,18.58283 10.4883,30.12632 24.28855,37.88549 8.19638,3.37982 17.95872,2.90495 22.42914,15.45635 1.27978,4.11498 4.05682,7.80066 -1.7432,13.94558 -2.9828,-2.18664 -5.96561,1.14027 -8.94841,1.97562 l 0.34864,8.94841 c -5.03656,-2.26948 -6.70699,-1.65372 -7.43764,-0.23242 -2.3416,-0.99904 -4.47538,-1.16682 -6.50794,-0.92971 0.73642,-3.51199 4.34481,-5.42845 7.78628,-7.43764 1.62833,-0.75606 2.82416,-1.29587 3.83503,-1.7432 2.14708,-0.67518 4.46069,-1.28375 5.11338,-2.55669 l -0.23242,-2.6729 -1.97563,-0.34864 0.34864,-2.6729 -3.37018,0.23243 -2.55669,2.6729 -0.34864,1.97562 c -1.81509,-0.003 -2.41589,1.51245 -3.02154,3.02154 -3.74473,1.60887 -5.62049,3.96533 -7.90249,6.1593 l -0.58107,4.88095 -1.39456,0.11622 -0.11621,2.90533 -6.97279,4.06746 c -0.52656,1.55671 -0.69884,2.40486 -0.9297,3.37018 l 0,25.10204 -0.8135,2.09184 -0.81349,0.69727 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/provod-zazhiganiya">
+				<path class="part" d="m 581.64683,594.77891 c 7.99406,0.91865 21.93759,-6.36174 20.45351,-18.94274 0.74414,-13.8026 -9.42184,-27.1085 -34.86394,-29.05329 l -1.97563,3.95125 c 15.30228,3.30616 27.71715,8.35475 31.14513,18.82653 0.35392,7.40592 3.70233,15.12944 -15.57257,20.45351 0.6819,1.58825 1.05876,3.17649 0.8135,4.76474 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/sukhariki-dlya-mufty-raket-85-2sht">
+				<path class="part" d="m 48.112245,582.92517 c -1.108769,-5.81066 -0.492924,-11.62131 -0.116213,-17.43197 2.610172,-5.56169 5.722872,-8.71124 9.878118,-6.85658 3.068359,1.07639 5.946702,2.44836 6.27551,7.78628 l 0.116213,13.71315 c -3.651148,7.47464 -5.901456,6.89445 -8.367347,7.55386 -3.378706,-0.54387 -6.257704,-1.75403 -7.786281,-4.76474 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/separator-mufty-raket-85">
+				<path class="part" d="m 83.557256,587.10884 13.2483,4.76474 c 6.640884,-0.12038 9.753854,-10.62275 5.926874,-15.80499 l -11.040253,-4.06746 -5.113379,0.11622 c -3.846791,0.96081 -8.346177,9.27023 -3.021542,14.99149 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/shajba-mufty-raket-85">
+				<path class="part" d="m 125.85884,577.46315 c 8.81136,-0.85524 13.46249,3.48982 13.59694,13.48073 -0.55103,8.02666 -3.07897,14.82628 -12.55102,17.31576 -13.67307,-1.8243 -12.48647,-10.79267 -10.34297,-20.22109 2.07367,-3.52513 2.05287,-7.05027 9.29705,-10.5754 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/salnik-raket-85-95-120-17kh28kh7-teflon">
+				<path class="part" d="m 144.9178,611.74603 c -5.72069,-11.01032 0.43588,-18.62496 3.25397,-22.77778 3.63257,-3.36358 7.01753,-3.26058 10.34297,-2.32426 7.90295,0.70775 15.97804,11.06866 6.97279,24.40476 -6.06516,7.21725 -7.93418,4.78339 -11.15646,5.46202 -3.65388,-0.21193 -6.68658,-2.08031 -9.41327,-4.76474 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/gajka-zvezdy-raket-85">
+				<path class="part" d="m 89.135488,661.48526 c -6.659323,-2.96749 -5.153032,-14.33579 3.137755,-17.54819 3.236152,0.94649 6.808445,1.33274 9.180837,3.71883 l 5.46202,1.62698 c 4.89046,4.68609 4.2832,12.6105 -3.83503,15.80499 -3.380567,-1.2462 -6.754513,-2.47585 -9.529483,-2.20805 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/zvezda-raket-85-z11">
+				<path class="part" d="m 116.678,667.41213 -3.83503,-2.55669 2.78912,-4.29988 -1.39456,-1.97563 -0.34864,-3.37018 4.88095,-0.34864 0.46485,-5.92687 4.29989,0.81349 c 1.75309,-2.56576 3.1212,-6.28645 7.55386,-0.81349 3.12503,0.18469 6.01431,0.5803 3.37018,5.92687 5.10138,5.46665 3.53231,11.811 -3.13776,18.82653 -1.09364,3.77783 -2.56589,1.87639 -3.95125,1.27835 -1.40593,1.92802 -2.82287,3.7349 -4.53231,2.32426 -2.43857,0.30799 -2.92565,-1.33551 -2.90533,-3.4864 -4.16714,0.47768 -7.05562,-0.12658 -3.25397,-6.39172 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/prokladka-kartera-raket-85">
+				<path class="part" d="m 294.2517,623.71599 c 14.33296,-7.69864 28.66591,-12.47355 42.99887,-18.71032 1.09666,0.42333 2.24135,0.80128 2.78911,1.7432 1.93561,0.48619 3.10731,1.4723 3.95125,2.6729 l 0.11621,6.04308 -2.90533,3.95125 -0.23242,2.90533 3.13775,7.20521 c -3.13871,0.23529 -6.23214,0.33476 -9.06462,-0.34864 l -6.62415,1.97563 0,3.02154 -3.60261,-0.46485 -13.59694,8.8322 c -1.1842,1.66572 -2.18581,3.33144 2.09184,4.99716 l 7.55385,2.09184 -9.64569,6.27551 c -1.20954,1.7432 -2.77896,3.48639 0.81349,5.22959 l 9.52948,3.25397 -10.45918,6.27551 c -1.75014,3.64919 -0.32333,4.61161 1.51077,5.22959 l 10.22676,3.13776 -11.50511,8.0187 0.23243,4.99717 c -1.35065,1.86673 -1.83327,3.87813 -4.88095,5.46202 -2.82681,0.29948 -5.78181,1.8808 -8.01871,-3.71882 l 0.58107,-6.97279 c -3.72419,-3.42551 -4.98235,-6.64552 -4.99717,-9.76191 -5.87016,0.0145 -9.06544,-2.43198 -7.20521,-9.52948 l 3.95124,-4.29988 0,-13.59694 2.78912,-6.97279 -3.95125,-4.64853 c -0.55886,-1.28401 0.0904,-4.51941 0.23243,-6.27551 l 3.95124,-3.83503 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/salnik-raket-60-85-15kh26kh7-teflon">
+				<path class="part" d="m 455.32313,704.71655 c -4.28693,-6.15006 -5.02928,-19.88154 6.39172,-24.98582 5.50722,-0.62627 8.53227,1.22964 11.96996,2.6729 6.4928,6.26785 5.01569,14.00168 -0.23243,22.42914 -2.88963,2.94927 -6.03636,5.17868 -10.45918,3.83503 -2.75332,-0.72719 -5.52034,-1.41328 -7.67007,-3.95125 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/krylchatka-raket-85">
+				<path class="part" d="m 540.97222,660.43934 c 5.61081,1.78338 14.34493,2.75821 13.01587,8.94842 8.5905,0.0937 10.72969,4.4452 3.83504,14.75907 6.87525,0.89138 10.65177,3.60553 1.85941,13.71315 l -3.71882,-0.11622 0,2.55669 8.94841,2.09184 c 3.22582,3.22268 -0.72056,7.89531 -5.69444,9.64569 l -4.76474,-0.58106 c -0.43703,3.20539 -0.96556,6.51427 -2.6729,11.15646 l 6.85657,1.7432 c 4.58537,5.31525 -0.44412,5.13629 -4.18367,5.69444 l -4.88095,-0.46485 c -2.96676,2.72743 -3.37737,8.06616 0.81349,13.48072 2.1945,3.62307 -0.11029,3.59047 -2.78912,3.25397 l -6.15929,-1.7432 c 0.24223,2.79892 -0.25002,4.86337 -0.92971,6.74037 0.11621,3.27964 0.23243,5.23835 0.34864,7.32143 -1.56573,0.58196 -3.21396,0.97139 -5.69444,-0.58107 l -2.90533,-0.58107 c -1.58093,1.59556 -0.85094,5.50205 -1.04592,8.48356 l -10.45919,-2.78911 -0.46485,2.78911 c -1.51679,0.13257 -3.21181,0.17603 -5.3458,0 l -4.53232,-1.97562 c -20.94986,-2.63836 -23.72657,-15.79802 -27.54251,-28.35601 -2.01839,-18.80816 -0.2977,-35.49749 6.97279,-49.04195 5.31271,-9.88933 11.81311,-25.18534 33.81802,-30.68027 6.83576,-0.3805 13.23784,0.01 17.31576,4.53231 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/raket_radne_parts/raket_85_parts/tros-gaza-raket">
+				<path class="part" d="m 104.82426,796.52494 c 24.17755,1.21814 30.59748,-22.47081 27.65873,-32.53968 -12.47727,-21.87117 -32.664163,-22.16255 -54.271539,-18.47789 -6.891084,4.57105 -13.639859,9.1421 -20.221088,13.71315 l -15.223923,11.04025 -2.091837,-0.34864 -6.856576,4.53231 -0.348639,1.97563 -6.740363,3.71882 -0.464853,4.4161 -2.20805,1.27834 c 0.154953,0.9297 0.464852,1.04592 0.929706,1.04592 l 2.672902,-1.51077 0.34864,-4.64853 c 7.640669,-3.44454 14.012505,-7.31203 20.802154,-11.04024 l 0.348639,-1.27835 c 3.667365,-3.00824 7.413378,-5.85918 11.388889,-8.25113 -0.05237,3.71499 0.172115,7.24542 1.045919,10.34297 l -4.532313,-2.44048 c -1.034606,0.32241 -1.126409,0.88053 -0.929706,1.51077 l 6.507937,3.37018 c 3.394009,5.7463 7.21278,10.91547 12.434807,14.17801 9.182928,4.60561 18.72472,8.49349 29.750564,9.41326 z" fill="#87d7fb">
+			</path></a>
+		</svg>
+		<img src="https://openkart.ru/image/catalog/scheme/schemes/scheme-0027.jpg" alt="Запчасти Raket 85">
+</div>
+<link href="https://openkart.ru/image/catalog/scheme/schemes/libs/scheme-v3.css" rel="stylesheet" media="screen"></div>
+      </div>
+                       <div class="row category-form-control-wrap">
+		  <div class="col-md-4 col-sm-12"></div>
+		  <div class="col-md-8 col-sm-12">
+			<div class="row">
+        		<div class="col-md-9 col-sm-6 category-control-sorts">
+          		<div class="category-form-control2">
+            		<span class="category-form-control-texts">Сортировка:</span>
+            		<select class="category-sorts2" onchange="location = this.value;"> 
+              		               		               			<option value="https://openkart.ru/raket-85-cylinder-gasket?sort=p.sort_order&amp;order=ASC" selected="selected">По умолчанию</option>
+              		               		               		               			<option value="https://openkart.ru/raket-85-cylinder-gasket?sort=pd.name&amp;order=ASC">Название (А - Я)</option>           
+              		               		               		               			<option value="https://openkart.ru/raket-85-cylinder-gasket?sort=pd.name&amp;order=DESC">Название (Я - А)</option>           
+              		               		               		               			<option value="https://openkart.ru/raket-85-cylinder-gasket?sort=p.price&amp;order=ASC">Цена (низкая &gt; высокая)</option>           
+              		               		               		               			<option value="https://openkart.ru/raket-85-cylinder-gasket?sort=p.price&amp;order=DESC">Цена (высокая &gt; низкая)</option>           
+              		               		               		               			<option value="https://openkart.ru/raket-85-cylinder-gasket?sort=rating&amp;order=DESC">Рейтинг (начиная с высокого)</option>           
+              		               		               		               			<option value="https://openkart.ru/raket-85-cylinder-gasket?sort=rating&amp;order=ASC">Рейтинг (начиная с низкого)</option>           
+              		               		               		               			<option value="https://openkart.ru/raket-85-cylinder-gasket?sort=p.model&amp;order=ASC">Модель (А - Я)</option>           
+              		               		               		               			<option value="https://openkart.ru/raket-85-cylinder-gasket?sort=p.model&amp;order=DESC">Модель (Я - А)</option>           
+              		               		            
+            		</select>
+						<select id="width_tmp_select">
+ 							<option id="width_tmp_option"></option>
+						</select>
+          		</div>
+        		</div>
+        		<div class="col-md-3 col-sm-6 category-control-pages">
+          		<div class="category-form-control">
+            		<span class="category-form-control-texts">На странице:</span> 
+            		<select class="category-sorts3" onchange="location = this.value;">          
+              		               		               			<option value="https://openkart.ru/raket-85-cylinder-gasket?limit=16">16</option>   
+              		               		               		               			<option value="https://openkart.ru/raket-85-cylinder-gasket?limit=32">32</option>   
+              		               		               		               			<option value="https://openkart.ru/raket-85-cylinder-gasket?limit=48">48</option>   
+              		               		               		                   	<option value="https://openkart.ru/raket-85-cylinder-gasket?limit=96" selected="selected">96</option>            
+              		               		   
+            		</select>
+          		</div>
+        		</div>
+			</div>
+		 </div>
+      </div>
+      <div class="row"> 
+	  
+  	<div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition" onclick="if (event.ctrlKey) { window.open('https://openkart.ru/raket-85-cylinder-gasket/prokladka-tsilindra-raket-85-0-15mm', '_blank'); return false; } else { location.href='https://openkart.ru/raket-85-cylinder-gasket/prokladka-tsilindra-raket-85-0-15mm'; return false; }">
+     <h4 class="h4-product-name"><a href="https://openkart.ru/raket-85-cylinder-gasket/prokladka-tsilindra-raket-85-0-15mm">Прокладка цилиндра Raket 85 0,15мм</a></h4>
+			   <div class="product-info">	
+			<ul class="list-unstyled">
+                        <li>Производитель: Radne</li>
+                        <li>Модель: 3090</li>
+				 
+            	<li><a href="javascript:void(0)" class="in-stock-btn" onmouseover="this.style.color='#ddd';" onmouseout="this.style.color='#F5F5F5';" onclick="$('.in-stock-btn-form').css('display', 'table'); $('.product-id-in-stock').val('993'); event.stopPropagation();" style="color: #F5F5F5; border-bottom: 1px solid rgba(245,245,245,0.5); text-decoration: none;">Уведомить&nbsp;о&nbsp;поступлении</a></li>
+				         </ul>
+		</div>
+      <div class="image"><a href="https://openkart.ru/raket-85-cylinder-gasket/prokladka-tsilindra-raket-85-0-15mm"><img 
+				class="lazyload" data-src="https://openkart.ru/image/cache/catalog/data/3090-228x228.jpg"
+			 alt="Прокладка цилиндра Raket 85 0,15мм" title="Прокладка цилиндра Raket 85 0,15мм" class="img-responsive" /></a></div>
+      <div class="caption">      
+        <div class="price"> 
+						           249.24&nbsp;<span class="currency-rub">₽</span>
+           
+          
+			 
+            <br /><span class="product-quantity">В наличии: 0</span>
+					  </div>
+		  <div class="cart-btn-wrap">
+          <div class="category-plus-minus">
+  				<button type="button" onclick="event.stopPropagation(); if ($(this).next().val() > 1) {$(this).next().val($(this).next().val()-1);} $(this).parents('form').submit();" class="minus" window.event.cancelBubble = "true">&ndash;</button>
+            <input type="text" onclick="event.stopPropagation();" name="quantity" value="1" size="2" id="input-quantity" class="quantity-items" window.event.cancelBubble = "true" />
+  				<button type="button" onclick="event.stopPropagation(); $(this).prev().val(~~$(this).prev().val()+1); $(this).parents('form').submit();" class="plus" window.event.cancelBubble = "true">+</button>        
+          </div>
+        	 <button type="button" class="cart-btn" onclick="event.stopPropagation(); cart.add('993',$(this).parent().find('.quantity-items').val());" window.event.cancelBubble = "true">Купить</button>   
+		  </div>
+		</div>        
+    </div>
+  </div>
+    
+  	<div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition" onclick="if (event.ctrlKey) { window.open('https://openkart.ru/raket-85-cylinder-gasket/prokladka-tsilindra-raket-85-0-25mm', '_blank'); return false; } else { location.href='https://openkart.ru/raket-85-cylinder-gasket/prokladka-tsilindra-raket-85-0-25mm'; return false; }">
+     <h4 class="h4-product-name"><a href="https://openkart.ru/raket-85-cylinder-gasket/prokladka-tsilindra-raket-85-0-25mm">Прокладка цилиндра Raket 85 0,25мм</a></h4>
+			   <div class="product-info">	
+			<ul class="list-unstyled">
+                        <li>Производитель: Radne</li>
+                        <li>Модель: 3090-1</li>
+				         </ul>
+		</div>
+      <div class="image"><a href="https://openkart.ru/raket-85-cylinder-gasket/prokladka-tsilindra-raket-85-0-25mm"><img 
+				class="lazyload" data-src="https://openkart.ru/image/cache/catalog/data/3090-228x228.jpg"
+			 alt="Прокладка цилиндра Raket 85 0,25мм" title="Прокладка цилиндра Raket 85 0,25мм" class="img-responsive" /></a></div>
+      <div class="caption">      
+        <div class="price"> 
+						           249.24&nbsp;<span class="currency-rub">₽</span>
+           
+          
+			            <br /><span class="product-quantity">В наличии: 2</span>
+					  </div>
+		  <div class="cart-btn-wrap">
+          <div class="category-plus-minus">
+  				<button type="button" onclick="event.stopPropagation(); if ($(this).next().val() > 1) {$(this).next().val($(this).next().val()-1);} $(this).parents('form').submit();" class="minus" window.event.cancelBubble = "true">&ndash;</button>
+            <input type="text" onclick="event.stopPropagation();" name="quantity" value="1" size="2" id="input-quantity" class="quantity-items" window.event.cancelBubble = "true" />
+  				<button type="button" onclick="event.stopPropagation(); $(this).prev().val(~~$(this).prev().val()+1); $(this).parents('form').submit();" class="plus" window.event.cancelBubble = "true">+</button>        
+          </div>
+        	 <button type="button" class="cart-btn" onclick="event.stopPropagation(); cart.add('994',$(this).parent().find('.quantity-items').val());" window.event.cancelBubble = "true">Купить</button>   
+		  </div>
+		</div>        
+    </div>
+  </div>
+   
+
+	
+		</div>
+      <div class="row">
+        <div class="col-md-6 text-left category-pagination"></div>
+        <div class="col-md-6 text-right category-results"><span class="category-form-control-texts">Показано</span> с 1 по 2 из 2 (всего 1 страниц)</div>
+      </div>
+                  </div>
+    </div>
+</div>
+<footer>
+  <div class="container">
+    <div class="row footer-links">
+            <div class="col-md-2 col-sm-4">
+        <h5>Информация</h5>
+        <ul class="list-footer-links">
+          <li><a href="https://openkart.ru/contact-us">Адреса и телефоны</a></li>
+                   <li><a href="https://openkart.ru/delivery">Доставка запчастей для картинга</a></li>
+                    <li><a href="https://openkart.ru/oplata">Способы оплаты</a></li>
+                  </ul>
+      </div>
+       
+		<div class="col-md-4 col-sm-8">	
+		  <div class="row">	
+      	<div class="col-md-7 col-sm-7 footer-service">
+        	 <h5>Служба поддержки</h5>
+        	 <ul class="list-footer-links">
+          	<li><a href="https://openkart.ru/kak-sdelat-zakaz">Как сделать заказ</a></li>
+          	<li><a href="https://openkart.ru/katalogi-i-tablitsy-razmerov">Каталоги и таблицы размеров</a></li>
+          	<li><a href="https://openkart.ru/nastroyka-karta-i-prochee">Настройка карта и прочее</a></li>
+        	 </ul>
+      	</div>
+      	<div class="col-md-5 col-sm-5 footer-extra"> 
+          <h5>Дополнительно</h5>
+        	 <ul class="list-footer-links">
+          	<li><a href="https://openkart.ru/brands">Производители</a></li>
+          	<li><a href="https://openkart.ru/specials">Акции</a></li>
+          	<li><a href="https://openkart.ru/latest">Новинки</a></li>
+          	<li><a href="https://openkart.ru/sitemap">Карта сайта</a></li>
+          </ul>
+      	</div>
+		  </div>
+		</div>
+      <div class="col-md-2 col-sm-4 footer-account"> 
+        <h5>Личный Кабинет</h5>
+        <ul class="list-footer-links">
+          <li><a href="https://openkart.ru/my-account">Личный Кабинет</a></li>
+          <li><a href="https://openkart.ru/order-history">История заказов</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 col-sm-8 footer-map">   
+        <h5 class="h5-fix">НАШ АДРЕС</h5>
+        <ul class="list-unstyled">
+          <li><i class="fa fa-map-marker"></i> г. Санкт-Петербург, ул. Плуталова, д. 8</li>
+          <li><i class="fa fa-mobile"></i> +7-921-9672225</li>
+          <li><i class="fa fa-envelope-o"></i> <a href="/cdn-cgi/l/email-protection#3c55525a537c534c5952575d4e48124e49" class="footer-email"><span class="__cf_email__" data-cfemail="4b22252d240b243b2e25202a393f65393e">[email&#160;protected]</span></a></li>
+			 <li class="footer-icons">
+				<a href="https://www.facebook.com/openkart.ru/" class="fa fa-facebook" target="_blank"></a>
+				<a href="https://telegram.me/openkartnews" class="fa fa-telegram" target="_blank"></a>
+				<a href="https://www.instagram.com/openkart/" class="fa fa-instagram" target="_blank"></a>
+				<a href="https://vk.com/openkart" class="fa fa-vk" target="_blank"></a>
+			 </li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyrights">&copy; 2020 Openkart</div>
+  </div>
+</footer>
+<div class="in-stock-btn-form" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000000db; z-index: 9999999; text-align: center;">	
+	<div style="display: table-cell; vertical-align: middle;">	
+		<form method = "post">
+			<span style="font-size: 17px; color: #fff;">Уведомить о поступлении на e-mail:</span>
+			<input type="email" placeholder="username@example.ru" class="form-control" name="mail_in_stock" style="width: 80%; max-width: 400px; margin: 15px auto 25px;" />
+			<input type="hidden" class="form-control product-id-in-stock" name="product_id_in_stock" />
+			<button type="submit" name="send_in_stock" value = "OK" data-loading-text="Загрузка..." class="btn btn-success in-stock-btn-close">ОК</button>
+			<button type="button" class="btn btn-danger in-stock-btn-close" onclick="$('.in-stock-btn-form').hide();">Отмена</button> 
+		</form>
+	</div>
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript"><!--
+	$('.cart-btn').on('click', function(){
+	    setTimeout(function() {
+	        loadCart8(); //fix3
+		}, 1000);
+		$('.cart-total-href').css({ display: 'block' });
+		if ($(this).closest('.product-thumb').find('img').length == 1) {
+			var that = $(this).closest('.product-thumb').find('img');
+		} else {
+			var that = $(this).closest('#content').find('img');
+		}			
+		var cartTotalHref = $(".cart-total-href");
+		var w = that.width();		
+        that.clone()
+            .css({'width' : w,
+			'position' : 'absolute',
+			'z-index' : '9999',
+			top: that.offset().top,
+			left: that.offset().left })
+            .appendTo("body")
+            .animate({opacity: 0.05,
+                left: cartTotalHref.offset()['left'],
+                top: cartTotalHref.offset()['top'],						
+                width: 20}, 1000, function() {	
+					$(this).remove();
+				});
+	});
+//--></script>
+	<script type="text/javascript">
+  		WebFontConfig = {
+    		google: { families: [ 'Open+Sans:300,400,400i,700' , 'Roboto:300,400,500,700' ] }
+  		};
+  		(function() {
+    		var wf = document.createElement('script');
+    		wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+   		wf.type = 'text/javascript';
+    		wf.async = 'true';
+    		var s = document.getElementsByTagName('script')[0];
+    		s.parentNode.insertBefore(wf, s);
+  		})();
+	</script>
+</body></html>
+ 

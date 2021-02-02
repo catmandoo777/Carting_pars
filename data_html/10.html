@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]><html dir="ltr" lang="ru" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html dir="ltr" lang="ru" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html dir="ltr" lang="ru">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Жиклер х/х Rotax для картов. Все для картинга на Openkart.ru</title>
+<base href="https://openkart.ru/" />
+<meta name="description" content="У нас вы можете купить жиклер х/х Rotax для гоночных картов - в наличии и под заказ, с экспресс-доставкой по России. Все для картинга на Openkart.ru" />
+<meta name="yandex-verification" content="bf8adcc2e2331beb" />
+<script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script defer src="catalog/view/javascript/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!--<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700|Roboto:300,400,500,700&amp;subset=cyrillic,cyrillic-ext" rel="stylesheet">-->
+<link href="catalog/view/theme/ktemplate/stylesheet/stylesheet-v3.24.css" rel="stylesheet">
+			<!-- cdek -->
+				<!-- cdek -->
+	    <script defer src="catalog/view/javascript/common4.js" type="text/javascript"></script>
+<script defer src="catalog/view/javascript/custom4.3.js" type="text/javascript"></script>
+<script defer src="catalog/view/javascript/lazyload/lazysizes.min.js"></script>
+<link rel="apple-touch-icon" sizes="192x192" href="https://openkart.ru/image/catalog/favicons/favicon-192x192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://openkart.ru/image/catalog/favicons/favicon-192x192.png">
+<meta name="msapplication-config" content="https://openkart.ru/image/catalog/favicons/browserconfig.xml">
+<link href="https://openkart.ru/rotax-idle-jet" rel="canonical" />
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(48771104, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true,
+        ecommerce:"dataLayer"
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/48771104" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2983350-12"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2983350-12');
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script type="text/javascript">
+	var selector = 'input.form-control.input-search';
+	var catTitle = 'Категории';
+	var prodTitle = 'Товары';
+	var viewAllTitle = 'Посмотреть все товары';
+	var noResTitle = 'Ничего не найдено';
+
+	console.log(selector);
+
+	$(document).ready(function() {
+
+		var timer = null;
+		$('input.form-control.input-search').keydown(function(){
+	       clearTimeout(timer); 
+	       timer = setTimeout(sphinxAutocomplete, 500)
+		});
+
+	});
+
+	$(document).mouseup(function (e) {
+		
+		if (!$('.sphinxsearch').is(e.target) && $('.sphinxsearch').has(e.target).length === 0) {
+			$('.sphinxsearch').hide();
+			$('input.form-control.input-search').removeClass('no-bottom-borders');
+			return false;
+		}
+		
+	});
+
+	function sphinxAutocomplete() {
+
+		if($(selector).val() == '') {
+			$('.sphinxsearch').hide();
+			$('input.form-control.input-search').removeClass('no-bottom-borders');
+			return false;
+		}
+
+		$.ajax({
+			url: 'https://openkart.ru/index.php?route=extension/module/sphinxautocomplete&search=' + $(selector).val(),
+			dataType: 'json',
+			success: function(json) {
+
+				var html = '';
+				
+				//Categories
+				if (json.categories.length) {
+					html += '<div class="categories"><span>'+catTitle+'</span>';
+					var categories = json.categories;
+					for (i = 0; i < categories.length; i++) {
+						html += '<a class="sphinxsearcha" href="' + categories[i]['href'] + '">';
+							if(categories[i]['image'] != '') {
+								html += '<img src="' + categories[i]['image'] + '" />';
+							}
+							html += categories[i]['name'];
+							html += '<br />';
+						html += '</a>';
+					}
+					html += '</div>';
+				}
+				
+				//Products
+				if (json.products.length) {
+					if (json.categories.length) { html += '<div class="products"><span>'+prodTitle+'</span>'; }
+					var products = json.products;
+					for (i = 0; i < products.length; i++) {
+						html += '<a class="sphinxsearcha" href="' + products[i]['href'] + '">';
+							html += '<img src="' + products[i]['image'] + '" />';
+							html += products[i]['name'];
+							html += '<br />';
+						html += '</a>';
+					}
+					if (json.categories.length) {  html += '</div>'; }
+					html += '<div class="sphinx-viewall"><a id="view-all" href="https://openkart.ru/search?wildcard=true&amp;search=' + encodeURIComponent($(selector).val()) + '">'+viewAllTitle+'</a></div>';
+				} else {
+					html = '<div class="sphinx-viewall">'+noResTitle+'</div>';
+				}
+
+                $('.sphinxsearch').remove();
+				$(selector).after('<div class="sphinxsearch">'+ html +'</div>');
+				$('.sphinxsearch').show();
+				$('input.form-control.input-search').addClass('no-bottom-borders');
+
+				$('.sphinxsearcha').hover(
+					function(){$(this).addClass('sphinxsearch-a-active');},
+ 					function(){$(this).removeClass('sphinxsearch-a-active');}
+				);
+
+			}
+		});
+			
+	}
+</script>
+
+</head>
+<body> 
+<header>
+  <div class="container">
+    <div class="row header-contacts">
+      <div class="col-sm-12">
+			<i class="fa fa-map-marker"></i>г. Санкт-Петербург, ул. Плуталова, д. 8
+			<i class="fa fa-mobile"></i><a href="tel:+79219672225">+7-921-9672225</a>
+			<i class="fa fa-envelope-o"></i><a href="/cdn-cgi/l/email-protection#3d54535b527d524d5853565c4f49134f48"><span class="__cf_email__" data-cfemail="2d44434b426d425d4843464c5f59035f58">[email&#160;protected]</span></a>
+			<i class="fa fa-calendar-o"></i>Время работы: ПН-ПТ 9:00-18:00
+	 	</div>
+	 </div>
+    <div class="row header-contacts-mobile">
+      <div class="col-sm-12">
+			<span class="dropdown"><a href="#" class="dropdown-toggle icon-map-marker" data-toggle="dropdown" aria-expanded="false">
+				<i class="fa fa-map-marker"></i></a>
+				<span class="dropdown-menu dropdown-menu-left dropdown-paddings">г. Санкт-Петербург,<br />ул. Плуталова, д. 8</span>
+			</span>
+			<a href="tel:+79219672225" class="icon-mobile"><i class="fa fa-mobile"></i></a>
+			<a href="/cdn-cgi/l/email-protection#bdd4d3dbd2fdd2cdd8d3d6dccfc993cfc8" class="icon-envelope"><i class="fa fa-envelope-o"></i></a>
+			<span class="dropdown"><a href="#" class="dropdown-toggle icon-calendar" data-toggle="dropdown" aria-expanded="false">
+				<i class="fa fa-calendar-o"></i></a>
+				<span class="dropdown-menu dropdown-menu-right dropdown-paddings">Время работы:<br />ПН-ПТ 9:00-18:00</span>
+			</span>
+	 	</div>
+	 </div>
+    <div class="row header">
+      <div class="col-sm-3">
+        <div id="logo">
+				<a href="https://openkart.ru/"><img src="/catalog/view/theme/ktemplate/image/logo.png" title="Openkart - Все для картинга" alt="Openkart - Все для картинга" class="img-responsive" /></a>
+			</div>
+      </div>
+		<div class="col-sm-9"> 
+	 	  <div class="row">
+      	<div class="col-sm-5 col-lg-7">
+  			  <nav class="navbar header-menu"> 
+    			<div class="navbar-header">
+      			<button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
+    			</div>
+    			<div class="collapse navbar-collapse navbar-ex1-collapse">
+      			<ul class="nav navbar-nav header-links">
+        				<li><a href="https://openkart.ru/" class="link-home">Главная</a></li> 
+        				<li><a href="https://openkart.ru/latest">Новинки</a></li> 
+        				<li><a href="https://openkart.ru/specials">Акции</a></li> 
+        				<li><a href="https://openkart.ru/oplata">Оплата</a></li> 
+        				<li><a href="https://openkart.ru/contact-us">Контакты</a></li>  
+      			</ul>
+    			</div> 
+  			  </nav>
+			</div> 
+	 	<div class="col-sm-7 col-lg-5 header-right-row">
+       <div class="header-search"><div id="search"> 
+  <input type="text" name="search" value="" placeholder="Поиск..." class="form-control input-search" autocomplete="off" /> 
+  <button type="submit" value="Искать" class="button search-submit"><i class="fa fa-search"></i></button>
+</div>
+</div>
+       <div class="header-account">
+		  <ul class="list-inline"> 
+         <li class="dropdown"><a href="https://openkart.ru/my-account" title="Личный кабинет" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i></a> 
+          <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="https://openkart.ru/create-account">Регистрация</a></li>
+            <li><a href="https://openkart.ru/login">Авторизация</a></li>
+                       </ul>
+          </li>
+		   </ul>
+        </div>
+        <div class="header-cart">
+		   <div id="cart">
+  <a data-toggle="dropdown" data-loading-text="Загрузка..." class="dropdown-toggle my-cart" title="Корзина"><i class="fa fa-shopping-cart"></i> <div id="cart-total">0</div></a>
+  <ul class="dropdown-menu pull-right dropdown-menu-wrap">
+        <li>
+        <div class="marker"></div>
+        <p class="text-center">Ваша корзина пуста!</p>
+    </li>
+      </ul>
+</div>
+<a class="cart-total-href" href="/checkout2" style="display:none;"><i class="fa fa-shopping-cart" style="font-size:22px;height:20px;width:28px;margin-left:-4px;"></i><div class="cart-total-btn">0</div></a>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript"><!--
+function loadCart8() {
+	$.ajax({
+		url: 'index.php?route=extension/quickcheckout/cart2',
+		dataType: 'html',
+		cache: false,
+		beforeSend: function() {
+			$('.tooltip').remove();
+		},
+		success: function(html) {			
+			$('.cart8 .quickcheckout-content').html(html);
+		}
+	});
+}
+
+$(document).ready(function(){
+    loadCart8();
+});
+
+$(document).on('click', '.cart8 .button-update', function() {
+	var quantity = $(this).parents('.quantity').find('input.qc-product-qantity');
+	if (quantity.length){
+		if ($(this).data('type')=='increase') {
+			quantity.val(parseInt(quantity.val())+1);
+		} else if ($(this).data('type')=='decrease') {
+			quantity.val(parseInt(quantity.val())-1);
+		}
+	}
+	
+	$.ajax({
+		url: 'index.php?route=extension/quickcheckout/cart2/update',
+		type: 'post',
+		data: $('.cart8 :input'),
+		dataType: 'json',
+		cache: false,
+		beforeSend: function() {
+			$('.cart8 .button-update').prop('disabled', true);
+		},
+		success: function(json) {
+			if (json['redirect']) {
+			    if (window.location.pathname == '/checkout2') {
+				    location = json['redirect'];
+				} else {
+				    $('ul.dropdown-menu.pull-right.dropdown-menu-wrap').html('<li><div class="marker"></div><p class="text-center">Ваша корзина пуста!</p></li>');
+			        $('#cart-total').html(json['count_products']);
+				    $('.cart-total-btn').html(json['count_products']);
+				}
+			} else {
+				if (json['error']['stock']) {
+					$('#button-payment-method').attr("disabled", true);
+				} else if (json['error']['warning']) {
+						$('#warning-messages').html('<div class="alert alert-danger" style="display: none;"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '</div>');
+						$('.alert-danger').fadeIn('slow');
+						$('#button-payment-method').attr("disabled", true);
+				} else {
+					$('#warning-messages').html('');
+					$('#button-payment-method').removeAttr("disabled");
+				}
+                if (window.location.pathname == '/checkout2') {
+			        reloadShippingMethodById($('#shipping-address select[name=\'address_id\']').val());			    
+				}				
+			    loadCart8();
+				$('#cart-total').html(json['count_products']);
+				$('.cart-total-btn').html(json['count_products']);				
+			}
+		}
+	});
+
+	return false;
+});
+
+$(document).on('click', '.button-remove', function() {
+	var remove_id = $(this).attr('data-remove');
+
+	$.ajax({
+		url: 'index.php?route=extension/quickcheckout/cart2/update&remove=' + remove_id,
+		type: 'get',
+		dataType: 'json',
+		cache: false,
+		beforeSend: function() {
+			$('.cart8 .button-remove').prop('disabled', true);
+		},
+		success: function(json) {
+			if (json['redirect']) {
+			    if (window.location.pathname == '/checkout2') {
+				    location = json['redirect'];
+				} else {
+				    $('ul.dropdown-menu.pull-right.dropdown-menu-wrap').html('<li><div class="marker"></div><p class="text-center">Ваша корзина пуста!</p></li>');
+			        $('#cart-total').html(json['count_products']);
+				    $('.cart-total-btn').html(json['count_products']);
+				}
+			} else {
+			    if (window.location.pathname == '/checkout2') {
+				    reloadShippingMethodById($('#shipping-address select[name=\'address_id\']').val());
+				}
+				loadCart8();
+				$('#cart-total').html(json['count_products']);
+				$('.cart-total-btn').html(json['count_products']);
+			}
+		}
+	});
+
+	return false;
+});
+//--></script>
+
+        </div>
+	 	</div>
+	 	</div>
+	  </div>
+    </div>
+  </div>
+</header>
+<div class="container categories-menu2">
+	<div class="row categories2">
+		<div class="category-menu2">
+			<a href="/chassis_parts">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category1.png" alt="ШАССИ И ЗАПЧАСТИ">
+					<div class="category-text2">ШАССИ И <br class="category-text-break" />ЗАПЧАСТИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/engines_and_parts">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category2.png" alt="МОТОРЫ И ЗАПЧАСТИ">
+					<div class="category-text2">МОТОРЫ И <br class="category-text-break" />ЗАПЧАСТИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2"> 
+			<a href="/kart_tools">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category3.png" alt="ОБОРУДОВАНИЕ">
+					<div class="category-text2">ОБОРУДОВА- <br class="category-text-break" />НИЕ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/data_systems">
+				<div class="category-link5 category-link5-fix2">
+					<img src="/catalog/view/theme/ktemplate/image/category4.png" alt="ЭЛЕКТРОННЫЕ СИСТЕМЫ">
+					<div class="category-text2">ЭЛЕКТРОННЫЕ <br class="category-text-break" />СИСТЕМЫ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/tyres_and_wheels">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category5.png" alt="ШИНЫ И ДИСКИ">
+					<div class="category-text2">ШИНЫ И <br class="category-text-break" />ДИСКИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/protection_wear">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category6.png" alt="ЭКИПИРОВКА И ШЛЕМЫ">
+					<div class="category-text2">ЭКИПИРОВКА <br class="category-text-break" />И ШЛЕМЫ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/lubricants">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category7.png" alt="МАСЛО И СМАЗКИ">
+					<div class="category-text2">МАСЛО И <br class="category-text-break" />СМАЗКИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/sprockets_and_chains">
+				<div class="category-link5 category-link5-fix">				
+					<img src="/catalog/view/theme/ktemplate/image/category8.png" alt="ЦЕПИ И ЗВЕЗДЫ">
+					<div class="category-text2">ЦЕПИ И <br class="category-text-break" />ЗВЕЗДЫ</div>
+				</div>
+			</a>
+		</div> 
+	</div>
+</div>
+
+<div id="product-category" class="container">
+  <ul class="breadcrumb-category">
+        <li><a href="https://openkart.ru/">Главная</a></li>
+        <li><a href="https://openkart.ru/rotax-idle-jet">Жиклер х/х Rotax</a></li>
+      </ul>
+  <h1>Жиклер х/х Rotax</h1>
+  <div class="row">
+                <div id="content" class="col-sm-12">
+      	  		      <div class="row category-description">         
+        <div class="col-sm-12"><div class="interactive-scheme">
+		<svg viewBox="0 0 795 1074">
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/pruzhina-zaslonki-rotax">
+				<path class="part" d="m 144.44813,223.5978 0.76105,-7.61054 c 4.24377,-4.37872 11.18032,-6.47894 20.70068,-6.39286 8.3716,-0.15902 16.7432,0.20315 25.1148,3.65306 7.07244,-8.08739 2.59915,-12.87599 -1.3699,-17.80867 -11.38631,3.58017 -21.69824,9.50868 -43.98895,-0.15221 -0.1,-2.66097 -0.48213,-5.53728 3.80528,-7.0017 11.92617,-1.94201 22.5305,-6.36521 40.33588,2.28316 7.29692,-7.72485 4.85086,-13.92736 -0.76105,-19.6352 -8.23796,3.67069 -14.29187,8.67854 -41.70579,0.60884 -0.32503,-2.68906 -0.87387,-5.37812 2.7398,-8.06718 15.02087,-4.87893 27.90007,-3.33286 39.27041,2.7398 10.22705,-10.39073 3.70424,-15.13585 0.45663,-19.02636 -20.41981,8.10851 -31.79065,3.87753 -43.53231,0.15221 -1.49613,-2.3339 -1.53001,-4.6678 1.82653,-7.0017 16.28703,-5.94587 29.83107,-4.80572 41.24915,1.82653 6.15218,-6.18991 7.03186,-12.37982 0.60884,-18.56973 -20.84102,7.57039 -32.18039,4.11886 -43.07568,0.15221 -1.63135,-2.14496 -3.8264,-4.2236 1.21769,-7.15391 17.88269,-5.4068 31.33056,-4.38311 41.09694,1.97874 2.09332,-1.17399 3.98242,-3.02873 4.87074,-8.21938 l 4.1097,-2.58759 c -0.56533,4.69473 -1.7878,9.20171 -5.17517,13.09014 4.60955,6.39081 8.61246,12.97788 -0.30442,23.74489 7.90384,9.1059 4.93569,16.85279 0,24.35375 6.44826,8.11806 6.38819,16.03273 -0.15221,23.74489 l 0.30442,1.21769 c 7.05098,9.82959 5.66964,12.17492 2.13095,20.39626 l 0,1.67432 c 4.66415,4.72807 4.6158,9.63067 -1.67432,14.76445 -26.20628,7.03703 -41.35695,-0.2015 -48.85969,-7.15391 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/rotax-carburetor">
+				<path class="part" d="m 155.2551,299.55102 c 11.12186,-0.28462 19.82482,3.23188 25.26701,11.87245 2.50612,1.0762 4.86631,2.44424 7.91497,2.43537 l 2.13095,-7.61054 c 4.13069,3.41281 7.33262,2.49142 9.74149,-2.13095 2.75648,2.11878 5.5676,4.11462 6.08844,11.2636 l 1.82653,2.43538 -0.60884,14.61224 -2.43538,3.65306 0.60885,15.82993 c 41.10577,10.995 37.47161,53.91274 28.92006,61.15184 -3.41332,3.06602 -5.61082,3.09249 -7.91496,3.38558 -4.33243,10.56697 -10.12199,10.93402 -15.52551,14.0034 0.21864,1.78756 3.0576,2.70141 6.69728,3.34864 6.02775,2.75697 5.37808,6.23614 5.83625,10.13508 l -0.0522,17.5673 3.04422,6.39286 0,6.08843 -34.39966,21.91837 c -5.8767,3.06658 -11.44042,3.31635 -16.7432,1.21769 l -3.34864,-0.91327 -0.25219,10.35034 c -1.6379,4.34092 -4.62073,3.75038 -7.9672,1.82653 -2.7175,0.46278 -3.83178,-2.28087 -4.2619,-6.39285 0.36269,-3.38028 -1.80799,-4.64943 -4.87075,-5.17517 l 0,-7.30613 -2.13095,0.30443 c -2.62427,1.60953 -4.95144,2.92196 -7.0017,3.95748 -0.39815,2.57325 -1.23796,4.99929 -3.34864,7.0017 l -7.0017,-3.04422 c 0.1447,2.30388 -1.21283,-1.40118 -2.13096,-3.34864 -0.14431,-5.34582 -0.0304,-11.29423 -1.82653,-12.78571 l -21.30952,-7.0017 0.91327,-6.08844 C 97.726159,457.64232 92.9539,440.80221 88.623667,423.14626 c 3.28588,-2.58816 -5.020381,-21.6362 22.348883,-35.18683 2.4225,-2.24524 3.8722,-4.38239 16.27575,-7.73664 l 0.30442,-6.08844 -6.39286,-2.43537 2.43538,-3.04422 c -0.38946,-3.51635 -2.16741,-6.71228 4.56632,-11.87245 l 6.39286,1.82653 0.91327,-21.91836 -3.04422,-4.26191 0.30442,-14.0034 2.43538,-4.87075 0.5566,-5.99927 c 7.17072,-5.71547 12.92535,-6.77533 19.53523,-8.00413 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/rotax-carburetor-valve">
+				<path class="part" d="m 140.34867,245.25402 0.86104,49.5095 c 1.29155,3.39481 2.5831,4.33957 3.87465,4.30517 15.53471,-0.67921 28.92084,1.94709 37.0245,12.70026 4.39497,2.52946 7.15406,2.48824 7.53405,-1.29155 l 0.64578,-4.30517 c 3.38096,2.51772 6.81687,4.15614 10.76293,-2.36785 l -1.50681,-53.59941 c -4.08063,-2.59047 -2.80143,-5.6682 -0.64577,-8.82561 0.33769,-8.17558 -5.39377,-8.29457 -9.47138,-9.25612 2.29434,4.31547 5.62127,7.83806 6.2425,10.97819 -9.79753,7.50795 -19.18822,9.32003 -28.41415,8.82561 -7.47362,-0.88997 -12.65945,-1.00483 -20.66484,-7.53406 l -1.07629,-5.81198 3.22888,-5.16621 c -2.09538,1.90966 -5.35253,1.55241 -8.39509,11.83923 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/rotax-carburetor-needle">
+				<path class="part" d="m 166.82549,179.1696 c 1.64388,-1.01956 2.95628,-2.81257 6.2425,0 l 0.43052,48.4332 c 12.21679,0.11178 21.63351,3.42363 25.83104,12.70027 -9.97365,9.45278 -19.94731,12.10843 -29.92096,11.83922 -20.15934,-2.06125 -25.63902,-7.13372 -23.46319,-13.77655 3.35247,-7.47185 11.64842,-9.01152 20.66483,-9.68664 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/zaschelka-igly-kz-rotax-super-mini">
+				<path class="part" d="m 163.16609,166.46933 c 5.65325,-3.69306 7.60337,-3.21014 11.99144,-0.49356 -0.59636,3.09835 -1.59887,5.5888 -4.24212,5.01399 0.20329,-6.75538 -3.65536,-3.10681 -2.79837,0 -3.03424,0.1539 -4.78608,-1.23108 -4.95095,-4.52043 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/kryshka-karbyuratora-rotax">
+				<path class="part" d="m 124.81292,84.781478 0.76106,-15.373299 1.21768,-1.369898 c 0.72701,-6.835837 5.52843,-10.614809 10.65477,-13.851191 l 0.60884,-17.656462 c 7.71866,-8.316738 17.92356,-8.760378 28.0068,-9.589285 1.45021,-1.705793 2.62381,-3.380852 7.61055,-5.479592 l 7.91496,0.152211 18.41752,10.654762 c 1.12697,2.980152 -0.29186,5.111707 -1.52211,7.306122 l 3.80527,1.82653 -0.15221,12.785715 c 4.41717,2.41286 8.7727,4.938723 10.80697,11.720237 1.9282,1.154217 2.24065,2.712373 2.58759,4.261905 l -0.15221,10.959184 c -0.51362,1.823404 -0.95343,3.683716 -3.04422,4.718537 -5.27106,8.504878 -13.07017,10.268275 -20.70068,12.481292 -11.10871,3.062764 -22.02251,3.786554 -32.72534,1.978744 -7.06876,-0.509125 -13.68237,-2.383713 -19.93962,-5.327383 -4.55006,-2.570162 -8.57958,-5.556751 -11.1114,-9.741497 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/fiksator-trosa-gaza-rotax">
+				<path class="part" d="m 220.09694,38.357159 7.0017,4.414115 0.45663,1.67432 4.56633,0.456633 2.892,2.739796 13.69898,6.697278 54.79592,28.920068 1.06547,2.435374 19.78742,12.329082 2.58758,2.435375 c 2.63578,0.94437 5.87224,0.5372 7.00171,4.87075 0.0593,7.04521 -4.03792,8.37516 -7.00171,11.2636 -4.89935,0.35283 -6.40847,-1.57092 -7.0017,-4.10969 l -7.0017,-1.82653 -16.59098,-10.04592 -4.1097,-0.30442 -55.55697,-33.638607 -12.93792,-6.392857 -1.67432,-3.196429 -1.06548,-0.761054 -3.95748,0 c -0.99137,-0.876212 -2.01825,-1.770178 -3.80527,-3.044218 l -5.02296,0 -3.95749,-2.435374 c -0.38373,-2.023074 -0.57502,-4.431034 -0.15221,-8.067177 1.81733,-2.68676 3.33043,-5.297459 6.69728,-8.371598 l 5.02296,0.152211 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/rotax-carburetor-needle-jet">
+				<path class="part" d="m 164.38775,551.30783 0.45664,32.1165 c 4.78865,2.51657 8.95539,1.61264 12.93792,-0.30442 l -0.60884,-32.57313 1.36989,-1.97874 0.30443,-6.84949 c -1.02607,-1.80388 -2.54961,-2.61282 -3.95749,-3.65307 l -0.45663,-0.45663 0.76106,-0.91326 0,-10.04592 -1.82654,-1.97874 0.30443,-5.78402 c -1.88273,-0.58576 -1.66372,-2.89056 -7.61055,-0.15221 l -0.15221,6.08844 c -1.52525,0.50422 -1.75848,2.30047 -1.67432,4.41411 l -0.45663,5.02296 2.58758,2.89201 -0.45663,1.67432 c -1.93064,-0.10544 -2.77367,1.42055 -3.95748,2.43537 l -0.15221,7.15391 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/rotax-carburetor-emulsion-jet">
+				<path class="part" d="m 194.67772,544.45834 c 2.96949,-2.45428 5.12676,-1.25353 7.30612,-0.15221 l -0.60884,16.28656 c 2.08346,2.38464 2.02367,4.76928 0.45663,7.15392 l -0.15221,2.892 c -2.70769,0.96529 -3.73689,0.67172 -4.87075,0.45664 l -0.76105,-2.7398 c -0.84135,-1.76229 -1.87951,-3.36715 -0.76106,-6.69728 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/rotax-idle-jet">
+				<path class="part" d="m 193.0034,599.71089 -0.30442,-12.17687 2.43537,-1.52211 0.45663,-5.78401 c 2.3339,-1.9482 4.6678,-0.95808 7.0017,-0.15221 l 0,6.69728 c 1.50718,1.26842 1.81064,2.53685 2.13096,3.80527 l -0.15221,7.15391 c -0.2018,1.47349 -0.89262,2.17809 -1.67432,2.7398 l -3.50085,0.30442 c -1.42064,-2.16154 -2.84127,-3.48027 -4.26191,-1.21769 z" fill="red">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/klapan-150-rotax">
+				<path class="part" d="m 140.64285,580.2279 c 1.63518,1.46377 3.8971,1.83074 7.15392,0.45663 0.19322,-1.97145 -0.39622,-3.3559 -1.82653,-4.10969 -0.78452,-0.3707 -0.40532,-2.48699 -0.45664,-3.95749 l 2.58759,-3.19642 -0.15221,-11.41582 2.892,-12.6335 0,-2.7398 c 2.2325,-3.42982 1.50103,-6.56325 -0.30442,-9.58928 0.80271,-3.23562 2.01701,-6.41979 -0.30442,-10.04592 l 0.60884,-12.93793 c -3.12107,-2.47931 -7.10107,-3.62251 -13.85119,-0.45663 l 1.97875,14.46003 c -2.00119,-0.68867 -1.59585,3.91703 -1.67432,7.45834 -2.60478,5.3911 -1.9912,8.14455 -0.15222,9.8937 l 0.76106,4.87075 2.28316,12.48129 0.15221,11.72024 2.7398,2.89201 -0.30442,2.28316 c -0.90708,1.32535 -1.99477,2.47009 -2.13096,4.56633 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/koromyslo-rotax">
+				<path class="part" d="m 196.96088,683.27467 -0.15221,-3.04422 6.69728,-4.56633 c 2.02201,-0.0187 4.39231,0.83337 4.87075,-3.04422 0.64484,-4.36338 0.6022,-8.72675 2.73979,-13.09013 0.0616,-2.56263 3.01352,-4.48295 6.69728,-6.24065 1.52211,-0.20295 2.63832,-1.42063 3.34864,-3.65306 l -4.71854,-1.82653 c -2.38464,2.38377 -4.76927,3.33863 -7.15391,4.56633 -3.38891,2.3339 -3.21306,4.6678 -4.41411,7.0017 l -0.30442,5.17517 c -0.85756,2.39705 -2.54183,2.72735 -5.02296,1.06547 l -7.76276,-2.58758 c -3.4005,-0.88047 -3.31244,-3.34665 -2.28316,-6.24065 l 1.67432,-5.47959 9.28486,-7.45833 -0.30442,-0.91327 -3.95748,-1.67432 -10.04592,6.69728 c -3.03249,6.89632 -3.42147,12.91146 -4.1097,19.02636 l -6.24064,5.32738 c -6.06843,-1.41063 -3.56899,1.46267 -4.56633,2.58759 0.72125,2.31399 2.65825,3.05441 5.17517,3.04422 l 14.15561,5.02295 1.21769,-0.60884 c 1.4362,0.54514 1.54449,2.19687 5.17517,0.91327 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/shtift-koromysla-rotax">
+				<path class="part" d="m 220.85799,689.81973 30.13775,9.43708 c 3.36338,-1.06548 1.83963,-2.13095 1.3699,-3.19643 l -30.89881,-10.04592 c -2.5411,0.63074 -2.53047,1.95742 -0.60884,3.80527 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/rotax-carburetor-float">
+				<path class="part" d="m 132.27126,711.43368 16.8954,6.39286 c 5.89453,-3.42352 11.8472,-5.04455 17.35204,-20.54847 2.40742,-10.984 3.84115,-21.43079 -5.32738,-26.02806 l -13.39455,-4.41412 c -6.65943,-0.006 -7.88195,2.70557 -10.80698,4.56633 -0.71198,4.43158 -4.46535,9.87696 -7.45833,15.06887 -1.09667,9.4758 -1.72538,13.80404 -2.43537,19.02636 1.27572,2.09108 2.33828,4.23544 5.17517,5.93623 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/rotax-carburetor-float">
+				<path class="part" d="m 177.51482,695.10254 10.61783,-7.41375 7.0017,1.82653 4.2619,-1.82653 7.0017,5.47959 4.94144,1.35908 0.53815,18.73275 c -1.06471,7.34733 -5.67786,11.85589 -9.43707,17.04762 -3.98929,5.14857 -9.54259,4.71134 -15.52551,2.7398 l -8.21939,-4.56633 c -12.66824,-7.1247 -4.92754,-24.64728 -1.18075,-33.37876 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/prokladka-kryshki-dellorto-vhsb-vhsh">
+				<path class="part" d="m 127.70493,708.23725 -19.6352,11.72024 c -0.39448,2.23478 0.29664,4.00431 2.73979,5.02296 l 27.85459,10.65476 c 3.7166,-0.36613 5.97411,0.51838 6.84949,2.58758 l 31.96429,11.87245 c 2.38464,0.53943 4.76927,0.82097 7.15391,0.15221 l 41.70578,-24.04932 c 0.85378,-3.63006 -1.48265,-6.80438 -3.34864,-10.04591 -1.99463,-1.76469 -6.97891,-3.03111 -11.2636,-4.41412 l -0.30442,4.41412 c -2.37094,7.41389 -7.30058,11.75733 -11.56803,16.8954 -3.65148,2.47507 -6.76983,1.21819 -10.04592,1.06548 l -15.52551,-7.0017 c -6.39157,-9.53855 -2.22685,-19.0771 0.76105,-28.61565 l -7.76275,-2.892 c -2.4326,9.64182 -8.32364,17.04582 -17.65646,22.22279 l -17.50425,-6.24065 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/tm-kz-rotax-carburetor-cap">
+				<path class="part" d="m 108.22193,782.21174 -0.30441,15.52551 8.5238,3.50085 0.30443,16.7432 c 1.36123,7.16191 5.38679,11.86444 12.02466,14.15561 l 44.29336,15.52551 c 6.21093,2.0853 12.61758,2.80052 19.63521,-0.76106 l 25.87585,-14.0034 c 2.76739,-2.52559 4.06659,-6.2791 4.87074,-11.41581 l -0.15221,-25.1148 3.80528,-2.73979 -0.30443,-7.00171 c -1.10205,-2.85429 -2.53792,-5.14249 -3.95748,-7.45833 l -20.09184,-8.5238 0.30443,-9.89372 c -0.91369,-0.32915 -1.7978,-0.70267 -3.50085,0.15222 l -0.15221,7.61054 -11.87245,-5.78401 -7.15391,0.15221 -12.4813,-4.56633 -9.58928,-0.45663 0.15221,-12.17687 c -1.09646,-1.30521 -2.30482,-1.82714 -3.80527,-0.30442 l -0.30443,12.78571 c -1.14264,-0.79197 -5.09116,0.52047 -9.43707,2.13095 l -0.15221,-9.13265 c -0.9248,-0.78294 -1.92895,-1.36754 -3.65306,-0.15221 l 0,11.72024 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/filtr-karbyuratora-kz-rotax">
+				<path class="part" d="m 246.42942,491.79338 12.93792,5.32738 4.56633,-0.30442 22.22279,5.02295 21.15731,7.61055 4.41412,-0.15221 c 4.20031,1.01698 7.51715,3.439 5.32738,13.24234 -4.78276,8.79352 -6.81021,7.88299 -9.43708,8.67602 l -7.30612,-2.43537 -23.44048,-9.58928 -19.02636,-11.72024 -1.97874,-2.58759 -11.87245,-5.32738 -5.02296,0.15221 -2.43537,-2.73979 c 0.41257,-3.29457 1.16031,-5.43218 3.19643,-7.91497 5.37801,-2.25485 5.18075,1.68503 7.30612,3.04422 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/choker-obogatitel-dlya-bystrogo-zapuska-dellorto-vhsb-vhsh">
+				<path class="part" d="m 13.394558,260.73726 c 9.389853,-0.78367 18.406596,-4.55221 27.397958,-8.52381 l 14.916667,-2.43538 0.456632,-3.50085 2.739796,2.28317 5.631803,-0.45664 3.805272,2.7398 c 6.006555,2.25977 4.768876,2.44976 5.479592,3.19643 l 0.304422,7.15391 -1.978742,1.21769 -6.392857,0.45663 -0.608844,3.95748 -4.566326,2.89201 0,6.08843 -2.892007,3.65307 0.152211,19.02636 1.065476,2.13095 0,18.56973 c -3.736696,1.2712 -7.549156,2.31512 -12.481292,0 l 0.152211,-18.41752 1.065476,-1.97874 0.761054,-19.33078 -2.283163,-4.26191 -5.17517,0.15221 -4.414115,-1.3699 c -2.723585,-1.04821 -1.746374,-3.94682 -1.369898,-6.54506 -5.563719,-0.96348 -9.038148,0.58018 -12.633503,1.97874 l -6.84949,-0.76106 c -3.814414,-0.85719 -3.260436,-4.26262 -2.283163,-7.91496 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/gajka-v-karbyurator-dellorto-kz-i-rotax">
+				<path class="part" d="m 229.22959,887.69388 c -0.15498,7.4934 0.59457,11.82095 1.21769,16.59099 18.5338,23.64026 60.25083,18.81194 72.90901,-2.43538 0.0767,-6.3198 -0.12895,-11.22769 -0.45663,-15.52551 -24.94528,-28.62037 -64.28812,-15.67653 -73.67007,1.3699 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/rem-komplekt-dellorto-vhsb34">
+				<path class="part" d="m 410.96938,891.19473 131.66241,0.30442 -0.82566,162.91235 -131.09254,0 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/fiksator-trosa-gaza-rotax">
+				<path class="part" d="m 610.47366,944.62953 c 2.71638,-1.92447 5.38018,-3.96724 10.33241,-0.86104 l 29.49044,5.16621 c 5.58228,-2.62645 12.00314,-2.73716 18.72751,-1.93733 l 71.8964,12.05449 9.25613,-0.86104 c 3.59732,2.7437 2.60596,10.99382 3.6594,16.79018 -2.94187,20.64643 -5.88374,21.30957 -8.82561,27.5531 l -38.96182,37.0245 c -7.26847,-0.8626 -5.85553,5.6206 -6.02725,10.7629 l -5.59672,-1.5068 c -4.52873,-1.0846 -8.2382,-1.3499 -11.62397,-1.2915 -5.72538,-3.1546 -10.98765,-3.9937 -16.14441,-4.3052 l -4.30517,-0.6458 c -1.95107,-0.087 -2.76174,-0.9333 -6.2425,0 l -6.88828,-1.2915 c -4.0135,-7.7791 -7.17994,-7.9347 -9.47138,-0.2153 l -8.39509,0.2153 -10.33242,-3.2289 c -2.90728,-2.8381 -4.92118,-2.9961 -7.31879,-4.3052 -0.32159,-1.9053 -0.56833,-3.1742 0.21526,-8.395 1.08846,-5.1188 0.60776,-7.0993 0.64577,-10.1172 l -6.02724,-42.40599 c -1.52138,-4.11851 -3.12375,-8.19652 -1.29156,-13.99181 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/benzonasos-rotax">
+				<path class="part" d="m 349.58012,671.46624 11.83923,-7.53405 c -1.831,-1.37483 -3.40922,-2.83392 1.50681,-6.45776 l 38.5313,-21.95639 c 1.86016,-0.31273 3.01117,-0.86185 6.45776,-0.64577 l 16.79018,9.90189 c 7.0486,-3.39125 11.66517,-2.32378 11.83923,6.88828 l 26.47682,16.14441 12.26975,-7.3188 c 14.19248,-1.63092 14.60619,2.51646 17.22069,6.45776 l 0,12.485 c -2.11896,5.21665 -6.88746,6.45898 -11.19345,8.39509 l -0.21526,23.24794 -38.10079,23.03268 c -3.64143,0.44858 -7.02635,2.17975 -11.19345,0 l -5.81199,-3.87465 c -4.44215,1.71227 -9.17562,4.66264 -11.40871,-3.01363 -5.53844,0.8355 -8.59448,-1.55614 -8.39509,-8.17983 l -44.34329,-26.47682 c -4.44988,1.66458 -8.62846,-0.82553 -12.70026,-4.95095 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/rem-komplekt-benzonasosa-rotax">
+				<path class="part" d="m 591.31563,778.44981 c 38.96183,0.22134 77.92365,1.22758 116.88548,0.43052 l 12.70025,0.86104 c 0.81223,2.44252 2.55355,2.09776 3.87466,3.01362 l 49.07898,-0.21526 c 1.57856,0.20822 3.15713,-0.31807 4.73569,-4.08992 l -5.38146,-60.27243 c -1.96909,-2.11259 -2.72662,-3.01363 -4.08992,-4.52043 l -47.35691,-0.21526 -10.33242,-2.36785 c -0.18248,-1.3633 -2.05433,-2.72661 -4.52043,-4.08991 l -47.14165,0.43051 c -3.34897,-0.19769 -3.73536,1.82655 -4.95095,3.22889 l -13.34604,3.01362 -44.77381,-0.86104 c -4.04095,0.23974 -5.17379,1.93354 -5.81199,3.87466 l -2.36784,58.55036 c 1.31831,2.61839 2.03551,2.83235 2.79836,3.22888 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/toplivnyj-filtr-rotax">
+				<path class="part" d="m 515.75983,424.77978 28.41415,-17.43595 c 4.10224,-7.10354 3.00668,-14.20707 0.86103,-21.31061 3.20438,-0.21787 6.11701,-1.74865 8.17983,-7.10354 l 11.62397,-7.10354 c 0.46955,-4.2558 -0.9097,-7.07365 -5.59672,-7.31879 l -10.76294,6.67302 c -2.27537,-0.0207 -5.97944,1.38726 -10.54767,3.65939 l -6.88828,-6.02724 c -3.86194,-1.67992 -8.35707,-2.60003 -15.06811,-0.86104 l -24.75475,15.49863 c -18.76046,-0.36541 -16.85038,6.65152 -20.66484,11.62397 l -0.64577,1.50681 -5.59673,6.2425 1.50681,14.85285 c -5.69322,3.69156 -7.24722,6.00339 -9.68664,8.61035 l -9.04086,5.59673 c -3.43914,2.4074 3.78023,12.33584 6.02724,9.9019 0.58407,-0.63266 9.68664,-7.96457 9.68664,-7.96457 l 5.59672,-10e-6 4.52044,-4.08991 c 6.25556,6.08462 11.50486,14.38301 23.24794,8.39509 7.62722,-0.0579 15.31678,0.13366 19.58854,-13.34604 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/shlang-toplivnyj-freeline-tm-racing-1m">
+				<path class="part" d="m 534.27208,110.71735 c -23.02465,101.0934 -93.67676,136.35642 -115.99658,136.47314 -13.96426,1.8311 -28.72908,1.09316 -49.0119,-17.35204 l -0.60884,120.55102 c -2.6365,1.23594 -4.84879,6.71397 -8.21939,0.60884 L 359.5221,211.87756 C 341.37657,183.75675 349.19001,127.50746 380.83163,81.889472 395.16156,67.110831 418.71294,16.191484 485.55271,17.047636 l 28.31123,13.698979 c 19.14346,18.943942 27.22886,44.799177 20.40814,79.970735 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-carburetor-fuelpump/shlang-s-prostavkoj-karbyuratora-dellorto">
+				<path class="part" d="m 580.83673,211.87756 4.2619,-23.44047 c -5.38111,-37.5831 -4.15687,-70.89215 4.2619,-99.545918 9.95074,-31.768904 31.05657,-54.474304 66.97279,-65.146257 l 39.27041,-2.435374 c 10.25102,4.802803 61.41053,-2.181637 80.06292,77.627549 0.19079,22.56537 -2.22814,44.60879 -6.08843,66.36394 l -2.7398,35.00851 -2.13095,3.65306 -9.43707,0.60884 1.5221,-34.39966 c 3.15457,-24.98846 13.25622,-49.05064 5.4796,-75.496594 C 751.17277,45.613028 726.56127,39.471859 701.99659,33.181989 l -6.69728,2.739797 -37.7483,3.044217 -4.87075,-0.608844 c -35.69534,11.199468 -45.8485,35.906426 -55.40476,60.579931 -3.98486,26.82616 -5.32781,54.97328 -1.21769,85.84694 l 1.21769,17.04762 -1.82653,10.04591 c -4.02533,2.11355 -7.48256,5.64734 -14.61224,0 z" fill="#87d7fb">
+			</path></a>
+		</svg>
+		<img src="https://openkart.ru/image/catalog/scheme/schemes/scheme-0018.jpg" alt="Карбюратор, бензонасос">
+</div>
+<link href="https://openkart.ru/image/catalog/scheme/schemes/libs/scheme-v3.css" rel="stylesheet" media="screen"></div>
+      </div>
+                       <div class="row category-form-control-wrap">
+		  <div class="col-md-4 col-sm-12"></div>
+		  <div class="col-md-8 col-sm-12">
+			<div class="row">
+        		<div class="col-md-9 col-sm-6 category-control-sorts">
+          		<div class="category-form-control2">
+            		<span class="category-form-control-texts">Сортировка:</span>
+            		<select class="category-sorts2" onchange="location = this.value;"> 
+              		               		               			<option value="https://openkart.ru/rotax-idle-jet?sort=p.sort_order&amp;order=ASC" selected="selected">По умолчанию</option>
+              		               		               		               			<option value="https://openkart.ru/rotax-idle-jet?sort=pd.name&amp;order=ASC">Название (А - Я)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-idle-jet?sort=pd.name&amp;order=DESC">Название (Я - А)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-idle-jet?sort=p.price&amp;order=ASC">Цена (низкая &gt; высокая)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-idle-jet?sort=p.price&amp;order=DESC">Цена (высокая &gt; низкая)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-idle-jet?sort=rating&amp;order=DESC">Рейтинг (начиная с высокого)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-idle-jet?sort=rating&amp;order=ASC">Рейтинг (начиная с низкого)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-idle-jet?sort=p.model&amp;order=ASC">Модель (А - Я)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-idle-jet?sort=p.model&amp;order=DESC">Модель (Я - А)</option>           
+              		               		            
+            		</select>
+						<select id="width_tmp_select">
+ 							<option id="width_tmp_option"></option>
+						</select>
+          		</div>
+        		</div>
+        		<div class="col-md-3 col-sm-6 category-control-pages">
+          		<div class="category-form-control">
+            		<span class="category-form-control-texts">На странице:</span> 
+            		<select class="category-sorts3" onchange="location = this.value;">          
+              		               		               			<option value="https://openkart.ru/rotax-idle-jet?limit=16">16</option>   
+              		               		               		               			<option value="https://openkart.ru/rotax-idle-jet?limit=32">32</option>   
+              		               		               		               			<option value="https://openkart.ru/rotax-idle-jet?limit=48">48</option>   
+              		               		               		                   	<option value="https://openkart.ru/rotax-idle-jet?limit=96" selected="selected">96</option>            
+              		               		   
+            		</select>
+          		</div>
+        		</div>
+			</div>
+		 </div>
+      </div>
+      <div class="row"> 
+	  
+  	<div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition" onclick="if (event.ctrlKey) { window.open('https://openkart.ru/rotax-idle-jet/zhikler-kh-kh-vysokaya-golovka-30', '_blank'); return false; } else { location.href='https://openkart.ru/rotax-idle-jet/zhikler-kh-kh-vysokaya-golovka-30'; return false; }">
+     <h4 class="h4-product-name"><a href="https://openkart.ru/rotax-idle-jet/zhikler-kh-kh-vysokaya-golovka-30">Жиклер х/х высокая головка 30 (Rotax)</a></h4>
+			   <div class="product-info">	
+			<ul class="list-unstyled">
+                        <li>Производитель: Dellorto</li>
+                        <li>Модель: 1299530 02</li>
+				         </ul>
+		</div>
+      <div class="image"><a href="https://openkart.ru/rotax-idle-jet/zhikler-kh-kh-vysokaya-golovka-30"><img 
+				class="lazyload" data-src="https://openkart.ru/image/cache/catalog/data/C12995-228x228.jpg"
+			 alt="Жиклер х/х высокая головка 30 (Rotax)" title="Жиклер х/х высокая головка 30 (Rotax)" class="img-responsive" /></a></div>
+      <div class="caption">      
+        <div class="price"> 
+						           651.00&nbsp;<span class="currency-rub">₽</span>
+           
+          
+			            <br /><span class="product-quantity">В наличии: 4</span>
+					  </div>
+		  <div class="cart-btn-wrap">
+          <div class="category-plus-minus">
+  				<button type="button" onclick="event.stopPropagation(); if ($(this).next().val() > 1) {$(this).next().val($(this).next().val()-1);} $(this).parents('form').submit();" class="minus" window.event.cancelBubble = "true">&ndash;</button>
+            <input type="text" onclick="event.stopPropagation();" name="quantity" value="1" size="2" id="input-quantity" class="quantity-items" window.event.cancelBubble = "true" />
+  				<button type="button" onclick="event.stopPropagation(); $(this).prev().val(~~$(this).prev().val()+1); $(this).parents('form').submit();" class="plus" window.event.cancelBubble = "true">+</button>        
+          </div>
+        	 <button type="button" class="cart-btn" onclick="event.stopPropagation(); cart.add('1905',$(this).parent().find('.quantity-items').val());" window.event.cancelBubble = "true">Купить</button>   
+		  </div>
+		</div>        
+    </div>
+  </div>
+    
+  	<div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition" onclick="if (event.ctrlKey) { window.open('https://openkart.ru/rotax-idle-jet/zhikler-kh-kh-vysokaya-golovka-60', '_blank'); return false; } else { location.href='https://openkart.ru/rotax-idle-jet/zhikler-kh-kh-vysokaya-golovka-60'; return false; }">
+     <h4 class="h4-product-name"><a href="https://openkart.ru/rotax-idle-jet/zhikler-kh-kh-vysokaya-golovka-60">Жиклер х/х высокая головка 60 (Rotax и Rotax Evo)</a></h4>
+			   <div class="product-info">	
+			<ul class="list-unstyled">
+                        <li>Производитель: Dellorto</li>
+                        <li>Модель: 1299560 02</li>
+				         </ul>
+		</div>
+      <div class="image"><a href="https://openkart.ru/rotax-idle-jet/zhikler-kh-kh-vysokaya-golovka-60"><img 
+				class="lazyload" data-src="https://openkart.ru/image/cache/catalog/data/C12995-228x228.jpg"
+			 alt="Жиклер х/х высокая головка 60 (Rotax и Rotax Evo)" title="Жиклер х/х высокая головка 60 (Rotax и Rotax Evo)" class="img-responsive" /></a></div>
+      <div class="caption">      
+        <div class="price"> 
+						           651.00&nbsp;<span class="currency-rub">₽</span>
+           
+          
+			            <br /><span class="product-quantity">В наличии: 5</span>
+					  </div>
+		  <div class="cart-btn-wrap">
+          <div class="category-plus-minus">
+  				<button type="button" onclick="event.stopPropagation(); if ($(this).next().val() > 1) {$(this).next().val($(this).next().val()-1);} $(this).parents('form').submit();" class="minus" window.event.cancelBubble = "true">&ndash;</button>
+            <input type="text" onclick="event.stopPropagation();" name="quantity" value="1" size="2" id="input-quantity" class="quantity-items" window.event.cancelBubble = "true" />
+  				<button type="button" onclick="event.stopPropagation(); $(this).prev().val(~~$(this).prev().val()+1); $(this).parents('form').submit();" class="plus" window.event.cancelBubble = "true">+</button>        
+          </div>
+        	 <button type="button" class="cart-btn" onclick="event.stopPropagation(); cart.add('821',$(this).parent().find('.quantity-items').val());" window.event.cancelBubble = "true">Купить</button>   
+		  </div>
+		</div>        
+    </div>
+  </div>
+   
+
+	
+		</div>
+      <div class="row">
+        <div class="col-md-6 text-left category-pagination"></div>
+        <div class="col-md-6 text-right category-results"><span class="category-form-control-texts">Показано</span> с 1 по 2 из 2 (всего 1 страниц)</div>
+      </div>
+                  </div>
+    </div>
+</div>
+<footer>
+  <div class="container">
+    <div class="row footer-links">
+            <div class="col-md-2 col-sm-4">
+        <h5>Информация</h5>
+        <ul class="list-footer-links">
+          <li><a href="https://openkart.ru/contact-us">Адреса и телефоны</a></li>
+                   <li><a href="https://openkart.ru/delivery">Доставка запчастей для картинга</a></li>
+                    <li><a href="https://openkart.ru/oplata">Способы оплаты</a></li>
+                  </ul>
+      </div>
+       
+		<div class="col-md-4 col-sm-8">	
+		  <div class="row">	
+      	<div class="col-md-7 col-sm-7 footer-service">
+        	 <h5>Служба поддержки</h5>
+        	 <ul class="list-footer-links">
+          	<li><a href="https://openkart.ru/kak-sdelat-zakaz">Как сделать заказ</a></li>
+          	<li><a href="https://openkart.ru/katalogi-i-tablitsy-razmerov">Каталоги и таблицы размеров</a></li>
+          	<li><a href="https://openkart.ru/nastroyka-karta-i-prochee">Настройка карта и прочее</a></li>
+        	 </ul>
+      	</div>
+      	<div class="col-md-5 col-sm-5 footer-extra"> 
+          <h5>Дополнительно</h5>
+        	 <ul class="list-footer-links">
+          	<li><a href="https://openkart.ru/brands">Производители</a></li>
+          	<li><a href="https://openkart.ru/specials">Акции</a></li>
+          	<li><a href="https://openkart.ru/latest">Новинки</a></li>
+          	<li><a href="https://openkart.ru/sitemap">Карта сайта</a></li>
+          </ul>
+      	</div>
+		  </div>
+		</div>
+      <div class="col-md-2 col-sm-4 footer-account"> 
+        <h5>Личный Кабинет</h5>
+        <ul class="list-footer-links">
+          <li><a href="https://openkart.ru/my-account">Личный Кабинет</a></li>
+          <li><a href="https://openkart.ru/order-history">История заказов</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 col-sm-8 footer-map">   
+        <h5 class="h5-fix">НАШ АДРЕС</h5>
+        <ul class="list-unstyled">
+          <li><i class="fa fa-map-marker"></i> г. Санкт-Петербург, ул. Плуталова, д. 8</li>
+          <li><i class="fa fa-mobile"></i> +7-921-9672225</li>
+          <li><i class="fa fa-envelope-o"></i> <a href="/cdn-cgi/l/email-protection#50393e363f103f20353e3b3122247e2225" class="footer-email"><span class="__cf_email__" data-cfemail="c4adaaa2ab84abb4a1aaafa5b6b0eab6b1">[email&#160;protected]</span></a></li>
+			 <li class="footer-icons">
+				<a href="https://www.facebook.com/openkart.ru/" class="fa fa-facebook" target="_blank"></a>
+				<a href="https://telegram.me/openkartnews" class="fa fa-telegram" target="_blank"></a>
+				<a href="https://www.instagram.com/openkart/" class="fa fa-instagram" target="_blank"></a>
+				<a href="https://vk.com/openkart" class="fa fa-vk" target="_blank"></a>
+			 </li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyrights">&copy; 2020 Openkart</div>
+  </div>
+</footer>
+<div class="in-stock-btn-form" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000000db; z-index: 9999999; text-align: center;">	
+	<div style="display: table-cell; vertical-align: middle;">	
+		<form method = "post">
+			<span style="font-size: 17px; color: #fff;">Уведомить о поступлении на e-mail:</span>
+			<input type="email" placeholder="username@example.ru" class="form-control" name="mail_in_stock" style="width: 80%; max-width: 400px; margin: 15px auto 25px;" />
+			<input type="hidden" class="form-control product-id-in-stock" name="product_id_in_stock" />
+			<button type="submit" name="send_in_stock" value = "OK" data-loading-text="Загрузка..." class="btn btn-success in-stock-btn-close">ОК</button>
+			<button type="button" class="btn btn-danger in-stock-btn-close" onclick="$('.in-stock-btn-form').hide();">Отмена</button> 
+		</form>
+	</div>
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript"><!--
+	$('.cart-btn').on('click', function(){
+	    setTimeout(function() {
+	        loadCart8(); //fix3
+		}, 1000);
+		$('.cart-total-href').css({ display: 'block' });
+		if ($(this).closest('.product-thumb').find('img').length == 1) {
+			var that = $(this).closest('.product-thumb').find('img');
+		} else {
+			var that = $(this).closest('#content').find('img');
+		}			
+		var cartTotalHref = $(".cart-total-href");
+		var w = that.width();		
+        that.clone()
+            .css({'width' : w,
+			'position' : 'absolute',
+			'z-index' : '9999',
+			top: that.offset().top,
+			left: that.offset().left })
+            .appendTo("body")
+            .animate({opacity: 0.05,
+                left: cartTotalHref.offset()['left'],
+                top: cartTotalHref.offset()['top'],						
+                width: 20}, 1000, function() {	
+					$(this).remove();
+				});
+	});
+//--></script>
+	<script type="text/javascript">
+  		WebFontConfig = {
+    		google: { families: [ 'Open+Sans:300,400,400i,700' , 'Roboto:300,400,500,700' ] }
+  		};
+  		(function() {
+    		var wf = document.createElement('script');
+    		wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+   		wf.type = 'text/javascript';
+    		wf.async = 'true';
+    		var s = document.getElementsByTagName('script')[0];
+    		s.parentNode.insertBefore(wf, s);
+  		})();
+	</script>
+</body></html>
+ 

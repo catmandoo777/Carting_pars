@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]><html dir="ltr" lang="ru" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html dir="ltr" lang="ru" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html dir="ltr" lang="ru">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Радиатор Rotax для картов. Все для картинга на Openkart.ru</title>
+<base href="https://openkart.ru/" />
+<meta name="description" content="У нас вы можете купить радиатор Rotax для гоночных картов - в наличии и под заказ, с экспресс-доставкой по России. Все для картинга на Openkart.ru" />
+<meta name="yandex-verification" content="bf8adcc2e2331beb" />
+<script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script defer src="catalog/view/javascript/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<!--<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700|Roboto:300,400,500,700&amp;subset=cyrillic,cyrillic-ext" rel="stylesheet">-->
+<link href="catalog/view/theme/ktemplate/stylesheet/stylesheet-v3.24.css" rel="stylesheet">
+			<!-- cdek -->
+				<!-- cdek -->
+	    <script defer src="catalog/view/javascript/common4.js" type="text/javascript"></script>
+<script defer src="catalog/view/javascript/custom4.3.js" type="text/javascript"></script>
+<script defer src="catalog/view/javascript/lazyload/lazysizes.min.js"></script>
+<link rel="apple-touch-icon" sizes="192x192" href="https://openkart.ru/image/catalog/favicons/favicon-192x192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://openkart.ru/image/catalog/favicons/favicon-192x192.png">
+<meta name="msapplication-config" content="https://openkart.ru/image/catalog/favicons/browserconfig.xml">
+<link href="https://openkart.ru/rotax-radiators" rel="canonical" />
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(48771104, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true,
+        ecommerce:"dataLayer"
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/48771104" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2983350-12"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2983350-12');
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script type="text/javascript">
+	var selector = 'input.form-control.input-search';
+	var catTitle = 'Категории';
+	var prodTitle = 'Товары';
+	var viewAllTitle = 'Посмотреть все товары';
+	var noResTitle = 'Ничего не найдено';
+
+	console.log(selector);
+
+	$(document).ready(function() {
+
+		var timer = null;
+		$('input.form-control.input-search').keydown(function(){
+	       clearTimeout(timer); 
+	       timer = setTimeout(sphinxAutocomplete, 500)
+		});
+
+	});
+
+	$(document).mouseup(function (e) {
+		
+		if (!$('.sphinxsearch').is(e.target) && $('.sphinxsearch').has(e.target).length === 0) {
+			$('.sphinxsearch').hide();
+			$('input.form-control.input-search').removeClass('no-bottom-borders');
+			return false;
+		}
+		
+	});
+
+	function sphinxAutocomplete() {
+
+		if($(selector).val() == '') {
+			$('.sphinxsearch').hide();
+			$('input.form-control.input-search').removeClass('no-bottom-borders');
+			return false;
+		}
+
+		$.ajax({
+			url: 'https://openkart.ru/index.php?route=extension/module/sphinxautocomplete&search=' + $(selector).val(),
+			dataType: 'json',
+			success: function(json) {
+
+				var html = '';
+				
+				//Categories
+				if (json.categories.length) {
+					html += '<div class="categories"><span>'+catTitle+'</span>';
+					var categories = json.categories;
+					for (i = 0; i < categories.length; i++) {
+						html += '<a class="sphinxsearcha" href="' + categories[i]['href'] + '">';
+							if(categories[i]['image'] != '') {
+								html += '<img src="' + categories[i]['image'] + '" />';
+							}
+							html += categories[i]['name'];
+							html += '<br />';
+						html += '</a>';
+					}
+					html += '</div>';
+				}
+				
+				//Products
+				if (json.products.length) {
+					if (json.categories.length) { html += '<div class="products"><span>'+prodTitle+'</span>'; }
+					var products = json.products;
+					for (i = 0; i < products.length; i++) {
+						html += '<a class="sphinxsearcha" href="' + products[i]['href'] + '">';
+							html += '<img src="' + products[i]['image'] + '" />';
+							html += products[i]['name'];
+							html += '<br />';
+						html += '</a>';
+					}
+					if (json.categories.length) {  html += '</div>'; }
+					html += '<div class="sphinx-viewall"><a id="view-all" href="https://openkart.ru/search?wildcard=true&amp;search=' + encodeURIComponent($(selector).val()) + '">'+viewAllTitle+'</a></div>';
+				} else {
+					html = '<div class="sphinx-viewall">'+noResTitle+'</div>';
+				}
+
+                $('.sphinxsearch').remove();
+				$(selector).after('<div class="sphinxsearch">'+ html +'</div>');
+				$('.sphinxsearch').show();
+				$('input.form-control.input-search').addClass('no-bottom-borders');
+
+				$('.sphinxsearcha').hover(
+					function(){$(this).addClass('sphinxsearch-a-active');},
+ 					function(){$(this).removeClass('sphinxsearch-a-active');}
+				);
+
+			}
+		});
+			
+	}
+</script>
+
+</head>
+<body> 
+<header>
+  <div class="container">
+    <div class="row header-contacts">
+      <div class="col-sm-12">
+			<i class="fa fa-map-marker"></i>г. Санкт-Петербург, ул. Плуталова, д. 8
+			<i class="fa fa-mobile"></i><a href="tel:+79219672225">+7-921-9672225</a>
+			<i class="fa fa-envelope-o"></i><a href="/cdn-cgi/l/email-protection#0e676068614e617e6b60656f7c7a207c7b"><span class="__cf_email__" data-cfemail="93fafdf5fcd3fce3f6fdf8f2e1e7bde1e6">[email&#160;protected]</span></a>
+			<i class="fa fa-calendar-o"></i>Время работы: ПН-ПТ 9:00-18:00
+	 	</div>
+	 </div>
+    <div class="row header-contacts-mobile">
+      <div class="col-sm-12">
+			<span class="dropdown"><a href="#" class="dropdown-toggle icon-map-marker" data-toggle="dropdown" aria-expanded="false">
+				<i class="fa fa-map-marker"></i></a>
+				<span class="dropdown-menu dropdown-menu-left dropdown-paddings">г. Санкт-Петербург,<br />ул. Плуталова, д. 8</span>
+			</span>
+			<a href="tel:+79219672225" class="icon-mobile"><i class="fa fa-mobile"></i></a>
+			<a href="/cdn-cgi/l/email-protection#86efe8e0e9c6e9f6e3e8ede7f4f2a8f4f3" class="icon-envelope"><i class="fa fa-envelope-o"></i></a>
+			<span class="dropdown"><a href="#" class="dropdown-toggle icon-calendar" data-toggle="dropdown" aria-expanded="false">
+				<i class="fa fa-calendar-o"></i></a>
+				<span class="dropdown-menu dropdown-menu-right dropdown-paddings">Время работы:<br />ПН-ПТ 9:00-18:00</span>
+			</span>
+	 	</div>
+	 </div>
+    <div class="row header">
+      <div class="col-sm-3">
+        <div id="logo">
+				<a href="https://openkart.ru/"><img src="/catalog/view/theme/ktemplate/image/logo.png" title="Openkart - Все для картинга" alt="Openkart - Все для картинга" class="img-responsive" /></a>
+			</div>
+      </div>
+		<div class="col-sm-9"> 
+	 	  <div class="row">
+      	<div class="col-sm-5 col-lg-7">
+  			  <nav class="navbar header-menu"> 
+    			<div class="navbar-header">
+      			<button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
+    			</div>
+    			<div class="collapse navbar-collapse navbar-ex1-collapse">
+      			<ul class="nav navbar-nav header-links">
+        				<li><a href="https://openkart.ru/" class="link-home">Главная</a></li> 
+        				<li><a href="https://openkart.ru/latest">Новинки</a></li> 
+        				<li><a href="https://openkart.ru/specials">Акции</a></li> 
+        				<li><a href="https://openkart.ru/oplata">Оплата</a></li> 
+        				<li><a href="https://openkart.ru/contact-us">Контакты</a></li>  
+      			</ul>
+    			</div> 
+  			  </nav>
+			</div> 
+	 	<div class="col-sm-7 col-lg-5 header-right-row">
+       <div class="header-search"><div id="search"> 
+  <input type="text" name="search" value="" placeholder="Поиск..." class="form-control input-search" autocomplete="off" /> 
+  <button type="submit" value="Искать" class="button search-submit"><i class="fa fa-search"></i></button>
+</div>
+</div>
+       <div class="header-account">
+		  <ul class="list-inline"> 
+         <li class="dropdown"><a href="https://openkart.ru/my-account" title="Личный кабинет" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i></a> 
+          <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="https://openkart.ru/create-account">Регистрация</a></li>
+            <li><a href="https://openkart.ru/login">Авторизация</a></li>
+                       </ul>
+          </li>
+		   </ul>
+        </div>
+        <div class="header-cart">
+		   <div id="cart">
+  <a data-toggle="dropdown" data-loading-text="Загрузка..." class="dropdown-toggle my-cart" title="Корзина"><i class="fa fa-shopping-cart"></i> <div id="cart-total">0</div></a>
+  <ul class="dropdown-menu pull-right dropdown-menu-wrap">
+        <li>
+        <div class="marker"></div>
+        <p class="text-center">Ваша корзина пуста!</p>
+    </li>
+      </ul>
+</div>
+<a class="cart-total-href" href="/checkout2" style="display:none;"><i class="fa fa-shopping-cart" style="font-size:22px;height:20px;width:28px;margin-left:-4px;"></i><div class="cart-total-btn">0</div></a>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript"><!--
+function loadCart8() {
+	$.ajax({
+		url: 'index.php?route=extension/quickcheckout/cart2',
+		dataType: 'html',
+		cache: false,
+		beforeSend: function() {
+			$('.tooltip').remove();
+		},
+		success: function(html) {			
+			$('.cart8 .quickcheckout-content').html(html);
+		}
+	});
+}
+
+$(document).ready(function(){
+    loadCart8();
+});
+
+$(document).on('click', '.cart8 .button-update', function() {
+	var quantity = $(this).parents('.quantity').find('input.qc-product-qantity');
+	if (quantity.length){
+		if ($(this).data('type')=='increase') {
+			quantity.val(parseInt(quantity.val())+1);
+		} else if ($(this).data('type')=='decrease') {
+			quantity.val(parseInt(quantity.val())-1);
+		}
+	}
+	
+	$.ajax({
+		url: 'index.php?route=extension/quickcheckout/cart2/update',
+		type: 'post',
+		data: $('.cart8 :input'),
+		dataType: 'json',
+		cache: false,
+		beforeSend: function() {
+			$('.cart8 .button-update').prop('disabled', true);
+		},
+		success: function(json) {
+			if (json['redirect']) {
+			    if (window.location.pathname == '/checkout2') {
+				    location = json['redirect'];
+				} else {
+				    $('ul.dropdown-menu.pull-right.dropdown-menu-wrap').html('<li><div class="marker"></div><p class="text-center">Ваша корзина пуста!</p></li>');
+			        $('#cart-total').html(json['count_products']);
+				    $('.cart-total-btn').html(json['count_products']);
+				}
+			} else {
+				if (json['error']['stock']) {
+					$('#button-payment-method').attr("disabled", true);
+				} else if (json['error']['warning']) {
+						$('#warning-messages').html('<div class="alert alert-danger" style="display: none;"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '</div>');
+						$('.alert-danger').fadeIn('slow');
+						$('#button-payment-method').attr("disabled", true);
+				} else {
+					$('#warning-messages').html('');
+					$('#button-payment-method').removeAttr("disabled");
+				}
+                if (window.location.pathname == '/checkout2') {
+			        reloadShippingMethodById($('#shipping-address select[name=\'address_id\']').val());			    
+				}				
+			    loadCart8();
+				$('#cart-total').html(json['count_products']);
+				$('.cart-total-btn').html(json['count_products']);				
+			}
+		}
+	});
+
+	return false;
+});
+
+$(document).on('click', '.button-remove', function() {
+	var remove_id = $(this).attr('data-remove');
+
+	$.ajax({
+		url: 'index.php?route=extension/quickcheckout/cart2/update&remove=' + remove_id,
+		type: 'get',
+		dataType: 'json',
+		cache: false,
+		beforeSend: function() {
+			$('.cart8 .button-remove').prop('disabled', true);
+		},
+		success: function(json) {
+			if (json['redirect']) {
+			    if (window.location.pathname == '/checkout2') {
+				    location = json['redirect'];
+				} else {
+				    $('ul.dropdown-menu.pull-right.dropdown-menu-wrap').html('<li><div class="marker"></div><p class="text-center">Ваша корзина пуста!</p></li>');
+			        $('#cart-total').html(json['count_products']);
+				    $('.cart-total-btn').html(json['count_products']);
+				}
+			} else {
+			    if (window.location.pathname == '/checkout2') {
+				    reloadShippingMethodById($('#shipping-address select[name=\'address_id\']').val());
+				}
+				loadCart8();
+				$('#cart-total').html(json['count_products']);
+				$('.cart-total-btn').html(json['count_products']);
+			}
+		}
+	});
+
+	return false;
+});
+//--></script>
+
+        </div>
+	 	</div>
+	 	</div>
+	  </div>
+    </div>
+  </div>
+</header>
+<div class="container categories-menu2">
+	<div class="row categories2">
+		<div class="category-menu2">
+			<a href="/chassis_parts">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category1.png" alt="ШАССИ И ЗАПЧАСТИ">
+					<div class="category-text2">ШАССИ И <br class="category-text-break" />ЗАПЧАСТИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/engines_and_parts">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category2.png" alt="МОТОРЫ И ЗАПЧАСТИ">
+					<div class="category-text2">МОТОРЫ И <br class="category-text-break" />ЗАПЧАСТИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2"> 
+			<a href="/kart_tools">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category3.png" alt="ОБОРУДОВАНИЕ">
+					<div class="category-text2">ОБОРУДОВА- <br class="category-text-break" />НИЕ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/data_systems">
+				<div class="category-link5 category-link5-fix2">
+					<img src="/catalog/view/theme/ktemplate/image/category4.png" alt="ЭЛЕКТРОННЫЕ СИСТЕМЫ">
+					<div class="category-text2">ЭЛЕКТРОННЫЕ <br class="category-text-break" />СИСТЕМЫ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/tyres_and_wheels">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category5.png" alt="ШИНЫ И ДИСКИ">
+					<div class="category-text2">ШИНЫ И <br class="category-text-break" />ДИСКИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/protection_wear">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category6.png" alt="ЭКИПИРОВКА И ШЛЕМЫ">
+					<div class="category-text2">ЭКИПИРОВКА <br class="category-text-break" />И ШЛЕМЫ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/lubricants">
+				<div class="category-link5">
+					<img src="/catalog/view/theme/ktemplate/image/category7.png" alt="МАСЛО И СМАЗКИ">
+					<div class="category-text2">МАСЛО И <br class="category-text-break" />СМАЗКИ</div>
+				</div>
+			</a>
+		</div> 
+		<div class="category-menu2">
+			<a href="/sprockets_and_chains">
+				<div class="category-link5 category-link5-fix">				
+					<img src="/catalog/view/theme/ktemplate/image/category8.png" alt="ЦЕПИ И ЗВЕЗДЫ">
+					<div class="category-text2">ЦЕПИ И <br class="category-text-break" />ЗВЕЗДЫ</div>
+				</div>
+			</a>
+		</div> 
+	</div>
+</div>
+
+<div id="product-category" class="container">
+  <ul class="breadcrumb-category">
+        <li><a href="https://openkart.ru/">Главная</a></li>
+        <li><a href="https://openkart.ru/rotax-radiators">Радиатор Rotax</a></li>
+      </ul>
+  <h1>Радиатор Rotax</h1>
+  <div class="row">
+                <div id="content" class="col-sm-12">
+      	  		      <div class="row category-description">         
+        <div class="col-sm-12"><div class="interactive-scheme">
+		<svg viewBox="0 0 795 957">
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-radiator/rotax-radiators">
+				<path class="part" d="m 488.26531,189.88095 c 13.96901,-5.04354 13.66492,0.10798 18.44557,1.62755 l 40.14626,24.95579 66.7296,50.45408 c 4.448,3.70683 8.2974,7.34601 3.79761,16.27551 0.64538,3.82416 3.33004,4.58941 5.96769,5.42517 l 7.59524,-9.22279 c 4.46326,0.70861 10.55142,-1.56177 9.22279,9.7653 -4.22872,5.32078 -13.63896,9.77797 -12.319,16.02354 6.34158,8.11148 49.7974,121.25604 74.70845,181.99517 5.24718,3.83654 7.33973,8.13741 3.414,16.0508 l -7.75413,8.90498 0.54252,2.17007 c -2.94362,3.99838 -4.50569,2.47058 -6.51021,2.71259 l -11.39286,11.39285 c -6.69547,5.46055 -12.17654,1.20595 -17.90306,-1.08503 l -29.77262,-11.61757 c -1.68042,-1.17035 -2.07226,-3.19975 -6.57602,-2.48787 l -30.92347,-16.27551 -15.50828,-10.69145 c -8.63855,-3.21316 -11.63386,-10.34923 -14.33015,-17.51944 -6.46607,-2.07836 -7.72464,-10.40571 -9.22279,-18.44557 -6.45993,-1.73682 -5.96218,-6.08278 -4.34014,-10.85034 l -46.11394,-115.01361 -13.56293,11.39286 c -15.03409,5.14145 -19.27263,-10.18643 -8.29665,-27.60255 l 11.00924,-9.28861 -11.39286,-32.07432 c -12.29705,2.49189 -24.59411,4.08266 -36.89116,-1.56173 l -8.13775,-0.54252 c -2.32299,-7.01935 -2.91832,-14.21146 4.88265,-22.2432 l 7.05272,2.71259 c 7.59524,0.58783 16.72495,2.89575 24.32019,-0.29054 -4.04596,-1.56005 -5.23131,-5.59709 -5.33209,-11.10232 0.10359,-3.20331 -2.56773,-7.79407 -4.34014,-11.93537 -1.70784,-3.78424 0.46272,-8.21488 4.88266,-13.02041 z" fill="red">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-radiator/kryshka-radiatora-rotax">
+				<path class="part" d="m 452.6686,157.54122 7.67235,16.49555 2.68532,0 2.3017,7.28874 3.06894,0.76723 0.38362,-2.3017 6.13788,2.3017 1.15085,1.91809 3.83618,0 0.38361,-2.49352 7.09693,-1.15085 0.95904,2.49352 3.64437,-1.72628 -0.19181,-2.49352 6.13788,-3.83617 0.95904,0.95904 3.26075,-1.34266 -0.76724,-4.21979 3.26075,-3.83617 2.87713,-1.34267 0.19181,-3.26074 -3.26075,-4.2198 2.1099,-2.10989 -6.32969,-16.30374 -3.26075,-0.38362 c 0.0991,-3.19681 -3.69973,-6.39363 -9.20682,-9.59044 l -1.53447,2.1099 -3.06894,-2.30171 -3.83617,1.53447 -3.45256,-1.15085 -2.49351,2.49351 -1.72628,-1.15085 -5.56245,4.02799 -2.68532,-0.57543 -5.94608,4.98703 0.95905,2.49351 -5.56245,6.90511 1.15085,4.4116 c 0.85864,3.29694 -0.21923,3.74011 -1.34266,4.60341 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-radiator/kryshka-radiatora-rotax">
+				<path class="part" d="m 384.00107,571.65627 -0.57542,-3.45256 5.56245,-5.37064 2.1099,0.95904 4.98702,-3.83618 4.79522,0.38362 0.19181,-1.34266 9.01501,-0.57543 1.72628,2.1099 0.95904,-1.72628 2.1099,-0.57542 5.75426,3.45255 2.87713,5.94607 3.26075,0.57543 6.32969,16.49555 -2.30171,1.15085 2.49352,5.75426 -0.38362,3.06894 -2.68532,0 -2.68533,4.79522 0,4.21979 -1.34266,0.38362 -1.91808,-0.19181 -6.5215,4.98703 0.38362,1.15085 -2.68533,0.76724 -1.72627,-1.34266 -7.67235,1.34266 -0.57543,1.91808 -2.49351,0.19181 -0.95905,-1.53447 -5.94607,-2.10989 -3.45255,0.76723 -1.72628,-2.10989 0,-2.1099 -1.53447,-2.68532 -2.87713,-0.57543 -7.28874,-15.72831 2.1099,-0.95905 -2.3017,-7.67235 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-radiator/krepezh-radiatora-rotax">
+				<path class="part" d="m 125.05929,104.98563 c -0.17418,-7.335048 5.00676,-9.314963 9.78225,-11.70033 l 14.57746,9.97405 3.64436,4.2198 c 3.19253,0.73658 7.41491,-0.38056 8.24778,4.60341 l 105.87842,66.94124 4.98702,-0.38362 17.4546,11.70034 c 2.52476,7.54747 -0.81484,10.53376 -7.48054,10.93309 l -18.79726,-11.1249 0.95905,-3.06894 -109.9064,-64.25593 c -4.02263,2.09651 -5.80876,-1.39824 -7.86416,-4.21979 l -5.56246,-1.53446 -15.34469,-9.20682 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-radiator/khomut-16-25mm">
+				<path class="part" d="m 257.02369,257.66538 c -2.82988,3.245 -2.44088,5.41704 -2.3017,7.67235 l 8.8232,6.32969 c 2.67547,0.0983 5.48039,0.58498 7.67235,-0.76724 6.52324,-1.41414 12.23101,0.70542 20.13992,-6.7133 l -0.19181,-14.19385 c -4.3136,-6.48527 -18.08207,-11.27708 -30.30578,-1.53447 -1.27873,2.58346 -2.55745,5.60092 -3.83618,9.20682 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-radiator/khomut-16-25mm">
+				<path class="part" d="m 419.6775,374.47689 c 16.34231,4.36037 16.78618,14.4528 18.79725,24.74334 l -8.24777,8.63138 2.49351,1.53447 c -0.14278,3.59821 -0.84543,6.2633 -4.02798,4.79522 l -3.26075,-0.95904 -9.78225,-5.37065 -1.15085,-5.17883 c -4.37638,-4.52106 -5.26664,-7.96929 -6.71331,-12.08395 -0.39572,-1.5742 -0.0679,-4.59548 0,-7.09693 l 4.02799,-4.6034 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-radiator/khomut-16-25mm">
+				<path class="part" d="m 186.62989,688.27597 c -3.37643,2.23777 -3.39288,4.47554 -3.26075,6.71331 l 8.8232,6.13788 5.37065,1.34266 2.3017,-2.1099 c 7.22412,-1.5402 14.99061,1.52973 21.29077,-7.86416 l -0.38361,-12.46756 c -7.72177,-8.28034 -17.59742,-9.62042 -29.92217,-3.06894 -2.48068,3.6188 -5.20804,7.20235 -4.21979,11.31671 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-radiator/khomut-16-25mm">
+				<path class="part" d="m 340.46049,656.43572 12.27576,2.68533 c 9.7887,-9.88147 9.61294,-20.5601 6.71331,-31.45664 -2.27566,-2.072 -6.22205,-2.47328 -9.97406,-3.06893 -1.3131,-1.93803 -2.97216,-2.14625 -4.79522,-1.53447 l -7.48054,11.50852 c -0.039,5.39014 -0.29545,10.21768 0.57543,15.15289 0.49837,2.35949 0.21246,5.83467 2.68532,6.7133 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-radiator/khomut-16-25mm">
+				<path class="part" d="m 407.20993,884.87992 9.78224,6.32969 c 2.00132,0.29073 4.0894,0.45133 7.09693,-0.76724 11.56144,-7.80557 13.45964,-16.30138 10.74129,-25.12694 l -8.82321,-5.75426 c 0.92526,-3.84094 -1.85151,-5.17176 -3.83617,-6.5215 l -13.04299,11.89214 0.57542,3.83618 c -3.54114,5.09965 -4.06338,10.50118 -2.49351,16.11193 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-radiator/khomut-16-25mm">
+				<path class="part" d="m 337.77516,811.41717 10.16587,-5.56244 c 17.31357,1.70991 16.95091,13.05017 19.56449,23.59247 l -8.05596,8.63139 2.68532,1.53447 c -0.17434,4.27021 -2.32522,5.24621 -5.56246,4.4116 -5.34614,-3.47958 -13.27184,-6.88903 -12.46756,-10.35767 -5.66647,-6.91256 -8.30546,-14.31829 -6.3297,-22.24982 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-radiator/khomut-16-25mm">
+				<path class="part" d="m 480.09725,438.3492 c -0.59406,-0.96974 -0.32192,-4.36216 2.3017,-5.56245 l 9.39863,-9.01501 c 4.89453,1.0947 4.87109,3.53067 4.21979,6.13788 l 9.97405,5.17883 0.95905,2.68532 c -0.0259,17.03434 -9.48599,20.04988 -13.043,23.78429 -1.52305,0.46468 -3.21882,0.67029 -5.75426,-0.38362 -3.45697,-1.99085 -6.9719,-4.0976 -10.9331,-7.09692 0.24414,-4.88532 -1.14476,-8.95412 2.87714,-15.72832 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-radiator/khomut-16-25mm">
+				<path class="part" d="m 410.85429,226.97598 12.65938,2.30171 c 6.63499,-4.00464 12.20192,-19.90385 5.94607,-31.64844 -4.34412,-3.22257 -6.44542,-2.52023 -8.8232,-2.30171 -1.04977,-2.06971 -3.35968,-2.24921 -5.37064,-2.87713 l -6.5215,11.70033 c 0.40752,7.63799 -2.83113,15.6406 2.10989,22.82524 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/cooling_group/waterpipes">
+				<path class="part" d="m 371.3417,838.2704 c -0.37665,11.96353 3.49314,21.25337 16.87916,24.55151 l 24.55152,-14.76927 c 3.90011,-0.8419 7.80022,-1.89907 11.70033,-0.76723 l 15.72832,9.78224 c 11.26124,-2.22607 18.3688,-8.93812 16.87917,-24.93513 l -21.29077,-12.65938 c -10.42161,-2.68778 -20.84321,-1.8854 -31.26482,0 -11.69006,5.00758 -22.5025,11.77039 -33.18291,18.79726 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/cooling_group/waterpipes">
+				<path class="part" d="m 299.79704,275.31178 c 5.60105,7.08099 21.06816,11.55779 30.49759,-0.19181 l -0.38362,-16.68736 c 8.02872,-4.76753 19.78533,-2.82487 30.11397,-3.45255 18.97287,2.25479 37.92048,4.63593 56.39177,9.39862 6.09954,-2.95381 10.60031,-9.10515 9.59043,-26.27779 l -2.3017,-2.68532 c -16.30374,-3.42773 -32.60749,-5.88423 -48.91123,-8.82321 -11.94507,-1.22854 -24.20224,-2.06696 -38.16993,-0.76723 -20.84538,2.76222 -25.95677,10.47298 -32.22387,16.49555 -5.85664,10.99703 -3.28836,21.99407 -4.60341,32.9911 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/cooling_group/waterpipes">
+				<path class="part" d="m 442.11912,408.04342 27.62045,-16.11193 c 9.51353,-2.72393 19.1298,-5.31087 31.64844,-4.02798 8.37136,3.11573 17.43766,9.01119 26.2778,14.00203 3.59586,15.85428 -10.17064,26.80049 -16.30374,25.31875 l -15.3447,-9.20681 c -7.66273,-1.77098 -13.28577,0.53744 -18.41364,3.83617 l -16.30374,9.97405 c -12.3769,2.07714 -19.25928,-9.60383 -19.18087,-23.78428 z" fill="#87d7fb">
+			</path></a>
+			<a href="https://openkart.ru/engines_and_parts/cooling_group/waterpipes">
+				<path class="part" d="m 228.82781,704.77152 0.95905,-23.40066 c 4.34187,-15.98483 17.84695,-22.04516 33.37471,-25.31875 15.32336,-1.61952 30.45427,-1.6994 45.26686,0.76723 l 43.73239,8.24778 c 6.94491,5.96295 0.0768,27.43186 -5.37064,29.73035 -16.45891,-3.39129 -31.61989,-7.52426 -51.40474,-9.01501 -18.7395,-1.49578 -30.87471,-0.61401 -36.82728,2.49351 l -0.1918,16.49555 c -5.95128,9.82998 -20.71412,10.11032 -29.53855,0 z" fill="#87d7fb">
+			</path></a>
+          	<a href="https://openkart.ru/engines_and_parts/rotax_parts/rotax-radiator/radiator-rotax-micro">
+				<path class="part" d="m 397.8113,643.96816 c 18.73314,-27.95172 32.49797,-30.25875 44.11601,-18.41364 9.95294,7.5216 26.12155,13.71127 29.53854,22.63343 1.21342,3.19408 2.36037,6.25521 3.06894,8.43958 9.59688,1.21156 7.66321,12.87441 6.71331,19.94811 l 5.17883,0.38362 c 4.59419,-3.32203 8.56789,-9.33284 14.57747,-6.5215 5.53198,7.48304 -1.83961,12.71358 -6.5215,18.41364 -2.93543,1.74853 -3.56712,3.88102 -3.45256,6.13788 2.94107,3.29495 5.88213,12.32888 8.8232,18.79725 l 65.98221,163.42104 c 6.62635,4.22267 6.03877,9.34708 4.60341,14.57746 2.18686,6.67706 7.54244,13.17809 1.15085,20.33173 -11.29037,10.73357 -23.12759,26.93566 -32.9911,23.40066 l -37.2109,-22.058 c -3.0539,-4.53947 -4.08542,-9.07895 -4.60341,-13.61842 -4.02013,-2.70286 -11.74543,-3.36681 -9.20681,-17.26279 L 436.36485,756.36807 c -6.95259,6.346 -13.22967,14.95662 -21.67438,13.04299 -12.34688,-6.41794 -5.51194,-20.88464 11.89214,-38.93717 -2.07965,-3.47321 -9.8437,-23.09651 -14.96108,-35.10099 -14.26989,7.21965 -25.33426,2.25835 -37.21089,0.38361 -2.65932,-0.28013 -4.63763,1.31248 -9.20682,-4.21979 0.38383,-6.2402 0.41485,-12.44511 5.75426,-19.18087 l 6.90511,0.76723 c 0.5526,1.35111 2.03943,2.74893 12.65938,4.60341 3.84155,-0.14371 7.69166,0.91103 11.50852,-2.68532 -4.53573,-4.87721 -2.0584,-7.65051 -1.91808,-11.12491 -2.99522,-6.64937 -6.7174,-13.29873 -2.30171,-19.9481 z" fill="#87d7fb">
+			</path></a>
+		</svg>
+		<img src="https://openkart.ru/image/catalog/scheme/schemes/scheme-0019.jpg" alt="Радиатор">
+</div>
+<link href="https://openkart.ru/image/catalog/scheme/schemes/libs/scheme-v3.css" rel="stylesheet" media="screen"></div>
+      </div>
+                       <div class="row category-form-control-wrap">
+		  <div class="col-md-4 col-sm-12"></div>
+		  <div class="col-md-8 col-sm-12">
+			<div class="row">
+        		<div class="col-md-9 col-sm-6 category-control-sorts">
+          		<div class="category-form-control2">
+            		<span class="category-form-control-texts">Сортировка:</span>
+            		<select class="category-sorts2" onchange="location = this.value;"> 
+              		               		               			<option value="https://openkart.ru/rotax-radiators?sort=p.sort_order&amp;order=ASC" selected="selected">По умолчанию</option>
+              		               		               		               			<option value="https://openkart.ru/rotax-radiators?sort=pd.name&amp;order=ASC">Название (А - Я)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-radiators?sort=pd.name&amp;order=DESC">Название (Я - А)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-radiators?sort=p.price&amp;order=ASC">Цена (низкая &gt; высокая)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-radiators?sort=p.price&amp;order=DESC">Цена (высокая &gt; низкая)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-radiators?sort=rating&amp;order=DESC">Рейтинг (начиная с высокого)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-radiators?sort=rating&amp;order=ASC">Рейтинг (начиная с низкого)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-radiators?sort=p.model&amp;order=ASC">Модель (А - Я)</option>           
+              		               		               		               			<option value="https://openkart.ru/rotax-radiators?sort=p.model&amp;order=DESC">Модель (Я - А)</option>           
+              		               		            
+            		</select>
+						<select id="width_tmp_select">
+ 							<option id="width_tmp_option"></option>
+						</select>
+          		</div>
+        		</div>
+        		<div class="col-md-3 col-sm-6 category-control-pages">
+          		<div class="category-form-control">
+            		<span class="category-form-control-texts">На странице:</span> 
+            		<select class="category-sorts3" onchange="location = this.value;">          
+              		               		               			<option value="https://openkart.ru/rotax-radiators?limit=16">16</option>   
+              		               		               		               			<option value="https://openkart.ru/rotax-radiators?limit=32">32</option>   
+              		               		               		               			<option value="https://openkart.ru/rotax-radiators?limit=48">48</option>   
+              		               		               		                   	<option value="https://openkart.ru/rotax-radiators?limit=96" selected="selected">96</option>            
+              		               		   
+            		</select>
+          		</div>
+        		</div>
+			</div>
+		 </div>
+      </div>
+      <div class="row"> 
+	  
+  	<div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition" onclick="if (event.ctrlKey) { window.open('https://openkart.ru/rotax-radiators/radiator-rotax-micro', '_blank'); return false; } else { location.href='https://openkart.ru/rotax-radiators/radiator-rotax-micro'; return false; }">
+     <h4 class="h4-product-name"><a href="https://openkart.ru/rotax-radiators/radiator-rotax-micro">Радиатор Rotax Micro</a></h4>
+			   <div class="product-info">	
+			<ul class="list-unstyled">
+                        <li>Производитель: Rotax</li>
+                        <li>Модель: 295923</li>
+				         </ul>
+		</div>
+      <div class="image"><a href="https://openkart.ru/rotax-radiators/radiator-rotax-micro"><img 
+				class="lazyload" data-src="https://openkart.ru/image/cache/catalog/data/295923-228x228.jpg"
+			 alt="Радиатор Rotax Micro" title="Радиатор Rotax Micro" class="img-responsive" /></a></div>
+      <div class="caption">      
+        <div class="price"> 
+						           13561.26&nbsp;<span class="currency-rub">₽</span>
+           
+          
+			            <br /><span class="product-quantity">В наличии: 1</span>
+					  </div>
+		  <div class="cart-btn-wrap">
+          <div class="category-plus-minus">
+  				<button type="button" onclick="event.stopPropagation(); if ($(this).next().val() > 1) {$(this).next().val($(this).next().val()-1);} $(this).parents('form').submit();" class="minus" window.event.cancelBubble = "true">&ndash;</button>
+            <input type="text" onclick="event.stopPropagation();" name="quantity" value="1" size="2" id="input-quantity" class="quantity-items" window.event.cancelBubble = "true" />
+  				<button type="button" onclick="event.stopPropagation(); $(this).prev().val(~~$(this).prev().val()+1); $(this).parents('form').submit();" class="plus" window.event.cancelBubble = "true">+</button>        
+          </div>
+        	 <button type="button" class="cart-btn" onclick="event.stopPropagation(); cart.add('3434',$(this).parent().find('.quantity-items').val());" window.event.cancelBubble = "true">Купить</button>   
+		  </div>
+		</div>        
+    </div>
+  </div>
+    
+  	<div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition" onclick="if (event.ctrlKey) { window.open('https://openkart.ru/rotax-radiators/radiator-rotax', '_blank'); return false; } else { location.href='https://openkart.ru/rotax-radiators/radiator-rotax'; return false; }">
+     <h4 class="h4-product-name"><a href="https://openkart.ru/rotax-radiators/radiator-rotax">Радиатор Rotax</a></h4>
+			   <div class="product-info">	
+			<ul class="list-unstyled">
+                        <li>Производитель: Rotax</li>
+                        <li>Модель: 295928</li>
+				         </ul>
+		</div>
+      <div class="image"><a href="https://openkart.ru/rotax-radiators/radiator-rotax"><img 
+				class="lazyload" data-src="https://openkart.ru/image/cache/catalog/data/295928-228x228.jpg"
+			 alt="Радиатор Rotax" title="Радиатор Rotax" class="img-responsive" /></a></div>
+      <div class="caption">      
+        <div class="price"> 
+						           24778.92&nbsp;<span class="currency-rub">₽</span>
+           
+          
+			            <br /><span class="product-quantity">В наличии: 1</span>
+					  </div>
+		  <div class="cart-btn-wrap">
+          <div class="category-plus-minus">
+  				<button type="button" onclick="event.stopPropagation(); if ($(this).next().val() > 1) {$(this).next().val($(this).next().val()-1);} $(this).parents('form').submit();" class="minus" window.event.cancelBubble = "true">&ndash;</button>
+            <input type="text" onclick="event.stopPropagation();" name="quantity" value="1" size="2" id="input-quantity" class="quantity-items" window.event.cancelBubble = "true" />
+  				<button type="button" onclick="event.stopPropagation(); $(this).prev().val(~~$(this).prev().val()+1); $(this).parents('form').submit();" class="plus" window.event.cancelBubble = "true">+</button>        
+          </div>
+        	 <button type="button" class="cart-btn" onclick="event.stopPropagation(); cart.add('1747',$(this).parent().find('.quantity-items').val());" window.event.cancelBubble = "true">Купить</button>   
+		  </div>
+		</div>        
+    </div>
+  </div>
+    
+  	<div class="product-layout col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="product-thumb transition" onclick="if (event.ctrlKey) { window.open('https://openkart.ru/rotax-radiators/radiator-rotax-neoriginalnyj', '_blank'); return false; } else { location.href='https://openkart.ru/rotax-radiators/radiator-rotax-neoriginalnyj'; return false; }">
+     <h4 class="h4-product-name"><a href="https://openkart.ru/rotax-radiators/radiator-rotax-neoriginalnyj">Радиатор Rotax неоригинальный</a></h4>
+			   <div class="product-info">	
+			<ul class="list-unstyled">
+                        <li>Производитель: Rotax</li>
+                        <li>Модель: RADRT</li>
+				 
+            	<li><a href="javascript:void(0)" class="in-stock-btn" onmouseover="this.style.color='#ddd';" onmouseout="this.style.color='#F5F5F5';" onclick="$('.in-stock-btn-form').css('display', 'table'); $('.product-id-in-stock').val('2468'); event.stopPropagation();" style="color: #F5F5F5; border-bottom: 1px solid rgba(245,245,245,0.5); text-decoration: none;">Уведомить&nbsp;о&nbsp;поступлении</a></li>
+				         </ul>
+		</div>
+      <div class="image"><a href="https://openkart.ru/rotax-radiators/radiator-rotax-neoriginalnyj"><img 
+				class="lazyload" data-src="https://openkart.ru/image/cache/catalog/data/RADRT-228x228.jpg"
+			 alt="Радиатор Rotax неоригинальный" title="Радиатор Rotax неоригинальный" class="img-responsive" /></a></div>
+      <div class="caption">      
+        <div class="price"> 
+						           13485.00&nbsp;<span class="currency-rub">₽</span>
+           
+          
+			 
+            <br /><span class="product-quantity">В наличии: 0</span>
+					  </div>
+		  <div class="cart-btn-wrap">
+          <div class="category-plus-minus">
+  				<button type="button" onclick="event.stopPropagation(); if ($(this).next().val() > 1) {$(this).next().val($(this).next().val()-1);} $(this).parents('form').submit();" class="minus" window.event.cancelBubble = "true">&ndash;</button>
+            <input type="text" onclick="event.stopPropagation();" name="quantity" value="1" size="2" id="input-quantity" class="quantity-items" window.event.cancelBubble = "true" />
+  				<button type="button" onclick="event.stopPropagation(); $(this).prev().val(~~$(this).prev().val()+1); $(this).parents('form').submit();" class="plus" window.event.cancelBubble = "true">+</button>        
+          </div>
+        	 <button type="button" class="cart-btn" onclick="event.stopPropagation(); cart.add('2468',$(this).parent().find('.quantity-items').val());" window.event.cancelBubble = "true">Купить</button>   
+		  </div>
+		</div>        
+    </div>
+  </div>
+   
+
+	
+		</div>
+      <div class="row">
+        <div class="col-md-6 text-left category-pagination"></div>
+        <div class="col-md-6 text-right category-results"><span class="category-form-control-texts">Показано</span> с 1 по 3 из 3 (всего 1 страниц)</div>
+      </div>
+                  </div>
+    </div>
+</div>
+<footer>
+  <div class="container">
+    <div class="row footer-links">
+            <div class="col-md-2 col-sm-4">
+        <h5>Информация</h5>
+        <ul class="list-footer-links">
+          <li><a href="https://openkart.ru/contact-us">Адреса и телефоны</a></li>
+                   <li><a href="https://openkart.ru/delivery">Доставка запчастей для картинга</a></li>
+                    <li><a href="https://openkart.ru/oplata">Способы оплаты</a></li>
+                  </ul>
+      </div>
+       
+		<div class="col-md-4 col-sm-8">	
+		  <div class="row">	
+      	<div class="col-md-7 col-sm-7 footer-service">
+        	 <h5>Служба поддержки</h5>
+        	 <ul class="list-footer-links">
+          	<li><a href="https://openkart.ru/kak-sdelat-zakaz">Как сделать заказ</a></li>
+          	<li><a href="https://openkart.ru/katalogi-i-tablitsy-razmerov">Каталоги и таблицы размеров</a></li>
+          	<li><a href="https://openkart.ru/nastroyka-karta-i-prochee">Настройка карта и прочее</a></li>
+        	 </ul>
+      	</div>
+      	<div class="col-md-5 col-sm-5 footer-extra"> 
+          <h5>Дополнительно</h5>
+        	 <ul class="list-footer-links">
+          	<li><a href="https://openkart.ru/brands">Производители</a></li>
+          	<li><a href="https://openkart.ru/specials">Акции</a></li>
+          	<li><a href="https://openkart.ru/latest">Новинки</a></li>
+          	<li><a href="https://openkart.ru/sitemap">Карта сайта</a></li>
+          </ul>
+      	</div>
+		  </div>
+		</div>
+      <div class="col-md-2 col-sm-4 footer-account"> 
+        <h5>Личный Кабинет</h5>
+        <ul class="list-footer-links">
+          <li><a href="https://openkart.ru/my-account">Личный Кабинет</a></li>
+          <li><a href="https://openkart.ru/order-history">История заказов</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 col-sm-8 footer-map">   
+        <h5 class="h5-fix">НАШ АДРЕС</h5>
+        <ul class="list-unstyled">
+          <li><i class="fa fa-map-marker"></i> г. Санкт-Петербург, ул. Плуталова, д. 8</li>
+          <li><i class="fa fa-mobile"></i> +7-921-9672225</li>
+          <li><i class="fa fa-envelope-o"></i> <a href="/cdn-cgi/l/email-protection#0c65626a634c637c6962676d7e78227e79" class="footer-email"><span class="__cf_email__" data-cfemail="40292e262f002f30252e2b2132346e3235">[email&#160;protected]</span></a></li>
+			 <li class="footer-icons">
+				<a href="https://www.facebook.com/openkart.ru/" class="fa fa-facebook" target="_blank"></a>
+				<a href="https://telegram.me/openkartnews" class="fa fa-telegram" target="_blank"></a>
+				<a href="https://www.instagram.com/openkart/" class="fa fa-instagram" target="_blank"></a>
+				<a href="https://vk.com/openkart" class="fa fa-vk" target="_blank"></a>
+			 </li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyrights">&copy; 2020 Openkart</div>
+  </div>
+</footer>
+<div class="in-stock-btn-form" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000000db; z-index: 9999999; text-align: center;">	
+	<div style="display: table-cell; vertical-align: middle;">	
+		<form method = "post">
+			<span style="font-size: 17px; color: #fff;">Уведомить о поступлении на e-mail:</span>
+			<input type="email" placeholder="username@example.ru" class="form-control" name="mail_in_stock" style="width: 80%; max-width: 400px; margin: 15px auto 25px;" />
+			<input type="hidden" class="form-control product-id-in-stock" name="product_id_in_stock" />
+			<button type="submit" name="send_in_stock" value = "OK" data-loading-text="Загрузка..." class="btn btn-success in-stock-btn-close">ОК</button>
+			<button type="button" class="btn btn-danger in-stock-btn-close" onclick="$('.in-stock-btn-form').hide();">Отмена</button> 
+		</form>
+	</div>
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript"><!--
+	$('.cart-btn').on('click', function(){
+	    setTimeout(function() {
+	        loadCart8(); //fix3
+		}, 1000);
+		$('.cart-total-href').css({ display: 'block' });
+		if ($(this).closest('.product-thumb').find('img').length == 1) {
+			var that = $(this).closest('.product-thumb').find('img');
+		} else {
+			var that = $(this).closest('#content').find('img');
+		}			
+		var cartTotalHref = $(".cart-total-href");
+		var w = that.width();		
+        that.clone()
+            .css({'width' : w,
+			'position' : 'absolute',
+			'z-index' : '9999',
+			top: that.offset().top,
+			left: that.offset().left })
+            .appendTo("body")
+            .animate({opacity: 0.05,
+                left: cartTotalHref.offset()['left'],
+                top: cartTotalHref.offset()['top'],						
+                width: 20}, 1000, function() {	
+					$(this).remove();
+				});
+	});
+//--></script>
+	<script type="text/javascript">
+  		WebFontConfig = {
+    		google: { families: [ 'Open+Sans:300,400,400i,700' , 'Roboto:300,400,500,700' ] }
+  		};
+  		(function() {
+    		var wf = document.createElement('script');
+    		wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+   		wf.type = 'text/javascript';
+    		wf.async = 'true';
+    		var s = document.getElementsByTagName('script')[0];
+    		s.parentNode.insertBefore(wf, s);
+  		})();
+	</script>
+</body></html>
+ 
